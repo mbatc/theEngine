@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\MFC">
+      <UniqueIdentifier>{7ecd3ca3-58aa-43b8-b84b-ab1ded48f684}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\MFC">
+      <UniqueIdentifier>{e16536f0-6ac7-4fa9-9645-d288ac19796b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Engine">
+      <UniqueIdentifier>{d630e857-f05c-43da-90fa-5d4efec86e33}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine">
+      <UniqueIdentifier>{5144b23c-78ed-444e-aca6-081654d9917e}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="_SourceFiles\resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="_SourceFiles\MainWin.h">
+      <Filter>Header Files\MFC</Filter>
+    </ClInclude>
+    <ClInclude Include="_SourceFiles\MainApp.h">
+      <Filter>Header Files\MFC</Filter>
+    </ClInclude>
+    <ClInclude Include="_SourceFiles\MainDoc.h">
+      <Filter>Header Files\MFC</Filter>
+    </ClInclude>
+    <ClInclude Include="_SourceFiles\MainView.h">
+      <Filter>Header Files\MFC</Filter>
+    </ClInclude>
+    <ClInclude Include="_SourceFiles\D3DGraphics.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="_SourceFiles\Project.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="_SourceFiles\Scene.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="_SourceFiles\SceneRenderer.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="_SourceFiles\MainWin.cpp">
+      <Filter>Source Files\MFC</Filter>
+    </ClCompile>
+    <ClCompile Include="_SourceFiles\MainApp.cpp">
+      <Filter>Source Files\MFC</Filter>
+    </ClCompile>
+    <ClCompile Include="_SourceFiles\MainDoc.cpp">
+      <Filter>Source Files\MFC</Filter>
+    </ClCompile>
+    <ClCompile Include="_SourceFiles\MainView.cpp">
+      <Filter>Source Files\MFC</Filter>
+    </ClCompile>
+    <ClCompile Include="_SourceFiles\D3DGraphics.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="_SourceFiles\Project.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="_SourceFiles\Scene.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="_SourceFiles\SceneRenderer.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="MFCEngine.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>
