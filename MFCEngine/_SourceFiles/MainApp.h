@@ -2,9 +2,11 @@
 
 class Project;
 class D3DGraphics;
+class MainWin;
 
 class MainApp : public CWinApp
 {
+	friend MainWin;
 	//Overides
 	protected:
 		BOOL InitInstance();
@@ -15,9 +17,13 @@ public:
 	~MainApp();
 
 protected:
+	//------------------------------------------
+	//DATA MEMBERS
 	D3DGraphics * gfx;
 	Project* curProject;
 
+	//------------------------------------------
+	//METHODS
 	void LoadProject(char* filepath = NULL);
 	void Update();
 	void Render();

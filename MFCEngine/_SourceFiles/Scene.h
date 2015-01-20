@@ -1,15 +1,15 @@
 #pragma once
 
-#include "SceneRenderer.h"
+#include "SceneRenderer.h" 
 
 class D3DGraphics;
-class SceneRenderer;
+class Gameobject;
 
 struct ObjectList
 {
 	int ID;
 	char* name;
-	//Gameobject* object;
+	Gameobject* object;
 };
 
 class Scene
@@ -18,18 +18,20 @@ public:
 	Scene();
 	~Scene();
 
-	//Methods
+	//------------------------------------------
+	//METHODS
 	int AddGameObject();
 	int AddLightObject();
 	void DeleteGameObject();
 
 
-	//Gameobject * GetSceneObject(int ID);
+	Gameobject * GetSceneObject(int ID);
 
 	void UpdateScene();
 	void RenderScene(D3DGraphics& gfx);
 
-	//Inline Methods
+	//------------------------------------------
+	//INLINE METHODS
 	int GetNumberOfObjects(){ return nObjects; }
 private:
 	SceneRenderer renderer;

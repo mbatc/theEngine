@@ -11,7 +11,7 @@ class MainWin : public CFrameWnd
 	BOOL OnCreateClient(LPCREATESTRUCT lpcs, CCreateContext * pContext);
 	void OnSize(UINT nType, int cx, int cy);
 public:
-	MainWin();
+	MainWin(MainApp* app);
 	~MainWin();
 
 	D3DGraphics * InitD3DView();
@@ -30,6 +30,7 @@ protected:
 	BOOL m_bInitMainSplitter;
 
 	D3DGraphics * gfx;
+	MainApp* theApp;
 
 	//==========================================================
 	//DIALOG CONTROLS
@@ -52,6 +53,7 @@ protected:
 
 	//Message Map Methods
 	afx_msg void MenuExit(){ MENUEXIT(); }
+	afx_msg void AddnewEmpty(){ ADDNEWEMPTY(); }
 	afx_msg void WindowObjProperties(){ WINDOWOBJPROPERTIES(); }
 	afx_msg void op_xpos(){ OP_XPOS(); }
 	afx_msg void op_ypos(){ OP_YPOS(); }
@@ -66,6 +68,7 @@ protected:
 
 private:
 	void MENUEXIT();
+	void ADDNEWEMPTY();
 	void WINDOWOBJPROPERTIES();
 	void OP_XPOS();
 	void OP_YPOS();

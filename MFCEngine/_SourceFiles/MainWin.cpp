@@ -1,10 +1,14 @@
+#include "MainApp.h"
 #include "MainView.h"
 #include "MainWin.h"
 #include "D3DGraphics.h"
+#include "Project.h"
+#include "Scene.h"
 #include "resource.h"
 
 BEGIN_MESSAGE_MAP(MainWin,CFrameWnd)
 	ON_COMMAND(ID_FILE_EXIT, MenuExit)
+	ON_COMMAND(ID_GAMEOBJECTADDNEW_EMPTY, AddnewEmpty )
 	ON_COMMAND(ID_WINDOW_OBJECTPROPERTIES, WindowObjProperties)
 
 	ON_COMMAND(IDC_XPOS, op_xpos )
@@ -21,7 +25,9 @@ BEGIN_MESSAGE_MAP(MainWin,CFrameWnd)
 
 END_MESSAGE_MAP()
 
-MainWin::MainWin()
+MainWin::MainWin(MainApp * app)
+	:
+	theApp(app)
 {
 	m_bInitMainSplitter = FALSE;
 	Create(NULL, "TheEngine");
@@ -110,6 +116,7 @@ BOOL MainWin::InitDockablePanels()
 		return FALSE;
 	}
 	pObjProp->ShowWindow(SW_SHOW);
+	pObjProp->EnableDocking(CBRS_ALIGN_ANY);
 	pObjProp->UpdateWindow();
 
 	if (!pObjList->Create(this, IDD_OBJLIST, 
@@ -119,6 +126,7 @@ BOOL MainWin::InitDockablePanels()
 		return FALSE;
 	}
 	pObjList->ShowWindow(SW_SHOW);
+	pObjList->EnableDocking(CBRS_ALIGN_ANY);
 	pObjList->UpdateWindow();
 
 	return TRUE;
@@ -180,15 +188,24 @@ void MainWin::MENUEXIT()
 	PostQuitMessage(0);
 }
 
+void MainWin::ADDNEWEMPTY()
+{
+	theApp->curProject->GetScene()->AddGameObject();
+}
+
 void MainWin::WINDOWOBJPROPERTIES()
 {
 	if (pMenu->CheckMenuItem(ID_WINDOW_OBJECTPROPERTIES, MF_CHECKED) == MF_UNCHECKED)
 	{
+		EnableDocking(CBRS_ALIGN_RIGHT);
 		pObjProp->ShowWindow(SW_SHOW);
+		DockControlBar(pObjProp);
 	}
 	else if (pMenu->CheckMenuItem(ID_WINDOW_OBJECTPROPERTIES, MF_UNCHECKED) == MF_CHECKED)
 	{
-		pObjProp->ShowWindow(SW_HIDE);
+		
+		CPoint point(100, 100);
+		FloatControlBar(pObjProp, point);
 	}
 	else
 	{

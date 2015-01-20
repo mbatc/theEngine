@@ -1,20 +1,16 @@
-﻿Build started 19/01/2015 9:44:36 PM.
+﻿Build started 20/01/2015 5:09:46 PM.
      1>Project "D:\mbatc13\My Documents\GameProjects\MFCEngine\MFCEngine\MFCEngine.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /D _AFXDLL /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt _SourceFiles\MainApp.cpp _SourceFiles\Project.cpp _SourceFiles\Scene.cpp _SourceFiles\SceneRenderer.cpp
-         Scene.cpp
-         Project.cpp
-         MainApp.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /D _AFXDLL /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt _SourceFiles\MainWin.cpp
+         MainWin.cpp
      1>c:\program files (x86)\microsoft visual studio 12.0\vc\atlmfc\include\afx.h(38): warning C4996: 'MBCS_Support_Deprecated_In_MFC': MBCS support in MFC is deprecated and may be removed in a future version of MFC.
                  c:\program files (x86)\microsoft visual studio 12.0\vc\atlmfc\include\afx.h(33) : see declaration of 'MBCS_Support_Deprecated_In_MFC'
          _WIN32_WINNT not defined. Defaulting to _WIN32_WINNT_MAXVER (see WinSDKVer.h)
-         Generating Code...
-         Compiling...
-         SceneRenderer.cpp
-         Generating Code...
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\mbatc13\My Documents\GameProjects\MFCEngine\Debug\MFCEngine.exe" /INCREMENTAL /NOLOGO /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /manifestinput:"C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\Include\Manifest\dpiaware.manifest" /DEBUG /PDB:"D:\mbatc13\My Documents\GameProjects\MFCEngine\Debug\MFCEngine.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\mbatc13\My Documents\GameProjects\MFCEngine\Debug\MFCEngine.lib" /MACHINE:X86 Debug\MFCEngine.res
+         Debug\Component.obj
          Debug\D3DGraphics.obj
+         Debug\Gameobject.obj
          Debug\MainApp.obj
          Debug\MainDoc.obj
          Debug\MainView.obj
@@ -22,9 +18,10 @@
          Debug\Project.obj
          Debug\Scene.obj
          Debug\SceneRenderer.obj
+         Debug\Transform.obj
          MFCEngine.vcxproj -> D:\mbatc13\My Documents\GameProjects\MFCEngine\Debug\MFCEngine.exe
      1>Done Building Project "D:\mbatc13\My Documents\GameProjects\MFCEngine\MFCEngine\MFCEngine.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:08.92
+Time Elapsed 00:00:03.87

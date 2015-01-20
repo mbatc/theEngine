@@ -25,6 +25,12 @@
     <Filter Include="Source Files\Engine">
       <UniqueIdentifier>{5144b23c-78ed-444e-aca6-081654d9917e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Engine\Gameobject">
+      <UniqueIdentifier>{1461ae8a-7ddb-467b-9904-6b05bd3dca9b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine\Gameobject">
+      <UniqueIdentifier>{50cbb57d-c2ca-4714-b2ea-7299f5c2fd4c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="_SourceFiles\resource.h">
@@ -54,6 +60,18 @@
     <ClInclude Include="_SourceFiles\SceneRenderer.h">
       <Filter>Header Files\Engine</Filter>
     </ClInclude>
+    <ClInclude Include="_SourceFiles\Gameobject.h">
+      <Filter>Header Files\Engine\Gameobject</Filter>
+    </ClInclude>
+    <ClInclude Include="_SourceFiles\Component.h">
+      <Filter>Header Files\Engine\Gameobject</Filter>
+    </ClInclude>
+    <ClInclude Include="_SourceFiles\Transform.h">
+      <Filter>Header Files\Engine\Gameobject</Filter>
+    </ClInclude>
+    <ClInclude Include="_SourceFiles\Mesh.h">
+      <Filter>Header Files\Engine\Gameobject</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="_SourceFiles\MainWin.cpp">
@@ -79,6 +97,15 @@
     </ClCompile>
     <ClCompile Include="_SourceFiles\SceneRenderer.cpp">
       <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="_SourceFiles\Gameobject.cpp">
+      <Filter>Source Files\Engine\Gameobject</Filter>
+    </ClCompile>
+    <ClCompile Include="_SourceFiles\Component.cpp">
+      <Filter>Source Files\Engine\Gameobject</Filter>
+    </ClCompile>
+    <ClCompile Include="_SourceFiles\Transform.cpp">
+      <Filter>Source Files\Engine\Gameobject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -9,6 +9,8 @@ public:
 	SceneRenderer();
 	~SceneRenderer();
 
+	//------------------------------------------
+	//METHODS
 	void Render(D3DGraphics& gfx, Scene* scene) const;
 
 private:

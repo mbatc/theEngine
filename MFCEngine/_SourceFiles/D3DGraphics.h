@@ -10,19 +10,23 @@ public:
 	D3DGraphics(HWND hwnd, UINT w_width, UINT w_height);
 	~D3DGraphics();
 
-	//Methods
+	//------------------------------------------
+	//METHODS
 	BOOL BeginFrame();
 	BOOL EndFrame();
 
 	void OnResize(int n_width, int n_height);
 
+	//------------------------------------------
+	//INLINE METHODS
 	UINT GetWidth(){ return width; }
 	UINT GetHeight(){ return height; }
 
 	LPDIRECT3DDEVICE9 GetDevice(){ return pDevice; }
 
 private:
-	//Data Members
+	//------------------------------------------
+	//DATA MEMBERS
 	LPDIRECT3D9			pDirect3D;
 	LPDIRECT3DDEVICE9	pDevice;
 
