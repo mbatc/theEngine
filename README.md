@@ -1,7 +1,7 @@
 # theEngine
 A simple DirectX 3D game engine!
 
-This engine is being written primarily in C++ and uses the Microsoft Foundation Classes (MFC) as a base for the GUI for the engine.
+This engine is being written primarily in C++ and uses the Microsoft Foundation Classes (MFC) as a base for the GUI in the engine.
 
 Update 2:
 
