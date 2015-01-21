@@ -3,6 +3,10 @@ A simple DirectX 3D game engine!
 
 This engine is being written primarily in C++ and uses the Microsoft Foundation Classes (MFC) as a base for the GUI for the engine.
 
+Update 2:
+
+Basic gameobject functionality has been added, and by basic, i mean basic. There are no graphical elements to the game object yet. Only an empty instance of one which contains a transform object (translation, rotation, scale). Also basic UI functionality has been added. So you can change the values of an objects translation, rotation or scale using the panel to the right, and select the object you are editing using the panel to the left.
+
 
 Update 1:
 
