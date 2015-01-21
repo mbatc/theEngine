@@ -42,16 +42,6 @@ void Gameobject::Render(D3DGraphics& gfx) const
 	}
 }
 
-void Gameobject::GetObjectName(char* namebuffer) const
-{
-
-}
-
-void Gameobject::SetObjectName(const char* namebuffer)
-{
-
-}
-
 void Gameobject::AddComponent( Component * newComponent )
 {
 	if (componentsList)

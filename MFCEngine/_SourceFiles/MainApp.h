@@ -3,9 +3,13 @@
 class Project;
 class D3DGraphics;
 class MainWin;
+class DialogObjProp;
+class DialogObjList;
 
 class MainApp : public CWinApp
 {
+	friend DialogObjProp;
+	friend DialogObjList;
 	friend MainWin;
 	//Overides
 	protected:

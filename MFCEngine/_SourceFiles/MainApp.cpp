@@ -24,7 +24,7 @@ inline BOOL MainApp::InitInstance()
 {
 	CWinApp::InitInstance();
 
-	MainWin* mainWin = new MainWin;
+	MainWin* mainWin = new MainWin(this);
 
 	if (!mainWin)
 		return FALSE;
@@ -74,7 +74,7 @@ void MainApp::InitVariables()
 
 }
 
-void MainApp::Update()
+void MainApp::Update() 
 {
 	curProject->Update();
 }

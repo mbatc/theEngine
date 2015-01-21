@@ -4,25 +4,13 @@
 #include "D3DGraphics.h"
 #include "Project.h"
 #include "Scene.h"
+#include "Gameobject.h"
 #include "resource.h"
 
 BEGIN_MESSAGE_MAP(MainWin,CFrameWnd)
 	ON_COMMAND(ID_FILE_EXIT, MenuExit)
 	ON_COMMAND(ID_GAMEOBJECTADDNEW_EMPTY, AddnewEmpty )
 	ON_COMMAND(ID_WINDOW_OBJECTPROPERTIES, WindowObjProperties)
-
-	ON_COMMAND(IDC_XPOS, op_xpos )
-	ON_COMMAND(IDC_YPOS, op_ypos )
-	ON_COMMAND(IDC_ZPOS, op_zpos )
-	ON_COMMAND(IDC_XROT, op_xrot )
-	ON_COMMAND(IDC_YROT, op_yrot )
-	ON_COMMAND(IDC_ZROT, op_zrot )
-	ON_COMMAND(IDC_XSCL, op_xscl )
-	ON_COMMAND(IDC_YSCL, op_yscl )
-	ON_COMMAND(IDC_ZSCL, op_zscl )
-
-	ON_COMMAND(IDC_OBJLIST, ol_objlist )
-
 END_MESSAGE_MAP()
 
 MainWin::MainWin(MainApp * app)
@@ -36,8 +24,6 @@ MainWin::MainWin(MainApp * app)
 
 	pMenu->LoadMenuA(IDR_MENU1);
 	SetMenu(pMenu);
-	
-	InitDialogControls();
 	InitDockablePanels();
 }
 
@@ -81,10 +67,10 @@ BOOL MainWin::InitDialogPointers()
 	pMenu = new CMenu();
 	if (!pMenu)
 		return FALSE;
-	pObjProp = new CDialogBar();
+	pObjProp = new DialogObjProp(this);
 	if (!pObjProp)
 		return FALSE;
-	pObjList = new CDialogBar();
+	pObjList = new DialogObjList(this);
 	if (!pObjList)
 		return FALSE;
 	return TRUE;
@@ -132,39 +118,6 @@ BOOL MainWin::InitDockablePanels()
 	return TRUE;
 }
 
-BOOL MainWin::InitDialogControls()
-{
-	//Set Up Pointers
-	pObjXPOS = (CEdit *)GetDlgItem(IDC_XPOS);
-	pObjYPOS = (CEdit *)GetDlgItem(IDC_YPOS);
-	pObjZPOS = (CEdit *)GetDlgItem(IDC_ZPOS);
-	if (!pObjXPOS || !pObjYPOS || !pObjZPOS)
-		return FALSE;
-
-	pObjXROT = (CEdit *)GetDlgItem(IDC_XROT);
-	pObjYROT = (CEdit *)GetDlgItem(IDC_YROT);
-	pObjZROT = (CEdit *)GetDlgItem(IDC_ZROT);
-	if (!pObjXROT || !pObjYROT || !pObjZROT)
-		return FALSE;
-
-	pObjXSCL = (CEdit *)GetDlgItem(IDC_XSCL);
-	pObjYSCL = (CEdit *)GetDlgItem(IDC_YSCL);
-	pObjZSCL = (CEdit *)GetDlgItem(IDC_ZSCL);
-	if (!pObjXSCL || !pObjYSCL || !pObjZSCL)
-		return FALSE;
-
-	pMFCBT = (CButton *)GetDlgItem(IDC_MFCBUTTON1);
-	pNMLBT = (CButton *)GetDlgItem(IDC_BUTTON1);
-	if (!pMFCBT || !pNMLBT)
-		return FALSE;
-
-	pObjLIST = (CListBox *)GetDlgItem(IDC_OBJLIST);
-	if (!pObjLIST)
-		return FALSE;
-
-	return TRUE;
-}
-
 D3DGraphics* MainWin::InitD3DView()
 {
 	if (!m_bInitMainSplitter)
@@ -191,6 +144,8 @@ void MainWin::MENUEXIT()
 void MainWin::ADDNEWEMPTY()
 {
 	theApp->curProject->GetScene()->AddGameObject();
+	if (!UpdateObjectList())
+		MessageBox("Failed To Update Object List!", "Error!");
 }
 
 void MainWin::WINDOWOBJPROPERTIES()
@@ -213,13 +168,32 @@ void MainWin::WINDOWOBJPROPERTIES()
 	}
 }
 
-void MainWin::OP_XPOS(){}
-void MainWin::OP_YPOS(){}
-void MainWin::OP_ZPOS(){}
-void MainWin::OP_XROT(){}
-void MainWin::OP_YROT(){}
-void MainWin::OP_ZROT(){}
-void MainWin::OP_XSCL(){}
-void MainWin::OP_YSCL(){}
-void MainWin::OP_ZSCL(){}
-void MainWin::OL_OBJLIST(){}
+BOOL MainWin::UpdateObjectList()
+{
+	int nSceneObjects = theApp->curProject->GetScene()->GetNumberOfObjects();
+	CListBox * pObjLIST = (CListBox *)pObjList->GetDlgItem(IDC_OBJLIST);
+	int curSelected = pObjLIST->GetCurSel();
+
+	if (pObjLIST)
+	{
+		pObjLIST->ResetContent();
+		for (int ID = 0; ID < nSceneObjects; ID++)
+		{
+			char objName[512];
+			Scene* scene = theApp->curProject->GetScene();
+			if (scene)
+				scene->GetObjectName(objName, 512, ID);
+			if (pObjLIST->AddString(objName) == LB_ERR)
+			{
+				char errorMsg[512];
+				sprintf_s(errorMsg, "Error Adding Object '%s' To List", objName);
+				MessageBox(errorMsg, "Error!");
+				return false;
+			}
+		}
+	}
+	else
+		return false;
+	pObjLIST->SetCurSel(curSelected);
+	return true;
+}

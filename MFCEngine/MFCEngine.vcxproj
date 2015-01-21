@@ -13,6 +13,8 @@
   <ItemGroup>
     <ClInclude Include="_SourceFiles\Component.h" />
     <ClInclude Include="_SourceFiles\D3DGraphics.h" />
+    <ClInclude Include="_SourceFiles\DialogObjList.h" />
+    <ClInclude Include="_SourceFiles\DialogObjProp.h" />
     <ClInclude Include="_SourceFiles\Gameobject.h" />
     <ClInclude Include="_SourceFiles\MainApp.h" />
     <ClInclude Include="_SourceFiles\MainDoc.h" />
@@ -28,6 +30,7 @@
   <ItemGroup>
     <ClCompile Include="_SourceFiles\Component.cpp" />
     <ClCompile Include="_SourceFiles\D3DGraphics.cpp" />
+    <ClCompile Include="_SourceFiles\DialogObjList.cpp" />
     <ClCompile Include="_SourceFiles\Gameobject.cpp" />
     <ClCompile Include="_SourceFiles\MainApp.cpp" />
     <ClCompile Include="_SourceFiles\MainDoc.cpp" />
@@ -36,6 +39,7 @@
     <ClCompile Include="_SourceFiles\Project.cpp" />
     <ClCompile Include="_SourceFiles\Scene.cpp" />
     <ClCompile Include="_SourceFiles\SceneRenderer.cpp" />
+    <ClCompile Include="_SourceFiles\DialogObjProp.cpp" />
     <ClCompile Include="_SourceFiles\Transform.cpp" />
   </ItemGroup>
   <ItemGroup>

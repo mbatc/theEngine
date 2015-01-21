@@ -31,6 +31,12 @@
     <Filter Include="Source Files\Engine\Gameobject">
       <UniqueIdentifier>{50cbb57d-c2ca-4714-b2ea-7299f5c2fd4c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\MFC\Dialogs">
+      <UniqueIdentifier>{27c5a153-947e-49ff-95a4-1510ac21a050}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\MFC\Dialogs">
+      <UniqueIdentifier>{e0be266a-2489-4e6d-9e2a-d80e193d2958}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="_SourceFiles\resource.h">
@@ -72,6 +78,12 @@
     <ClInclude Include="_SourceFiles\Mesh.h">
       <Filter>Header Files\Engine\Gameobject</Filter>
     </ClInclude>
+    <ClInclude Include="_SourceFiles\DialogObjProp.h">
+      <Filter>Header Files\MFC\Dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="_SourceFiles\DialogObjList.h">
+      <Filter>Header Files\MFC\Dialogs</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="_SourceFiles\MainWin.cpp">
@@ -106,6 +118,12 @@
     </ClCompile>
     <ClCompile Include="_SourceFiles\Transform.cpp">
       <Filter>Source Files\Engine\Gameobject</Filter>
+    </ClCompile>
+    <ClCompile Include="_SourceFiles\DialogObjProp.cpp">
+      <Filter>Source Files\MFC\Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="_SourceFiles\DialogObjList.cpp">
+      <Filter>Source Files\MFC\Dialogs</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

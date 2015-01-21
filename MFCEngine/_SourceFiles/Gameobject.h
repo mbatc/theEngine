@@ -23,10 +23,7 @@ public:
 	virtual void Render(D3DGraphics& gfx) const;
 	
 	void AddComponent( Component * newComponent );
-	void RemoveComponent( const unsigned int ID );
-
-	void GetObjectName( char* nameBuffer ) const;
-	void SetObjectName( const char* nameBuffer );
+	void RemoveComponent(const unsigned int ID);
 
 	Component* GetComponent( int ID ) const;
 

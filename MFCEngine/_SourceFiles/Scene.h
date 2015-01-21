@@ -23,6 +23,8 @@ public:
 	int AddGameObject();
 	int AddLightObject();
 	void DeleteGameObject();
+	void GetObjectName(char* nameBuffer, const int buflen, const int ID) const;
+	void SetObjectName(const char* nameBuffer, const int ID);
 
 
 	Gameobject * GetSceneObject(int ID);
