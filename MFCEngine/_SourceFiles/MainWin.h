@@ -26,6 +26,8 @@ public:
 
 	BOOL UpdateObjectList();
 
+	CSplitterWnd	m_mainSplitter;
+
 protected:
 	//Methods
 	BOOL InitDialogPointers();
@@ -36,18 +38,21 @@ protected:
 	CMenu*			pMenu;
 	DialogObjProp*	pObjProp;
 	DialogObjList*	pObjList;
-	CSplitterWnd	m_mainSplitter;
 	BOOL			m_bInitMainSplitter;
 
 	D3DGraphics * gfx;
 
 	//Message Map Methods
 	afx_msg void MenuExit(){ MENUEXIT(); }
+	afx_msg void AddnewCube(){ ADDNEWCUBE(); }
+	afx_msg void AddnewLight(){ ADDNEWLIGHT(); }
 	afx_msg void AddnewEmpty(){ ADDNEWEMPTY(); }
 	afx_msg void WindowObjProperties(){ WINDOWOBJPROPERTIES(); }
 
 private:
 	void MENUEXIT();
+	void ADDNEWCUBE();
+	void ADDNEWLIGHT();
 	void ADDNEWEMPTY();
 	void WINDOWOBJPROPERTIES();
 

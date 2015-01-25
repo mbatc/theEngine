@@ -20,6 +20,12 @@ public:
 	MainApp();
 	~MainApp();
 
+	Project* GetProject(){ return curProject; }
+	void Update();
+	void Render();
+	int	 LockGFX();
+	void UnlockGFX();
+
 protected:
 	//------------------------------------------
 	//DATA MEMBERS
@@ -29,7 +35,15 @@ protected:
 	//------------------------------------------
 	//METHODS
 	void LoadProject(char* filepath = NULL);
-	void Update();
-	void Render();
 	void InitVariables();
+
+	bool isLocked;
+};
+
+class GameUdt : public CWinThread
+{
+public:
+	GameUdt(MainApp* WinApp){ winApp = WinApp; }
+	MainApp* winApp;
+private:
 };

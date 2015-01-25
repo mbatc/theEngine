@@ -84,6 +84,18 @@
     <ClInclude Include="_SourceFiles\DialogObjList.h">
       <Filter>Header Files\MFC\Dialogs</Filter>
     </ClInclude>
+    <ClInclude Include="_SourceFiles\MeshRenderer.h">
+      <Filter>Header Files\Engine\Gameobject</Filter>
+    </ClInclude>
+    <ClInclude Include="_SourceFiles\Camera.h">
+      <Filter>Header Files\Engine\Gameobject</Filter>
+    </ClInclude>
+    <ClInclude Include="_SourceFiles\PrimitiveDefinitions.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="_SourceFiles\Light.h">
+      <Filter>Header Files\Engine\Gameobject</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="_SourceFiles\MainWin.cpp">
@@ -124,6 +136,18 @@
     </ClCompile>
     <ClCompile Include="_SourceFiles\DialogObjList.cpp">
       <Filter>Source Files\MFC\Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="_SourceFiles\MeshRenderer.cpp">
+      <Filter>Source Files\Engine\Gameobject</Filter>
+    </ClCompile>
+    <ClCompile Include="_SourceFiles\Mesh.cpp">
+      <Filter>Source Files\Engine\Gameobject</Filter>
+    </ClCompile>
+    <ClCompile Include="_SourceFiles\Camera.cpp">
+      <Filter>Source Files\Engine\Gameobject</Filter>
+    </ClCompile>
+    <ClCompile Include="_SourceFiles\Light.cpp">
+      <Filter>Source Files\Engine\Gameobject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

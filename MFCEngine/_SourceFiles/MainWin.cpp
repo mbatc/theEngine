@@ -5,11 +5,17 @@
 #include "Project.h"
 #include "Scene.h"
 #include "Gameobject.h"
+#include "Mesh.h"
+#include "MeshRenderer.h"
 #include "resource.h"
 
 BEGIN_MESSAGE_MAP(MainWin,CFrameWnd)
 	ON_COMMAND(ID_FILE_EXIT, MenuExit)
+
+	ON_COMMAND(ID_GAMEOBJECTADDNEW_CUBE, AddnewCube)
+	ON_COMMAND(ID_GAMEOBJECTADDNEW_LIGHT, AddnewLight)
 	ON_COMMAND(ID_GAMEOBJECTADDNEW_EMPTY, AddnewEmpty )
+
 	ON_COMMAND(ID_WINDOW_OBJECTPROPERTIES, WindowObjProperties)
 END_MESSAGE_MAP()
 
@@ -84,10 +90,9 @@ void MainWin::OnSize(UINT nType, int cx, int cy)
 
 	if (m_bInitMainSplitter && nType != SIZE_MINIMIZED)
 	{
-		m_mainSplitter.SetRowInfo(0, cy, 0);
-		m_mainSplitter.SetColumnInfo(0, cr.Width() / 2, 50);
-		m_mainSplitter.SetColumnInfo(1, cr.Width() / 2, 50);
-
+		m_mainSplitter.SetColumnInfo(0, cx, 0);
+		m_mainSplitter.SetRowInfo(0, cr.Height() / 2, 50);
+		m_mainSplitter.SetRowInfo(1, cr.Height() / 2, 50);
 		m_mainSplitter.RecalcLayout();
 	}
 }
@@ -143,7 +148,37 @@ void MainWin::MENUEXIT()
 
 void MainWin::ADDNEWEMPTY()
 {
-	theApp->curProject->GetScene()->AddGameObject();
+	int ID = theApp->curProject->GetScene()->AddGameObject();
+	char nb[] = { "New Empty Gameobject" };
+	theApp->curProject->GetScene()->SetObjectName(nb, ID);
+	if (!UpdateObjectList())
+		MessageBox("Failed To Update Object List!", "Error!");
+}
+
+void MainWin::ADDNEWLIGHT()
+{
+	theApp->curProject->GetScene()->AddLightObject(*gfx);
+
+	CListBox * pObjLIST = (CListBox *)pObjList->GetDlgItem(IDC_OBJLIST);
+	int curSelected = pObjLIST->GetCurSel();
+	pObjLIST->SetCurSel(curSelected + 1);
+
+	if (!UpdateObjectList())
+		MessageBox("Failed To Update Object List!", "Error!");
+}
+
+void MainWin::ADDNEWCUBE()
+{
+	int ID = theApp->curProject->GetScene()->AddGameObject();
+	if (ID == -1)
+	{
+		MessageBox("Failed To Create New Gameobject!", "Error!");
+		return;
+	}
+	Gameobject* obj = theApp->curProject->GetScene()->GetSceneObject(ID);
+	int meshID =		obj->AddComponent((Component*)new Mesh(obj, *gfx));
+	int meshRendID =	obj->AddComponent((Component*)new MeshRenderer(obj));
+	((MeshRenderer*)obj->GetComponent(meshRendID))->SetMeshPointer((Mesh*)obj->GetComponent(meshID));
 	if (!UpdateObjectList())
 		MessageBox("Failed To Update Object List!", "Error!");
 }

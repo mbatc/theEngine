@@ -4,6 +4,7 @@
 
 class D3DGraphics;
 class Component;
+class Scene;
 
 struct ComponentList
 {
@@ -21,8 +22,9 @@ public:
 	//METHODS
 	virtual void Update();
 	virtual void Render(D3DGraphics& gfx) const;
-	
-	void AddComponent( Component * newComponent );
+
+	//Returns new components ID. Returns -1 if component was not added.
+	int AddComponent( Component * newComponent );
 	void RemoveComponent(const unsigned int ID);
 
 	Component* GetComponent( int ID ) const;
@@ -31,7 +33,7 @@ public:
 	//INLINE METHODS
 	Transform* GetTransform() const { return transform; }
 
-private:
+protected:
 	//------------------------------------------
 	//DATA MEMBERS
 	char *			objectName;

@@ -1,5 +1,6 @@
 #include "Gameobject.h"
 #include "Component.h"
+#include "Transform.h"
 #include "D3DGraphics.h"
 
 Gameobject::Gameobject()
@@ -14,13 +15,18 @@ Gameobject::~Gameobject()
 {
 	if (objectName)
 	{
-		delete objectName;
+		delete [] objectName;
 		objectName = NULL;
 	}
 	if (componentsList)
 	{
-		delete componentsList;
+		delete [] componentsList;
 		componentsList = NULL;
+	}
+	if (transform)
+	{
+		delete transform;
+		transform = NULL;
 	}
 }
 
@@ -28,21 +34,22 @@ void Gameobject::Update()
 {
 	for (int i = 0; i < nComponents; i++)
 	{
-		if ( componentsList[i].component->GetType() != CT_GFX )
-			componentsList[i].component->Update();
+		componentsList[i].component->Update();
 	}
+
+	transform->SetRotation(transform->GetRotation().x,
+		transform->GetRotation().y + 2, transform->GetRotation().z);
 }
 
 void Gameobject::Render(D3DGraphics& gfx) const
 {
 	for (int i = 0; i < nComponents; i++)
 	{
-		if (componentsList[i].component->GetType() == CT_GFX)
-			componentsList[i].component->Update();
+		componentsList[i].component->Render( gfx );
 	}
 }
 
-void Gameobject::AddComponent( Component * newComponent )
+int Gameobject::AddComponent( Component * newComponent )
 {
 	if (componentsList)
 	{
@@ -50,7 +57,7 @@ void Gameobject::AddComponent( Component * newComponent )
 		if (!tempList)
 		{
 			MessageBox(NULL, "Failed To Add New Component!", "Error!", MB_OK | MB_ICONEXCLAMATION);
-			return;
+			return -1;
 		}
 
 		for (int i = 0; i < nComponents; i++)
@@ -77,6 +84,7 @@ void Gameobject::AddComponent( Component * newComponent )
 			delete[] tempList;
 			tempList = NULL;
 		}
+		return nComponents - 1;
 	}
 	else
 	{
@@ -84,7 +92,9 @@ void Gameobject::AddComponent( Component * newComponent )
 		componentsList[0].ID = 0;
 		componentsList[0].component = newComponent;
 		nComponents = 1;
+		return 0;
 	}
+	return -1;
 }
 
 void Gameobject::RemoveComponent(const unsigned int ID)
@@ -134,4 +144,5 @@ Component * Gameobject::GetComponent(int ID) const
 			return componentsList[i].component;
 		}
 	}
+	return NULL;
 }

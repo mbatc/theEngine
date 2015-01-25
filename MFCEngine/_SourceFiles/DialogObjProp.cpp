@@ -106,7 +106,7 @@ void DialogObjProp::OP_XROT()
 	float yRot = objtransform->GetRotation().y;
 	float zRot = objtransform->GetRotation().z;
 
-	objtransform->SetTranslation(xRot, yRot, zRot);
+	objtransform->SetRotation(xRot, yRot, zRot);
 }
 void DialogObjProp::OP_YROT()
 {
@@ -127,7 +127,7 @@ void DialogObjProp::OP_YROT()
 	float yRot = atof(s_yrot);
 	float zRot = objtransform->GetRotation().z;
 
-	objtransform->SetTranslation(xRot, yRot, zRot);
+	objtransform->SetRotation(xRot, yRot, zRot);
 }
 
 void DialogObjProp::OP_ZROT()
@@ -149,7 +149,7 @@ void DialogObjProp::OP_ZROT()
 	float yRot = objtransform->GetRotation().y;
 	float zRot = atof(s_zrot);
 
-	objtransform->SetTranslation(xRot, yRot, zRot);
+	objtransform->SetRotation(xRot, yRot, zRot);
 }
 void DialogObjProp::OP_XSCL()
 {
@@ -170,7 +170,7 @@ void DialogObjProp::OP_XSCL()
 	float yScl = objtransform->GetScale().y;
 	float zScl = objtransform->GetScale().z;
 
-	objtransform->SetTranslation(xScl, yScl, zScl);
+	objtransform->SetScale(xScl, yScl, zScl);
 }
 void DialogObjProp::OP_YSCL()
 {
@@ -191,7 +191,7 @@ void DialogObjProp::OP_YSCL()
 	float yScl = atof(s_yscl);
 	float zScl = objtransform->GetScale().z;
 
-	objtransform->SetTranslation(xScl, yScl, zScl);
+	objtransform->SetScale(xScl, yScl, zScl);
 }
 
 void DialogObjProp::OP_ZSCL()
@@ -213,7 +213,7 @@ void DialogObjProp::OP_ZSCL()
 	float yScl = objtransform->GetScale().y;
 	float zScl = atof(s_zscl);
 
-	objtransform->SetTranslation(xScl, yScl, zScl);
+	objtransform->SetScale(xScl, yScl, zScl);
 }
 
 void DialogObjProp::OP_OBJNME()

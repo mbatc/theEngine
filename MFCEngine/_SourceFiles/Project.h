@@ -23,7 +23,7 @@ public:
 
 	//------------------------------------------
 	//METHODS
-	void Update(){}
+	void Update();
 
 	void Nullify();
 	bool LoadProject(char* filename );

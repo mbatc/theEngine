@@ -33,6 +33,11 @@ void Project::Nullify()
 	curScene = new Scene();
 }
 
+void Project::Update()
+{ 
+	curScene->UpdateScene();
+}
+
 bool Project::LoadProject(char* filename)
 {
 	return true;

@@ -77,3 +77,23 @@ BOOL D3DGraphics::EndFrame()
 	return TRUE;
 }
 
+void D3DGraphics::OnResize(int n_Width, int n_Height)
+{
+	D3DPRESENT_PARAMETERS d3dpp;
+	ZeroMemory(&d3dpp, sizeof(d3dpp));
+	d3dpp.Windowed = TRUE;
+	d3dpp.AutoDepthStencilFormat = D3DFMT_D16;
+	d3dpp.BackBufferFormat = D3DFMT_UNKNOWN;
+	d3dpp.BackBufferHeight = n_Height;
+	d3dpp.BackBufferWidth = n_Width;
+	d3dpp.Flags = D3DPRESENTFLAG_LOCKABLE_BACKBUFFER;
+	d3dpp.PresentationInterval = D3DPRESENT_INTERVAL_ONE;
+	d3dpp.EnableAutoDepthStencil = TRUE;
+	d3dpp.SwapEffect = D3DSWAPEFFECT_DISCARD;
+
+	width = n_Width;
+	height = n_Height;
+
+	pDevice->Reset(&d3dpp);
+}
+

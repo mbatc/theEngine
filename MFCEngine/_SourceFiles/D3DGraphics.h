@@ -1,8 +1,18 @@
 #pragma once
 
-#include <d3d9.h>
+#include <d3dx9.h>
+#include <d3d.h>
 
 #pragma comment(lib,"d3d9.lib")
+#pragma comment(lib,"d3dx9.lib")
+
+#define CUSTOMFVF (D3DFVF_XYZ | D3DFVF_NORMAL )
+
+struct CUSTOMVERTEX
+{
+	FLOAT x, y, z;
+	D3DVECTOR NORMAL;
+};
 
 class D3DGraphics
 {

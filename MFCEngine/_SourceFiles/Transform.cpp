@@ -7,5 +7,5 @@ Transform::Transform()
 	ZeroMemory(&Rotation, sizeof(Vector3));
 	Scale.x = 1;
 	Scale.y = 1;
-	Scale.z = 1;
+	Scale.z = 1; 
 }

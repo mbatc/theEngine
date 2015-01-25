@@ -1,4 +1,5 @@
 #pragma once
+#include "D3DGraphics.h"
 
 class Gameobject;
 
@@ -29,7 +30,8 @@ public:
 	//OVERIDE
 
 	//The function called once every frame used to update all derived components
-	virtual void Update() = 0;
+	virtual void Update() {};
+	virtual void Render(D3DGraphics& gfx) {};
 
 protected:
 	//------------------------------------------
