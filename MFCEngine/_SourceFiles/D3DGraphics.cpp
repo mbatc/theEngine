@@ -1,5 +1,6 @@
 #include "D3DGraphics.h"
 #include <assert.h>
+#include "Gameobject.h"
 
 D3DGraphics::D3DGraphics(HWND hwnd, UINT w_width, UINT w_height)
 	:
@@ -31,7 +32,7 @@ D3DGraphics::D3DGraphics(HWND hwnd, UINT w_width, UINT w_height)
 
 	pDevice->SetRenderState(D3DRS_LIGHTING, TRUE);
 	pDevice->SetRenderState(D3DRS_ZENABLE, TRUE);
-	pDevice->SetRenderState(D3DRS_CULLMODE, FALSE);
+	pDevice->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
 	pDevice->SetRenderState(D3DRS_AMBIENT, D3DCOLOR_XRGB(50, 50, 50));
 	pDevice->SetRenderState(D3DRS_NORMALIZENORMALS, TRUE);
 }
@@ -77,8 +78,12 @@ BOOL D3DGraphics::EndFrame()
 	return TRUE;
 }
 
-void D3DGraphics::OnResize(int n_Width, int n_Height)
+void D3DGraphics::OnResize(int n_Width, int n_Height, ObjectList* sceneObject, int nObjects)
 {
+	for (int i = 0; i < nObjects; i++)
+	{
+		sceneObject[i].object->FreeGFX();
+	}
 	D3DPRESENT_PARAMETERS d3dpp;
 	ZeroMemory(&d3dpp, sizeof(d3dpp));
 	d3dpp.Windowed = TRUE;
@@ -95,5 +100,16 @@ void D3DGraphics::OnResize(int n_Width, int n_Height)
 	height = n_Height;
 
 	pDevice->Reset(&d3dpp);
+
+	pDevice->SetRenderState(D3DRS_LIGHTING, TRUE);
+	pDevice->SetRenderState(D3DRS_ZENABLE, TRUE);
+	pDevice->SetRenderState(D3DRS_CULLMODE, FALSE);
+	pDevice->SetRenderState(D3DRS_AMBIENT, D3DCOLOR_XRGB(50, 50, 50));
+	pDevice->SetRenderState(D3DRS_NORMALIZENORMALS, TRUE);
+
+	for (int i = 0; i < nObjects; i++)
+	{
+		sceneObject[i].object->RestoreGFX();
+	}
 }
 

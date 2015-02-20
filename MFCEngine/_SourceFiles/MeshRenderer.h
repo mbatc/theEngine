@@ -10,12 +10,21 @@ public:
 	MeshRenderer(Gameobject* object)
 		:
 		Component(object),
-		mesh(NULL)
-	{m_type = CT_GFX;}
+		mesh(NULL),
+		meshID( -1 )
+	{
+		m_type = CT_GFX; m_pCompIdentifier = CTYPE_MESHRENDERER;m_pName = new char[14];m_pName = { "Mesh Renderer" };
+	}
 	~MeshRenderer();
 
+	int GetMeshID(){ return meshID; }
+
 	void Render(D3DGraphics& gfx);
-	void SetMeshPointer(Mesh* newMesh);
+	void SetMeshPointer(Mesh* newMesh, int ID);
+
+	void FreeGFX();
+	void RestoreGFX();
 private:
+	int meshID;
 	Mesh* mesh;
 };

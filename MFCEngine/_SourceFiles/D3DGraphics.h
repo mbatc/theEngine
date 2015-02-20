@@ -6,6 +6,8 @@
 #pragma comment(lib,"d3d9.lib")
 #pragma comment(lib,"d3dx9.lib")
 
+#include "Scene.h"
+
 #define CUSTOMFVF (D3DFVF_XYZ | D3DFVF_NORMAL )
 
 struct CUSTOMVERTEX
@@ -25,7 +27,7 @@ public:
 	BOOL BeginFrame();
 	BOOL EndFrame();
 
-	void OnResize(int n_width, int n_height);
+	void OnResize(int n_width, int n_height, ObjectList* sceneObject, int nObjects);
 
 	//------------------------------------------
 	//INLINE METHODS

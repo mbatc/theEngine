@@ -8,6 +8,15 @@ Light::Light(D3DGraphics& gfx, int index)
 	gfx(gfx),
 	index(index)
 {
+	objectName = NULL;
+
+	if (type)
+		type = { "GAMELIGHT" };
+	else
+	{
+		type = new char[512];
+		type = { "GAMELIGHT" };
+	}
 	ZeroMemory(&light, sizeof(light));
 	
 	light.Type = D3DLIGHT_POINT;
@@ -21,8 +30,16 @@ Light::Light(D3DGraphics& gfx, int index)
 		transform->GetTranslation().z);
 	light.Range = 100.0f;
 
+	lightState = true;
+
 	gfx.GetDevice()->SetLight(index, &light);
 	gfx.GetDevice()->LightEnable(index, TRUE);
+}
+
+Light::~Light()
+{
+	lightState = false;
+	gfx.GetDevice()->LightEnable(index, FALSE);
 }
 
 void Light::SetDiffuse(D3DXCOLOR color)
@@ -59,6 +76,7 @@ void Light::SetAttenuation(int type, float attenuation)
 
 void Light::SetState(bool state)
 {
+	lightState = state;
 	gfx.GetDevice()->SetLight(index, &light);
 	gfx.GetDevice()->LightEnable(index, state);
 }
@@ -68,7 +86,9 @@ void Light::Update()
 	light.Position = D3DXVECTOR3(transform->GetTranslation().x,
 		transform->GetTranslation().y,
 		transform->GetTranslation().z);
+
 	gfx.GetDevice()->SetLight(index, &light);
+	gfx.GetDevice()->LightEnable(index, lightState);
 
 	for (int i = 0; i < nComponents; i++)
 	{
@@ -76,10 +96,33 @@ void Light::Update()
 	}
 }
 
-void Light::Render(D3DGraphics& grfx)
+void Light::Render(D3DGraphics& gfx)
 {
 	for (int i = 0; i < nComponents; i++)
 	{
 		componentsList[i].component->Render(gfx);
+	}
+}
+
+
+void Light::FreeGFX()
+{
+	/*D3DLIGHT9 tempLight;
+	ZeroMemory(&tempLight, sizeof(D3DLIGHT9));
+	gfx.GetDevice()->LightEnable(index, FALSE);
+	gfx.GetDevice()->SetLight(index, &tempLight);
+	for (int i = 0; i < nComponents; i++)
+	{
+		componentsList[i].component->FreeGFX();
+	}*/
+}
+void Light::RestoreGFX()
+{
+	gfx.GetDevice()->SetLight(index, &light);
+	gfx.GetDevice()->LightEnable(index, lightState);
+
+	for (int i = 0; i < nComponents; i++)
+	{
+		componentsList[i].component->RestoreGFX();
 	}
 }

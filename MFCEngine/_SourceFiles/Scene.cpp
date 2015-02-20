@@ -15,6 +15,14 @@ Scene::Scene()
 	nLights(NULL)
 {
 	mainCamera = new Camera();
+	char t[] = { "Scene_0" };
+	name = new char[8];
+
+	for (int i = 0; i < 8; i++)
+	{
+		name[i] = t[i];
+	}
+
 	//TODO: add initialization code
 }
 
@@ -111,61 +119,141 @@ int Scene::AddLightObject(D3DGraphics& gfx)
 
 		for (int i = 1; i < nObjects + 1; i++)
 		{
-			tempList[i].ID = i;
-			tempList[i].object = sceneObjects[i - 1].object;
-			tempList[i].name = new char[512];
-			ZeroMemory(tempList[i].name, sizeof(char) * 512);
-
-			GetObjectName(tempList[i].name, 512, i);
+			tempList[i] = sceneObjects[i - 1];
+			tempList[i].ID += 1;
+			sceneObjects[i - 1].name = NULL;
+			sceneObjects[i - 1].object = NULL;
 		}
 		tempList[0].ID			= 0;
 		tempList[0].object		= (Gameobject*)new Light(gfx,nLights);
 		tempList[0].name		= new char[10];
-		char name[10] = { "New Light" };
-		for (int i = 0; i < 10; i++)
-		{
-			tempList[0].name[i] = name[i];
-		}
+		tempList[0].name		= { "New Light" };
 
 		delete sceneObjects;
+		sceneObjects = new ObjectList[nObjects + 1];
 		nObjects++;
 		nLights++;
 
-		sceneObjects = new ObjectList[nObjects];
 		ZeroMemory(sceneObjects, sizeof(ObjectList)*(nObjects));
 		for (int i = 0; i < nObjects; i++)
 		{
-			sceneObjects[i].ID = tempList[i].ID;
-			sceneObjects[i].object = tempList[i].object;
-			sceneObjects[i].name = new char[512];
+			sceneObjects[i] = tempList[i];
+			sceneObjects[i].name = NULL;
 			SetObjectName(tempList[i].name, i);
+
+			tempList[i].name = NULL;
+			tempList[i].object = NULL;
 		}
+		delete[] tempList;
+		tempList = NULL;
+
+		/*for (int i = 0; i < nLights; i++)
+		{
+			int iobj = 0;
+			for (; iobj < nObjects; iobj++)
+			{
+				if (strcmp(sceneObjects[iobj].object->GetPointerToType(), "GAMELIGHT"))
+					break;
+				((Light*)sceneObjects[iobj].object)->SetIndex(i);
+			}
+		}*/
+
 		return 0;
 	}
 	else
 	{
-		char name[10] = { "New Light" };
 		sceneObjects = new ObjectList[1];
 		if (!sceneObjects)
 			return -1;
 		sceneObjects[0].ID = 0;
 		sceneObjects[0].object = (Gameobject*) new Light(gfx,0);
 		sceneObjects[0].name = new char[10];
-		for (int i = 0; i < 10; i++)
-			sceneObjects[0].name[i] = name[i];
+		sceneObjects[0].name = { "New Light" };
 
 		if (!sceneObjects[0].object)
 			return -1;
+
 		nObjects = 1;
 		nLights = 1;
 		return 0;
 	}
+	MessageBox(NULL, "An Unknown Error Occured When Adding The Object!", "Error!",
+		MB_OK | MB_ICONEXCLAMATION);
 	return -1;
 }
 
-void Scene::DeleteGameObject()
+void Scene::DeleteGameObject(int ID)
 {
-	//TODO: fill out deleting game and light 
+	bool isLight;
+	if (sceneObjects)
+	{
+		if (ID < 0)
+			return;
+		if (sceneObjects[ID].object)
+		{
+			ObjectList* temp = new ObjectList[nObjects - 1];
+			for (int i = 0; i < nObjects; i++)
+			{
+				if (i < ID)
+				{
+					temp[i] = sceneObjects[i];
+					sceneObjects[i].name = NULL;
+					sceneObjects[i].object = NULL;
+				}
+				else if (i > ID)
+				{
+					temp[i - 1] = sceneObjects[i];
+					temp[i - 1].ID -= 1;
+					sceneObjects[i].name = NULL;
+					sceneObjects[i].object = NULL;
+				}
+				else
+				{
+					if (strcmp(sceneObjects[ID].object->GetPointerToType(), "GAMELIGHT"))
+						isLight = true;
+					else
+						isLight = false;
+					if (isLight)
+						((Light*)sceneObjects[ID].object)->~Light();
+					else
+						sceneObjects[ID].object->~Gameobject();
+					sceneObjects[ID].name = NULL;
+					sceneObjects[ID].object = NULL;
+				}
+			}
+			delete sceneObjects;
+			sceneObjects = new ObjectList[nObjects - 1];
+			for (int i = 0; i < nObjects - 1; i++)
+			{
+				sceneObjects[i] = temp[i];
+			}
+			delete [] temp;
+			temp = NULL;
+
+			if (isLight)
+				nLights--;
+			nObjects -= 1;
+/*
+			for (int i = 0; i < nLights; i++)
+			{
+				int iobj = 0;
+				for (; iobj < nObjects; iobj++)
+				{
+					if (strcmp(sceneObjects[iobj].object->GetPointerToType(), "GAMELIGHT"))
+					{
+						((Light*)sceneObjects[iobj].object)->SetIndex(i);
+						break;
+					}
+				}				
+			}*/
+		}
+		else
+			MessageBox(NULL, "Object Selected Does Not Exist!", "Notice",
+				MB_OK | MB_ICONINFORMATION);
+	}
+	else
+		MessageBox(NULL, "No Gameobjects Exist!", "Notice!",
+			MB_OK | MB_ICONINFORMATION);
 }
 
 void Scene::GetObjectName(char* namebuffer, const int buflen, const int ID) const
@@ -176,7 +264,8 @@ void Scene::GetObjectName(char* namebuffer, const int buflen, const int ID) cons
 	{
 		if (sceneObjects[obji].ID == ID)
 		{
-			for (int i = 0; sceneObjects[obji].name[i] != '\0'; namelen++, i++); namelen++;
+			if (name)
+				for (int i = 0; sceneObjects[obji].name[i] != '\0'; namelen++, i++);
 
 			ZeroMemory(namebuffer, sizeof(char)*buflen);
 			for (int chari = 0; chari < namelen && chari < buflen; chari++)
@@ -218,4 +307,23 @@ void Scene::UpdateScene()
 void Scene::RenderScene(D3DGraphics& gfx)
 {
 	renderer.Render(gfx, this);
+}
+
+void Scene::SaveScene(char* filepath)
+{
+}
+
+void Scene::SetName(char* newName)
+{
+	int namelen = 0;
+	for (; newName[namelen] != '\0'; namelen++);
+
+	if (name)
+		delete name;
+	name = NULL;
+
+	name = new char[namelen];
+
+	for (int i = 0; i < namelen; i++)
+		name[i] = newName[i];
 }

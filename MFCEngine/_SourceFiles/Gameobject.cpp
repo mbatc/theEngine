@@ -1,3 +1,4 @@
+#include "GlobalPointers.h"
 #include "Gameobject.h"
 #include "Component.h"
 #include "Transform.h"
@@ -6,9 +7,12 @@
 Gameobject::Gameobject()
 	:
 	objectName(NULL),
-	componentsList(NULL)
+	componentsList(NULL),
+	type(NULL)
 {
 	transform = new Transform();
+	type = new char[512];
+	type = { "GAMEOBJECT" };
 }
 
 Gameobject::~Gameobject()
@@ -36,9 +40,7 @@ void Gameobject::Update()
 	{
 		componentsList[i].component->Update();
 	}
-
-	transform->SetRotation(transform->GetRotation().x,
-		transform->GetRotation().y + 2, transform->GetRotation().z);
+	transform->Update();
 }
 
 void Gameobject::Render(D3DGraphics& gfx) const
@@ -145,4 +147,20 @@ Component * Gameobject::GetComponent(int ID) const
 		}
 	}
 	return NULL;
+}
+
+void Gameobject::FreeGFX()
+{
+	for (int i = 0; i < nComponents; i++)
+	{
+		componentsList[i].component->FreeGFX();
+	}
+}
+
+void Gameobject::RestoreGFX()
+{
+	for (int i = 0; i < nComponents; i++)
+	{
+		componentsList[i].component->RestoreGFX();
+	}
 }

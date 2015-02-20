@@ -37,6 +37,18 @@
     <Filter Include="Header Files\MFC\Dialogs">
       <UniqueIdentifier>{e0be266a-2489-4e6d-9e2a-d80e193d2958}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Engine\Gameobject\Custom Scripts">
+      <UniqueIdentifier>{3dd42948-6494-4ec3-8b17-bb3abf9d0a72}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Engine\Gameobject\Custom Scripts">
+      <UniqueIdentifier>{4114f29f-363c-4786-a56d-625fc7804565}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Engine\Physics">
+      <UniqueIdentifier>{d44bf935-5d9e-4dd4-9da5-8251aeac43ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine\Gameobject\Physics">
+      <UniqueIdentifier>{9b6e51b0-b3a4-4e86-bea4-79e20eb98122}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="_SourceFiles\resource.h">
@@ -81,9 +93,6 @@
     <ClInclude Include="_SourceFiles\DialogObjProp.h">
       <Filter>Header Files\MFC\Dialogs</Filter>
     </ClInclude>
-    <ClInclude Include="_SourceFiles\DialogObjList.h">
-      <Filter>Header Files\MFC\Dialogs</Filter>
-    </ClInclude>
     <ClInclude Include="_SourceFiles\MeshRenderer.h">
       <Filter>Header Files\Engine\Gameobject</Filter>
     </ClInclude>
@@ -95,6 +104,33 @@
     </ClInclude>
     <ClInclude Include="_SourceFiles\Light.h">
       <Filter>Header Files\Engine\Gameobject</Filter>
+    </ClInclude>
+    <ClInclude Include="_SourceFiles\DialogObjList.h">
+      <Filter>Header Files\MFC\Dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="_SourceFiles\CustomBehaviour.h">
+      <Filter>Header Files\Engine\Gameobject\Custom Scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="_SourceFiles\Rotation.h">
+      <Filter>Header Files\Engine\Gameobject\Custom Scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="_SourceFiles\KeyboardInput.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="_SourceFiles\Vector.h">
+      <Filter>Header Files\Engine\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="_SourceFiles\PhysicsController.h">
+      <Filter>Header Files\Engine\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="_SourceFiles\GlobalPointers.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="_SourceFiles\Console.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -148,6 +184,21 @@
     </ClCompile>
     <ClCompile Include="_SourceFiles\Light.cpp">
       <Filter>Source Files\Engine\Gameobject</Filter>
+    </ClCompile>
+    <ClCompile Include="_SourceFiles\CustomBehaviour.cpp">
+      <Filter>Source Files\Engine\Gameobject\Custom Scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="_SourceFiles\KeyboardInput.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="_SourceFiles\GlobalPointerDef.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="_SourceFiles\Vector.cpp">
+      <Filter>Source Files\Engine\Gameobject\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="_SourceFiles\PhysicsController.cpp">
+      <Filter>Source Files\Engine\Gameobject\Physics</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -27,6 +27,4 @@ void Camera::Render(D3DGraphics& gfx)
 }
 
 void Camera::Update()
-{
-
-}
+{}

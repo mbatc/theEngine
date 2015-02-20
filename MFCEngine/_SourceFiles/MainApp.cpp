@@ -4,6 +4,7 @@
 #include "D3DGraphics.h"
 #include "Project.h"
 #include "Scene.h"
+#include "GlobalPointers.h"
 #include "resource.h"
 
 IMPLEMENT_DYNCREATE(MainView, CView);
@@ -16,17 +17,27 @@ UINT _cdecl GameUpdateThread(LPVOID pParam)
 		return 1;
 	while (1 != 2)
 	{
+		char msg[512];
+		int nCycles = gameThread->winApp->GetProject()->LockScene();
+
 		gameThread->winApp->Update();
-		int nCycles = gameThread->winApp->LockGFX();
-		gameThread->winApp->Render();
-		gameThread->winApp->UnlockGFX();
 
 		if (nCycles > 0)
 		{
-			char msg[512];
-			sprintf_s(msg, "%i CPU Cycles To Lock GFX", nCycles);
-			MessageBox(NULL, msg, "",
-				MB_OK | MB_ICONINFORMATION);
+			sprintf(msg, "CPU Cycles To Lock Scene: %d", nCycles);
+			Console->Output(msg);
+		}
+
+		nCycles = gameThread->winApp->LockGFX();
+		gameThread->winApp->Render();
+		gameThread->winApp->UnlockGFX();
+
+		gameThread->winApp->GetProject()->UnlockScene();
+
+		if (nCycles > 0)
+		{
+			sprintf(msg, "CPU Cycles To Lock D3DGraphics: %d", nCycles);
+			Console->Output(msg);
 		}
 	}
 }
@@ -34,7 +45,6 @@ UINT _cdecl GameUpdateThread(LPVOID pParam)
 MainApp::MainApp()
 {
 	InitVariables();
-	curProject = new Project(NULL);
 }
 
 MainApp::~MainApp()
@@ -55,6 +65,8 @@ inline BOOL MainApp::InitInstance()
 	mainWin->UpdateWindow();
 
 	gfx = mainWin->InitD3DView();
+	curProject = new Project("scene_0.scene", *gfx /*,CreateState::LOAD*/);
+	mainWin->UpdateObjectList();
 
 	GameUdt* object = new GameUdt(this);
 	AfxBeginThread(GameUpdateThread, object);
@@ -72,7 +84,7 @@ inline int MainApp::OnIdle(LONG ICount)
 	if (width != gfx->GetWidth() || height != gfx->GetHeight())
 	{
 		LockGFX();
-		gfx->OnResize(width, height);
+		gfx->OnResize(width, height, curProject->GetScene()->GeObjectList(), curProject->GetScene()->GetNumberOfObjects());
 		UnlockGFX();
 	}
 
@@ -129,10 +141,9 @@ int MainApp::LockGFX()
 	}
 	do
 	{
-		if (isLocked == false)
-			isLocked = true;
-		nCycles += 2;
-	} while (isLocked == false);
+		nCycles += 1;
+	} while (isLocked == true);
+	isLocked = true;
 	return nCycles;
 }
 

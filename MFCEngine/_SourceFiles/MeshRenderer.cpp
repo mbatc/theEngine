@@ -7,9 +7,10 @@
 MeshRenderer::~MeshRenderer()
 {}
 
-void MeshRenderer::SetMeshPointer(Mesh* newmesh)
+void MeshRenderer::SetMeshPointer(Mesh* newmesh, int ID)
 {
 	mesh = newmesh;
+	meshID = ID;
 }
 
 void MeshRenderer::Render(D3DGraphics& gfx)
@@ -46,14 +47,24 @@ void MeshRenderer::Render(D3DGraphics& gfx)
 		gfx.GetDevice()->SetMaterial(mesh->GetMaterial());
 		gfx.GetDevice()->SetTransform(D3DTS_WORLD,
 			&(
+			matScale *
 			matRotationX *
 			matRotationY *
 			matRotationZ *
-			matScale *
 			matTranslate));
 		gfx.GetDevice()->SetStreamSource(0, mesh->GetVB(), 0, sizeof(CUSTOMVERTEX));
 		gfx.GetDevice()->SetIndices(mesh->GetIB());
 		gfx.GetDevice()->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, 
 			mesh->GetNVerts() , 0, mesh->GetNTris());
 	}
+}
+
+
+void MeshRenderer::FreeGFX()
+{
+
+}
+void MeshRenderer::RestoreGFX()
+{
+
 }

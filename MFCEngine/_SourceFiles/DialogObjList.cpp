@@ -3,13 +3,21 @@
 #include "MainWin.h"
 #include "MainApp.h"
 #include "Gameobject.h"
+#include "Component.h"
 #include "Transform.h"
 #include "Project.h"
 #include "Scene.h"
 #include "resource.h"
+
 BEGIN_MESSAGE_MAP(DialogObjList,CDialogBar)
 	ON_LBN_SELCHANGE(IDC_OBJLIST,ol_objlist)
+	ON_COMMAND(IDC_DELETEOBJECT, DeleteObject)
 END_MESSAGE_MAP()
+
+void DialogObjList::DELETEOBJECT()
+{
+	parentWnd->DELETEOBJECT();
+}
 
 void DialogObjList::OL_OBJLIST()
 {
@@ -53,14 +61,28 @@ void DialogObjList::OL_OBJLIST()
 	sprintf_s(zscl, "%g\0", curTrans->GetScale().z		);
 	parentWnd->theApp->curProject->GetScene()->GetObjectName(name, 512, ID);
 
-	pXPOS->SetWindowText(xpos);
-	pYPOS->SetWindowText(ypos);
-	pZPOS->SetWindowText(zpos);
-	pXROT->SetWindowText(xrot);
-	pYROT->SetWindowText(yrot);
-	pZROT->SetWindowText(zrot);
-	pXSCL->SetWindowText(xscl);
-	pYSCL->SetWindowText(yscl);
-	pZSCL->SetWindowText(zscl);
-	pNAME->SetWindowText(name);
+	if (pXPOS)pXPOS->SetWindowText(xpos);
+	if (pYPOS)pYPOS->SetWindowText(ypos);
+	if (pZPOS)pZPOS->SetWindowText(zpos);
+	if (pXROT)pXROT->SetWindowText(xrot);
+	if (pYROT)pYROT->SetWindowText(yrot);
+	if (pZROT)pZROT->SetWindowText(zrot);
+	if (pXSCL)pXSCL->SetWindowText(xscl);
+	if (pYSCL)pYSCL->SetWindowText(yscl);
+	if (pZSCL)pZSCL->SetWindowText(zscl);
+	if (pNAME)pNAME->SetWindowText(name);
+
+	CComboBox* compList = (CComboBox*)parentWnd->GetObjProp()->GetDlgItem(IDC_CBCOMPONENT);
+	compList->ResetContent();
+
+	int nComponents = parentWnd->theApp->curProject->GetScene()->GetSceneObject(ID)->GetNumberOfComponent();
+	Gameobject* curObj = parentWnd->theApp->curProject->GetScene()->GetSceneObject(ID);
+	CString** compNames = new CString*[nComponents];
+	//GETTING OBJECT COMPONENTS
+	for (int i = 0; i < nComponents; i++)
+	{
+		char name[512];
+		curObj->GetComponent(i)->GetName(name,512);
+		compList->AddString(name);
+	}
 }

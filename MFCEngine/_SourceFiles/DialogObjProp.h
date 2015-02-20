@@ -12,6 +12,17 @@ public:
 		:
 		parentWnd(parentWnd)
 	{}
+	void ResetContent();
+	void ClearTempIDS();
+
+	static const int TEMPID_0 = 4001;
+	static const int TEMPID_1 = 4002;
+	static const int TEMPID_2 = 4003;
+	static const int TEMPID_3 = 4004;
+	static const int TEMPID_4 = 4005;
+	static const int TEMPID_5 = 4006;
+	static const int TEMPID_6 = 4007;
+
 private:
 	MainWin* parentWnd;
 
@@ -26,6 +37,7 @@ private:
 	afx_msg void op_yscl(){ OP_YSCL(); }
 	afx_msg void op_zscl(){ OP_ZSCL(); }
 	afx_msg void op_objnme(){ OP_OBJNME(); }
+	afx_msg void op_compcb(){ OP_COMPCB(); }
 
 	void OP_XPOS();
 	void OP_YPOS();
@@ -37,6 +49,7 @@ private:
 	void OP_YSCL();
 	void OP_ZSCL();
 	void OP_OBJNME();
+	void OP_COMPCB();
 
 	DECLARE_MESSAGE_MAP()
 };

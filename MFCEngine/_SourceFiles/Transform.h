@@ -20,6 +20,8 @@ public:
 	void SetRotation(float x, float y, float z){ Rotation.x = x; Rotation.y = y; Rotation.z = z; }
 	void SetScale(float x, float y, float z){ Scale.x = x; Scale.y = y; Scale.z = z; }
 
+	void Update();
+
 private:
 	Vector3 Translation;
 	Vector3 Rotation;

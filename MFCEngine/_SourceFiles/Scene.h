@@ -23,9 +23,12 @@ public:
 	//METHODS
 	int AddGameObject();
 	int AddLightObject(D3DGraphics& gfx);
-	void DeleteGameObject();
+	void DeleteGameObject( int ID );
 	void GetObjectName(char* nameBuffer, const int buflen, const int ID) const;
 	void SetObjectName(const char* nameBuffer, const int ID);
+	void SetName(char* newName);
+
+	ObjectList* GeObjectList(){ return sceneObjects; }
 
 
 	Gameobject * GetSceneObject(int ID);
@@ -33,11 +36,17 @@ public:
 	void UpdateScene();
 	void RenderScene(D3DGraphics& gfx);
 
+	void SaveScene(char* filepath);
+
 	//------------------------------------------
 	//INLINE METHODS
 	int GetNumberOfObjects(){ return nObjects; }
 	Camera* GetMainCam(){ return mainCamera; }
+	char* GetSceneName(){ return name; }
+
 private:
+	char* name;
+
 	SceneRenderer renderer;
 
 	ObjectList* sceneObjects;

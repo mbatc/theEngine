@@ -22,6 +22,9 @@ public:
 	//METHODS
 	virtual void Update();
 	virtual void Render(D3DGraphics& gfx) const;
+	
+	void FreeGFX();
+	void RestoreGFX();
 
 	//Returns new components ID. Returns -1 if component was not added.
 	int AddComponent( Component * newComponent );
@@ -31,11 +34,14 @@ public:
 
 	//------------------------------------------
 	//INLINE METHODS
+	char* GetPointerToType() const { return type; }
 	Transform* GetTransform() const { return transform; }
+	int GetNumberOfComponent() const { return nComponents; }
 
 protected:
 	//------------------------------------------
 	//DATA MEMBERS
+	char *			type;
 	char *			objectName;
 	unsigned int	nComponents;
 	ComponentList * componentsList;

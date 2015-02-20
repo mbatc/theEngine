@@ -11,12 +11,17 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="resource.h" />
     <ClInclude Include="_SourceFiles\Camera.h" />
     <ClInclude Include="_SourceFiles\Component.h" />
+    <ClInclude Include="_SourceFiles\Console.h" />
+    <ClInclude Include="_SourceFiles\CustomBehaviour.h" />
     <ClInclude Include="_SourceFiles\D3DGraphics.h" />
     <ClInclude Include="_SourceFiles\DialogObjList.h" />
     <ClInclude Include="_SourceFiles\DialogObjProp.h" />
     <ClInclude Include="_SourceFiles\Gameobject.h" />
+    <ClInclude Include="_SourceFiles\GlobalPointers.h" />
+    <ClInclude Include="_SourceFiles\KeyboardInput.h" />
     <ClInclude Include="_SourceFiles\Light.h" />
     <ClInclude Include="_SourceFiles\MainApp.h" />
     <ClInclude Include="_SourceFiles\MainDoc.h" />
@@ -24,19 +29,25 @@
     <ClInclude Include="_SourceFiles\MainWin.h" />
     <ClInclude Include="_SourceFiles\Mesh.h" />
     <ClInclude Include="_SourceFiles\MeshRenderer.h" />
+    <ClInclude Include="_SourceFiles\PhysicsController.h" />
     <ClInclude Include="_SourceFiles\PrimitiveDefinitions.h" />
     <ClInclude Include="_SourceFiles\Project.h" />
     <ClInclude Include="_SourceFiles\resource.h" />
+    <ClInclude Include="_SourceFiles\Rotation.h" />
     <ClInclude Include="_SourceFiles\Scene.h" />
     <ClInclude Include="_SourceFiles\SceneRenderer.h" />
     <ClInclude Include="_SourceFiles\Transform.h" />
+    <ClInclude Include="_SourceFiles\Vector.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="_SourceFiles\Camera.cpp" />
     <ClCompile Include="_SourceFiles\Component.cpp" />
+    <ClCompile Include="_SourceFiles\CustomBehaviour.cpp" />
     <ClCompile Include="_SourceFiles\D3DGraphics.cpp" />
     <ClCompile Include="_SourceFiles\DialogObjList.cpp" />
     <ClCompile Include="_SourceFiles\Gameobject.cpp" />
+    <ClCompile Include="_SourceFiles\GlobalPointerDef.cpp" />
+    <ClCompile Include="_SourceFiles\KeyboardInput.cpp" />
     <ClCompile Include="_SourceFiles\Light.cpp" />
     <ClCompile Include="_SourceFiles\MainApp.cpp" />
     <ClCompile Include="_SourceFiles\MainDoc.cpp" />
@@ -44,11 +55,13 @@
     <ClCompile Include="_SourceFiles\MainWin.cpp" />
     <ClCompile Include="_SourceFiles\Mesh.cpp" />
     <ClCompile Include="_SourceFiles\MeshRenderer.cpp" />
+    <ClCompile Include="_SourceFiles\PhysicsController.cpp" />
     <ClCompile Include="_SourceFiles\Project.cpp" />
     <ClCompile Include="_SourceFiles\Scene.cpp" />
     <ClCompile Include="_SourceFiles\SceneRenderer.cpp" />
     <ClCompile Include="_SourceFiles\DialogObjProp.cpp" />
     <ClCompile Include="_SourceFiles\Transform.cpp" />
+    <ClCompile Include="_SourceFiles\Vector.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="MFCEngine.rc" />
@@ -96,6 +109,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -109,6 +123,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
