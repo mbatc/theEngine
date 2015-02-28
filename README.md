@@ -1,7 +1,10 @@
 # theEngine
 A simple DirectX 3D game engine!
 
-This engine is being written primarily in C++ and uses the Microsoft Foundation Classes (MFC) as a base for the GUI in the engine.
+This engine is being written primarily in C++ and uses the Microsoft Foundation Classes (MFC) as a base for the GUI in the engine.(This being the reason that the exe's and solution name is 'MFCEngine').
+
+Update 4:
+The loading of .obj files has been somewhat complete. It can load them, but the faces have to be triangulated otherwise it will not work. This will be fixed soon. Loading models can also be done through the program itself instead of having to change source code to load models. Keyboard input has been added and there is now a component that you can add to an object that gives simple controls to the object. With all these changes a bug has popped up. When an object is deleted, there is an access violation. I am going to wok on fixing this before moving onto other things.
 
 Update 3:
 Its been a while but not much has changed. There is still only basic object functionality, however there is now a mesh and mesh renderer architecture in place. Cubes and planes can be loaded in and I am working on loading .Obj files into the engine. There is also a console window which displays text output. This will be used later to display errors during compiling.Some changes have also been made to the properties panel to support changing menus depending on which component is selected.There is also a simple saving and loading system in place which you can save scenes with, however to load a scene you have to change source code.

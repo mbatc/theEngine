@@ -18,11 +18,20 @@ void SceneRenderer::Render(D3DGraphics& gfx, Scene* scene) const
 {
 	gfx.BeginFrame();
 	gfx.GetDevice()->SetFVF(CUSTOMFVF);
-
-	scene->GetMainCam()->Render(gfx);
 	for (int i = 0; i < scene->GetNumberOfObjects(); i++)
 	{
-		scene->GetSceneObject(i)->Render(gfx);
+		Gameobject* curObj = scene->GetSceneObject(i);
+		if (!strcmp(curObj->GetPointerToType(), "CAMERA"))
+		{
+			curObj->Render(gfx);
+		}
+	}
+	for (int i = 0; i < scene->GetNumberOfObjects(); i++)
+	{
+		if (strcmp(scene->GetSceneObject(i)->GetPointerToType(), "CAMERA") != 0)
+		{
+			scene->GetSceneObject(i)->Render(gfx);
+		}
 	}
 	gfx.EndFrame();
 }

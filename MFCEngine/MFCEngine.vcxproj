@@ -11,7 +11,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="resource.h" />
     <ClInclude Include="_SourceFiles\Camera.h" />
     <ClInclude Include="_SourceFiles\Component.h" />
     <ClInclude Include="_SourceFiles\Console.h" />
@@ -21,6 +20,7 @@
     <ClInclude Include="_SourceFiles\DialogObjProp.h" />
     <ClInclude Include="_SourceFiles\Gameobject.h" />
     <ClInclude Include="_SourceFiles\GlobalPointers.h" />
+    <ClInclude Include="_SourceFiles\MainSplitter.h" />
     <ClInclude Include="_SourceFiles\KeyboardInput.h" />
     <ClInclude Include="_SourceFiles\Light.h" />
     <ClInclude Include="_SourceFiles\MainApp.h" />
@@ -30,10 +30,10 @@
     <ClInclude Include="_SourceFiles\Mesh.h" />
     <ClInclude Include="_SourceFiles\MeshRenderer.h" />
     <ClInclude Include="_SourceFiles\PhysicsController.h" />
+    <ClInclude Include="_SourceFiles\PlayerControl.h" />
     <ClInclude Include="_SourceFiles\PrimitiveDefinitions.h" />
     <ClInclude Include="_SourceFiles\Project.h" />
     <ClInclude Include="_SourceFiles\resource.h" />
-    <ClInclude Include="_SourceFiles\Rotation.h" />
     <ClInclude Include="_SourceFiles\Scene.h" />
     <ClInclude Include="_SourceFiles\SceneRenderer.h" />
     <ClInclude Include="_SourceFiles\Transform.h" />
@@ -51,6 +51,7 @@
     <ClCompile Include="_SourceFiles\Light.cpp" />
     <ClCompile Include="_SourceFiles\MainApp.cpp" />
     <ClCompile Include="_SourceFiles\MainDoc.cpp" />
+    <ClCompile Include="_SourceFiles\MainSplitter.cpp" />
     <ClCompile Include="_SourceFiles\MainView.cpp" />
     <ClCompile Include="_SourceFiles\MainWin.cpp" />
     <ClCompile Include="_SourceFiles\Mesh.cpp" />
@@ -106,10 +107,11 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -118,12 +120,13 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>

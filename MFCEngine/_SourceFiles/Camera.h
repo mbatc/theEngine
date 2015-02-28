@@ -9,7 +9,7 @@ public:
 	~Camera(); 
 
 	void Update();
-	void Render(D3DGraphics& gfx);
+	void Render(D3DGraphics& gfx) const;
 private:
 
 };

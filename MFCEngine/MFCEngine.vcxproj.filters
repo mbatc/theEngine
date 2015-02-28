@@ -111,9 +111,6 @@
     <ClInclude Include="_SourceFiles\CustomBehaviour.h">
       <Filter>Header Files\Engine\Gameobject\Custom Scripts</Filter>
     </ClInclude>
-    <ClInclude Include="_SourceFiles\Rotation.h">
-      <Filter>Header Files\Engine\Gameobject\Custom Scripts</Filter>
-    </ClInclude>
     <ClInclude Include="_SourceFiles\KeyboardInput.h">
       <Filter>Header Files\Engine</Filter>
     </ClInclude>
@@ -129,8 +126,11 @@
     <ClInclude Include="_SourceFiles\Console.h">
       <Filter>Header Files\Engine</Filter>
     </ClInclude>
-    <ClInclude Include="resource.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="_SourceFiles\MainSplitter.h">
+      <Filter>Header Files\MFC</Filter>
+    </ClInclude>
+    <ClInclude Include="_SourceFiles\PlayerControl.h">
+      <Filter>Header Files\Engine\Gameobject\Custom Scripts</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -199,6 +199,9 @@
     </ClCompile>
     <ClCompile Include="_SourceFiles\PhysicsController.cpp">
       <Filter>Source Files\Engine\Gameobject\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="_SourceFiles\MainSplitter.cpp">
+      <Filter>Source Files\MFC</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

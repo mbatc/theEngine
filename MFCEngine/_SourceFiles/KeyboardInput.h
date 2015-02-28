@@ -1,5 +1,4 @@
 #pragma once
-#include <Windows.h>
 
 struct KEYSTATE
 {
@@ -16,6 +15,8 @@ class KeyboardServer
 {
 	friend KeyboardClient;
 public:
+	KeyboardServer();
+
 	void Update();
 	void KeyDown(char keyCode);
 	void KeyUp(char keyCode);
@@ -27,11 +28,12 @@ private:
 class KeyboardClient
 {
 public:
-	KeyboardClient(KeyboardServer& kserv);
+	KeyboardClient();
+	void ServerRef(KeyboardServer* server){ kServ = server; }
 
-	bool KeyIsDown(char keyCode){ return kServ.keyState[keyCode].isDown; }
-	bool KeyIsReleased(char keyCode){ return kServ.keyState[keyCode].isReleased; }
-	bool KeyIsPressed(char keyCode){ return kServ.keyState[keyCode].isPressed; }
+	bool KeyIsDown(char keyCode){ return kServ->keyState[keyCode].isDown; }
+	bool KeyIsReleased(char keyCode){ return kServ->keyState[keyCode].isReleased; }
+	bool KeyIsPressed(char keyCode){ return kServ->keyState[keyCode].isPressed; }
 private:
-	KeyboardServer& kServ;
+	KeyboardServer* kServ;
 };

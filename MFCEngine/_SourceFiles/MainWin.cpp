@@ -2,13 +2,13 @@
 #include "MainView.h"
 #include "MainWin.h"
 #include "GlobalPointers.h"
+#include "PlayerControl.h"
 #include "D3DGraphics.h"
 #include "Project.h"
 #include "Scene.h"
 #include "Gameobject.h"
 #include "Mesh.h"
 #include "MeshRenderer.h"
-#include "Rotation.h"
 #include "PrimitiveDefinitions.h"
 #include "resource.h"
 
@@ -17,18 +17,23 @@ BEGIN_MESSAGE_MAP(MainWin,CFrameWnd)
 
 	ON_COMMAND(ID_GAMEOBJECTADDNEW_CUBE, AddnewCube)
 	ON_COMMAND(ID_GAMEOBJECTADDNEW_LIGHT, AddnewLight)
-	ON_COMMAND(ID_GAMEOBJECTADDNEW_EMPTY, AddnewEmpty )
+	ON_COMMAND(ID_GAMEOBJECTADDNEW_EMPTY, AddnewEmpty)
 	ON_COMMAND(IDC_DELETEOBJECT, DeleteObject)
 	ON_COMMAND(ID_FILESAVEAS_SCENE, FilesaveasScene)
-	ON_COMMAND(ID_GAMEOBJECTADDNEW_PLANE, AddnewPlane )
+	ON_COMMAND(ID_GAMEOBJECTADDNEW_PLANE, AddnewPlane)
+	ON_COMMAND(ID_GAMEOBJECTADDNEW_MESHFROMFILE, AddnewMeshFromFile)
+
+	ON_COMMAND(ID_CONTROL_PLAYERCONTROL, AddComp_PlayerControl)
 
 	ON_COMMAND(ID_WINDOW_OBJECTPROPERTIES, WindowObjProperties)
 END_MESSAGE_MAP()
 
 MainWin::MainWin(MainApp * app)
 	:
-	theApp(app)
+	theApp(app),
+	m_mainSplitter()
 {
+	kServ = new KeyboardServer();
 	m_bInitMainSplitter = FALSE;
 	Create(NULL, "TheEngine");
 	if (!InitDialogPointers())
@@ -36,6 +41,8 @@ MainWin::MainWin(MainApp * app)
 
 	pMenu->LoadMenuA(IDR_MENU1);
 	SetMenu(pMenu);
+
+	m_mainSplitter.SetAppPointer(theApp);
 
 	InitDockablePanels();
 }
@@ -56,7 +63,7 @@ BOOL MainWin::OnCreateClient(LPCREATESTRUCT lpcs, CCreateContext * pContext)
 		return FALSE;
 	}
 
-	if (!m_mainSplitter.CreateView(0,0, RUNTIME_CLASS(MainView),
+	if (!m_mainSplitter.CreateView(0, 0, RUNTIME_CLASS(MainView),
 		CSize(cr.Width(), (cr.Height() - 200)/2), pContext))
 	{
 		MessageBox("Failed To Create Splitter View!", "Error!",
@@ -229,7 +236,7 @@ void MainWin::ADDNEWCUBE()
 	int meshID =		obj->AddComponent((Component*)new Mesh(obj, *gfx));
 	int meshRendID =	obj->AddComponent((Component*)new MeshRenderer(obj));
 	((MeshRenderer*)obj->GetComponent(meshRendID))->SetMeshPointer((Mesh*)obj->GetComponent(meshID),meshID);
-	((Mesh*)obj->GetComponent(meshID))->LoadFromFile("TestObj.obj");
+	theApp->curProject->GetScene()->SetObjectName("New Cube", ID);
 
 	theApp->curProject->UnlockScene();
 
@@ -252,8 +259,51 @@ void MainWin::ADDNEWPLANE()
 	((MeshRenderer*)obj->GetComponent(meshRendID))->SetMeshPointer((Mesh*)obj->GetComponent(meshID), meshID);
 	((Mesh*)obj->GetComponent(meshID))->LoadPrimitive(PM_PLANE, PRM_PLANE, PRMIB_PLANE,
 		sizeof(PRM_PLANE) / sizeof(CUSTOMVERTEX), sizeof(PRMIB_PLANE) / sizeof(short));
+	theApp->curProject->GetScene()->SetObjectName("New Plane", ID);
 
 	theApp->curProject->UnlockScene();
+
+	if (!UpdateObjectList())
+		MessageBox("Failed To Update Object List!", "Error!");
+}
+
+void MainWin::ADDMESHFROMFILE()
+{
+	//Used so that the scene class is not accessed between threads!!
+	CFileDialog fileDialog(TRUE);
+	fileDialog.DoModal();
+	OPENFILENAME& ofn = fileDialog.GetOFN();
+	ofn.lpstrDefExt = ".obj";
+	char filepath[512] = { 0 };
+	sprintf_s(filepath, sizeof(filepath), "%s", fileDialog.GetPathName().GetString());
+
+	int nameStart = 0;
+	for (nameStart = sizeof(filepath) / sizeof(char);
+		nameStart <= 0 || filepath[nameStart] != '\\';
+		nameStart--);
+
+	theApp->curProject->LockScene();
+
+	int ID = theApp->curProject->GetScene()->AddGameObject();
+	if (ID == -1)
+	{
+		MessageBox("Failed To Create New Gameobject!", "Error!");
+		return;
+	}
+	Gameobject* obj = theApp->curProject->GetScene()->GetSceneObject(ID);
+	int meshID = obj->AddComponent((Component*)new Mesh(obj, *gfx));
+	int meshRendID = obj->AddComponent((Component*)new MeshRenderer(obj));
+	((MeshRenderer*)obj->GetComponent(meshRendID))->SetMeshPointer((Mesh*)obj->GetComponent(meshID), meshID);
+	if (filepath)
+	{
+		((Mesh*)obj->GetComponent(meshID))->LoadFromFile(filepath);
+		theApp->curProject->GetScene()->SetObjectName(&filepath[nameStart + 1], ID);
+	}
+	else { MessageBox("Failed To Open File!", "Error!"); }
+
+
+	theApp->curProject->UnlockScene();
+
 
 	if (!UpdateObjectList())
 		MessageBox("Failed To Update Object List!", "Error!");
@@ -336,4 +386,14 @@ BOOL MainWin::UpdateObjectList()
 	if (pObjLIST->GetCount() == 0)
 		pObjProp->ResetContent();
 	return true;
+}
+
+void MainWin::ADDCOMP_PLAYERCONTROL()
+{
+	int curSel = ((CListBox*)pObjList->GetDlgItem(IDC_OBJLIST))->GetCurSel();
+
+	theApp->GetProject()->LockScene();
+	Gameobject* obj = theApp->GetProject()->GetScene()->GetSceneObject(curSel);
+	obj->AddComponent((Component*)new PlayerControl(obj));
+	theApp->GetProject()->UnlockScene();
 }

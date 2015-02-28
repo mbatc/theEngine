@@ -26,6 +26,9 @@ public:
 	int	 LockGFX();
 	void UnlockGFX();
 
+	int		LockKBD();
+	void	UnlockKBD();
+
 protected:
 	//------------------------------------------
 	//DATA MEMBERS
@@ -38,6 +41,7 @@ protected:
 	void InitVariables();
 
 	bool isLocked;
+	bool kbdLocked;
 };
 
 class GameUdt : public CWinThread

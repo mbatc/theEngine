@@ -1,131 +1,15 @@
-﻿Build started 20/02/2015 12:28:24 PM.
+﻿Build started 28/02/2015 7:13:24 PM.
      1>Project "D:\mbatc13\My Documents\GameProjects\MFCEngine\MFCEngine\MFCEngine.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _CRT_SECURE_NO_WARNINGS /D _MBCS /D _AFXDLL /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt _SourceFiles\MainWin.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W0 /WX- /sdl /MP /Od /Oy- /D _CRT_SECURE_NO_WARNINGS /D _MBCS /D _AFXDLL /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt _SourceFiles\MainWin.cpp _SourceFiles\Mesh.cpp _SourceFiles\Project.cpp
+     1>cl : Command line warning D9030: '/Gm' is incompatible with multiprocessing; ignoring /MP switch
+         Project.cpp
+         Mesh.cpp
+         Generating Code...
+         Compiling...
          MainWin.cpp
-     1>c:\program files (x86)\microsoft visual studio 12.0\vc\atlmfc\include\afx.h(38): warning C4996: 'MBCS_Support_Deprecated_In_MFC': MBCS support in MFC is deprecated and may be removed in a future version of MFC.
-                 c:\program files (x86)\microsoft visual studio 12.0\vc\atlmfc\include\afx.h(33) : see declaration of 'MBCS_Support_Deprecated_In_MFC'
          _WIN32_WINNT not defined. Defaulting to _WIN32_WINNT_MAXVER (see WinSDKVer.h)
-     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(12): warning C4005: 'DXGI_STATUS_OCCLUDED' : macro redefinition
-                 c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50092) : see previous definition of 'DXGI_STATUS_OCCLUDED'
-     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(13): warning C4005: 'DXGI_STATUS_CLIPPED' : macro redefinition
-                 c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50101) : see previous definition of 'DXGI_STATUS_CLIPPED'
-     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(14): warning C4005: 'DXGI_STATUS_NO_REDIRECTION' : macro redefinition
-                 c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50110) : see previous definition of 'DXGI_STATUS_NO_REDIRECTION'
-     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(15): warning C4005: 'DXGI_STATUS_NO_DESKTOP_ACCESS' : macro redefinition
-                 c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50119) : see previous definition of 'DXGI_STATUS_NO_DESKTOP_ACCESS'
-     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(16): warning C4005: 'DXGI_STATUS_GRAPHICS_VIDPN_SOURCE_IN_USE' : macro redefinition
-                 c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50128) : see previous definition of 'DXGI_STATUS_GRAPHICS_VIDPN_SOURCE_IN_USE'
-     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(17): warning C4005: 'DXGI_STATUS_MODE_CHANGED' : macro redefinition
-                 c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50137) : see previous definition of 'DXGI_STATUS_MODE_CHANGED'
-     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(18): warning C4005: 'DXGI_STATUS_MODE_CHANGE_IN_PROGRESS' : macro redefinition
-                 c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50146) : see previous definition of 'DXGI_STATUS_MODE_CHANGE_IN_PROGRESS'
-     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(21): warning C4005: 'DXGI_ERROR_INVALID_CALL' : macro redefinition
-                 c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50161) : see previous definition of 'DXGI_ERROR_INVALID_CALL'
-     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(22): warning C4005: 'DXGI_ERROR_NOT_FOUND' : macro redefinition
-                 c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50170) : see previous definition of 'DXGI_ERROR_NOT_FOUND'
-     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(23): warning C4005: 'DXGI_ERROR_MORE_DATA' : macro redefinition
-                 c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50179) : see previous definition of 'DXGI_ERROR_MORE_DATA'
-     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(24): warning C4005: 'DXGI_ERROR_UNSUPPORTED' : macro redefinition
-                 c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50188) : see previous definition of 'DXGI_ERROR_UNSUPPORTED'
-     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(25): warning C4005: 'DXGI_ERROR_DEVICE_REMOVED' : macro redefinition
-                 c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50197) : see previous definition of 'DXGI_ERROR_DEVICE_REMOVED'
-     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(26): warning C4005: 'DXGI_ERROR_DEVICE_HUNG' : macro redefinition
-                 c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50206) : see previous definition of 'DXGI_ERROR_DEVICE_HUNG'
-     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(27): warning C4005: 'DXGI_ERROR_DEVICE_RESET' : macro redefinition
-                 c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50216) : see previous definition of 'DXGI_ERROR_DEVICE_RESET'
-     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(28): warning C4005: 'DXGI_ERROR_WAS_STILL_DRAWING' : macro redefinition
-                 c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50225) : see previous definition of 'DXGI_ERROR_WAS_STILL_DRAWING'
-     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(29): warning C4005: 'DXGI_ERROR_FRAME_STATISTICS_DISJOINT' : macro redefinition
-                 c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50235) : see previous definition of 'DXGI_ERROR_FRAME_STATISTICS_DISJOINT'
-     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(30): warning C4005: 'DXGI_ERROR_GRAPHICS_VIDPN_SOURCE_IN_USE' : macro redefinition
-                 c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50244) : see previous definition of 'DXGI_ERROR_GRAPHICS_VIDPN_SOURCE_IN_USE'
-     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(31): warning C4005: 'DXGI_ERROR_DRIVER_INTERNAL_ERROR' : macro redefinition
-                 c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50254) : see previous definition of 'DXGI_ERROR_DRIVER_INTERNAL_ERROR'
-     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(32): warning C4005: 'DXGI_ERROR_NONEXCLUSIVE' : macro redefinition
-                 c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50263) : see previous definition of 'DXGI_ERROR_NONEXCLUSIVE'
-     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(33): warning C4005: 'DXGI_ERROR_NOT_CURRENTLY_AVAILABLE' : macro redefinition
-                 c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50272) : see previous definition of 'DXGI_ERROR_NOT_CURRENTLY_AVAILABLE'
-     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(34): warning C4005: 'DXGI_ERROR_REMOTE_CLIENT_DISCONNECTED' : macro redefinition
-                 c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50282) : see previous definition of 'DXGI_ERROR_REMOTE_CLIENT_DISCONNECTED'
-     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(35): warning C4005: 'DXGI_ERROR_REMOTE_OUTOFMEMORY' : macro redefinition
-                 c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50291) : see previous definition of 'DXGI_ERROR_REMOTE_OUTOFMEMORY'
-     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\d2derr.h(59): warning C4005: 'D2DERR_WRONG_STATE' : macro redefinition
-                 c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50511) : see previous definition of 'D2DERR_WRONG_STATE'
-     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\d2derr.h(64): warning C4005: 'D2DERR_NOT_INITIALIZED' : macro redefinition
-                 c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50520) : see previous definition of 'D2DERR_NOT_INITIALIZED'
-     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\d2derr.h(69): warning C4005: 'D2DERR_UNSUPPORTED_OPERATION' : macro redefinition
-                 c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50529) : see previous definition of 'D2DERR_UNSUPPORTED_OPERATION'
-     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\d2derr.h(74): warning C4005: 'D2DERR_SCANNER_FAILED' : macro redefinition
-                 c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50538) : see previous definition of 'D2DERR_SCANNER_FAILED'
-     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\d2derr.h(79): warning C4005: 'D2DERR_SCREEN_ACCESS_DENIED' : macro redefinition
-                 c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50547) : see previous definition of 'D2DERR_SCREEN_ACCESS_DENIED'
-     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\d2derr.h(84): warning C4005: 'D2DERR_DISPLAY_STATE_INVALID' : macro redefinition
-                 c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50556) : see previous definition of 'D2DERR_DISPLAY_STATE_INVALID'
-     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\d2derr.h(89): warning C4005: 'D2DERR_ZERO_VECTOR' : macro redefinition
-                 c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50565) : see previous definition of 'D2DERR_ZERO_VECTOR'
-     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\d2derr.h(97): warning C4005: 'D2DERR_INTERNAL_ERROR' : macro redefinition
-                 c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50574) : see previous definition of 'D2DERR_INTERNAL_ERROR'
-     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\d2derr.h(103): warning C4005: 'D2DERR_DISPLAY_FORMAT_NOT_SUPPORTED' : macro redefinition
-                 c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50583) : see previous definition of 'D2DERR_DISPLAY_FORMAT_NOT_SUPPORTED'
-     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\d2derr.h(108): warning C4005: 'D2DERR_INVALID_CALL' : macro redefinition
-                 c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50592) : see previous definition of 'D2DERR_INVALID_CALL'
-     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\d2derr.h(113): warning C4005: 'D2DERR_NO_HARDWARE_DEVICE' : macro redefinition
-                 c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50601) : see previous definition of 'D2DERR_NO_HARDWARE_DEVICE'
-     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\d2derr.h(119): warning C4005: 'D2DERR_RECREATE_TARGET' : macro redefinition
-                 c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50610) : see previous definition of 'D2DERR_RECREATE_TARGET'
-     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\d2derr.h(124): warning C4005: 'D2DERR_TOO_MANY_SHADER_ELEMENTS' : macro redefinition
-                 c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50619) : see previous definition of 'D2DERR_TOO_MANY_SHADER_ELEMENTS'
-     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\d2derr.h(129): warning C4005: 'D2DERR_SHADER_COMPILE_FAILED' : macro redefinition
-                 c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50628) : see previous definition of 'D2DERR_SHADER_COMPILE_FAILED'
-     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\d2derr.h(134): warning C4005: 'D2DERR_MAX_TEXTURE_SIZE_EXCEEDED' : macro redefinition
-                 c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50637) : see previous definition of 'D2DERR_MAX_TEXTURE_SIZE_EXCEEDED'
-     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\d2derr.h(139): warning C4005: 'D2DERR_UNSUPPORTED_VERSION' : macro redefinition
-                 c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50646) : see previous definition of 'D2DERR_UNSUPPORTED_VERSION'
-     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\d2derr.h(144): warning C4005: 'D2DERR_BAD_NUMBER' : macro redefinition
-                 c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50655) : see previous definition of 'D2DERR_BAD_NUMBER'
-     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\d2derr.h(149): warning C4005: 'D2DERR_WRONG_FACTORY' : macro redefinition
-                 c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50664) : see previous definition of 'D2DERR_WRONG_FACTORY'
-     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\d2derr.h(154): warning C4005: 'D2DERR_LAYER_ALREADY_IN_USE' : macro redefinition
-                 c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50673) : see previous definition of 'D2DERR_LAYER_ALREADY_IN_USE'
-     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\d2derr.h(159): warning C4005: 'D2DERR_POP_CALL_DID_NOT_MATCH_PUSH' : macro redefinition
-                 c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50682) : see previous definition of 'D2DERR_POP_CALL_DID_NOT_MATCH_PUSH'
-     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\d2derr.h(164): warning C4005: 'D2DERR_WRONG_RESOURCE_DOMAIN' : macro redefinition
-                 c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50691) : see previous definition of 'D2DERR_WRONG_RESOURCE_DOMAIN'
-     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\d2derr.h(169): warning C4005: 'D2DERR_PUSH_POP_UNBALANCED' : macro redefinition
-                 c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50700) : see previous definition of 'D2DERR_PUSH_POP_UNBALANCED'
-     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\d2derr.h(174): warning C4005: 'D2DERR_RENDER_TARGET_HAS_LAYER_OR_CLIPRECT' : macro redefinition
-                 c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50709) : see previous definition of 'D2DERR_RENDER_TARGET_HAS_LAYER_OR_CLIPRECT'
-     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\d2derr.h(179): warning C4005: 'D2DERR_INCOMPATIBLE_BRUSH_TYPES' : macro redefinition
-                 c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50718) : see previous definition of 'D2DERR_INCOMPATIBLE_BRUSH_TYPES'
-     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\d2derr.h(184): warning C4005: 'D2DERR_WIN32_ERROR' : macro redefinition
-                 c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50727) : see previous definition of 'D2DERR_WIN32_ERROR'
-     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\d2derr.h(189): warning C4005: 'D2DERR_TARGET_NOT_GDI_COMPATIBLE' : macro redefinition
-                 c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50736) : see previous definition of 'D2DERR_TARGET_NOT_GDI_COMPATIBLE'
-     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\d2derr.h(194): warning C4005: 'D2DERR_TEXT_EFFECT_IS_WRONG_TYPE' : macro redefinition
-                 c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50745) : see previous definition of 'D2DERR_TEXT_EFFECT_IS_WRONG_TYPE'
-     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\d2derr.h(201): warning C4005: 'D2DERR_TEXT_RENDERER_NOT_RELEASED' : macro redefinition
-                 c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50754) : see previous definition of 'D2DERR_TEXT_RENDERER_NOT_RELEASED'
-     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\d2derr.h(206): warning C4005: 'D2DERR_EXCEEDS_MAX_BITMAP_SIZE' : macro redefinition
-                 c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50763) : see previous definition of 'D2DERR_EXCEEDS_MAX_BITMAP_SIZE'
-     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\d3d10.h(608): warning C4005: 'D3D10_ERROR_TOO_MANY_UNIQUE_STATE_OBJECTS' : macro redefinition
-                 c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50445) : see previous definition of 'D3D10_ERROR_TOO_MANY_UNIQUE_STATE_OBJECTS'
-     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\d3d10.h(609): warning C4005: 'D3D10_ERROR_FILE_NOT_FOUND' : macro redefinition
-                 c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50454) : see previous definition of 'D3D10_ERROR_FILE_NOT_FOUND'
-     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dwrite.h(4962): warning C4005: 'DWRITE_E_FILEFORMAT' : macro redefinition
-                 c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50921) : see previous definition of 'DWRITE_E_FILEFORMAT'
-     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dwrite.h(4967): warning C4005: 'DWRITE_E_UNEXPECTED' : macro redefinition
-                 c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50930) : see previous definition of 'DWRITE_E_UNEXPECTED'
-     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dwrite.h(4972): warning C4005: 'DWRITE_E_NOFONT' : macro redefinition
-                 c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50939) : see previous definition of 'DWRITE_E_NOFONT'
-     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dwrite.h(4978): warning C4005: 'DWRITE_E_FILENOTFOUND' : macro redefinition
-                 c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50948) : see previous definition of 'DWRITE_E_FILENOTFOUND'
-     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dwrite.h(4983): warning C4005: 'DWRITE_E_FILEACCESS' : macro redefinition
-                 c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50957) : see previous definition of 'DWRITE_E_FILEACCESS'
-     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dwrite.h(4988): warning C4005: 'DWRITE_E_FONTCOLLECTIONOBSOLETE' : macro redefinition
-                 c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50966) : see previous definition of 'DWRITE_E_FONTCOLLECTIONOBSOLETE'
-     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dwrite.h(4993): warning C4005: 'DWRITE_E_ALREADYREGISTERED' : macro redefinition
-                 c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50975) : see previous definition of 'DWRITE_E_ALREADYREGISTERED'
+         Generating Code...
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\mbatc13\My Documents\GameProjects\MFCEngine\Debug\MFCEngine.exe" /INCREMENTAL /NOLOGO /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /manifestinput:"C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\Include\Manifest\dpiaware.manifest" /DEBUG /PDB:"D:\mbatc13\My Documents\GameProjects\MFCEngine\Debug\MFCEngine.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\mbatc13\My Documents\GameProjects\MFCEngine\Debug\MFCEngine.lib" /MACHINE:X86 Debug\MFCEngine.res
          Debug\Camera.obj
@@ -139,6 +23,7 @@
          Debug\Light.obj
          Debug\MainApp.obj
          Debug\MainDoc.obj
+         Debug\MainSplitter.obj
          Debug\MainView.obj
          Debug\MainWin.obj
          Debug\Mesh.obj
@@ -155,4 +40,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:04.08
+Time Elapsed 00:00:04.59

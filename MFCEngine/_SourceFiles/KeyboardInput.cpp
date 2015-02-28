@@ -1,18 +1,29 @@
 #include "KeyboardInput.h"
 
+KeyboardServer::KeyboardServer()
+{
+	for (int i = 0; i < 256; i++)
+	{
+		keyState[i].isDown = false;
+		keyState[i].isPressed = false;
+		keyState[i].isReleased = false;
+		keyState[i].nFramesDown = 0;
+		keyState[i].nFramesUp = 0;
+	}
+}
+
 void KeyboardServer::Update()
 {
 	for (int i = 0; i < 256; i++)
 	{
 		keyState[i].isPressed = false;
-		keyState[i].isDown = false;
+		keyState[i].isReleased = false;
 	}
 }
 
 void KeyboardServer::KeyDown(char keyCode)
 {
 	keyState[keyCode].isDown = true;
-	keyState[keyCode].isReleased = false;
 	if (keyState[keyCode].nFramesDown == 0)
 	{
 		keyState[keyCode].isPressed = true;
@@ -24,7 +35,6 @@ void KeyboardServer::KeyDown(char keyCode)
 void KeyboardServer::KeyUp(char keyCode)
 {
 	keyState[keyCode].isDown = false;
-	keyState[keyCode].isPressed = false;
 	if (keyState[keyCode].nFramesUp == 0)
 	{
 		keyState[keyCode].isReleased = true;
@@ -32,3 +42,9 @@ void KeyboardServer::KeyUp(char keyCode)
 	keyState[keyCode].nFramesUp++;
 	keyState[keyCode].nFramesDown = 0;
 }
+
+KeyboardClient::KeyboardClient()
+	:
+	kServ(nullptr)
+{}
+

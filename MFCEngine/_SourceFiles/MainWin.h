@@ -1,10 +1,14 @@
 #pragma once
 
-#include "DialogObjProp.h"
-#include "DialogObjList.h"
 #include <afxwin.h>
 #include <afxext.h>
+#include "DialogObjProp.h"
+#include "DialogObjList.h"
+#include "MainSplitter.h"
 
+#include "KeyboardInput.h"
+
+class KeyboardServer;
 class D3DGraphics;
 class MainApp;
 
@@ -30,7 +34,9 @@ public:
 
 	BOOL UpdateObjectList();
 
-	CSplitterWnd	m_mainSplitter;
+	MainSplitter	m_mainSplitter;
+
+	KeyboardServer*	kServ;
 
 protected:
 	//Methods
@@ -56,9 +62,11 @@ protected:
 	afx_msg void AddnewPlane(){ ADDNEWPLANE(); }
 	afx_msg void AddnewLight(){ ADDNEWLIGHT(); }
 	afx_msg void AddnewEmpty(){ ADDNEWEMPTY(); }
+	afx_msg void AddnewMeshFromFile(){ ADDMESHFROMFILE(); }
 	afx_msg void DeleteObject(){ DELETEOBJECT(); }
 	afx_msg void WindowObjProperties(){ WINDOWOBJPROPERTIES(); }
 	afx_msg void FilesaveasScene(){ FILESAVEASSCENE(); }
+	afx_msg void AddComp_PlayerControl(){ ADDCOMP_PLAYERCONTROL(); }
 
 private:
 	void MENUEXIT();
@@ -66,9 +74,11 @@ private:
 	void ADDNEWPLANE();
 	void ADDNEWLIGHT();
 	void ADDNEWEMPTY();
+	void ADDMESHFROMFILE();
 	void DELETEOBJECT();
 	void WINDOWOBJPROPERTIES();
 	void FILESAVEASSCENE();
+	void ADDCOMP_PLAYERCONTROL();
 
 	DECLARE_MESSAGE_MAP();
 };

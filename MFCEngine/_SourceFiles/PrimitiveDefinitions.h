@@ -2,6 +2,7 @@
 
 #include "D3DGraphics.h"
 
+
 static const CUSTOMVERTEX PRM_CUBE[] =
 {
 	//	X		Y			Z		XNORM	YNORM	ZNORM
@@ -33,7 +34,7 @@ static const CUSTOMVERTEX PRM_CUBE[] =
 	{ -0.5f, -0.5f, -0.5f, -1.0f, 0.0f, 0.0f, },    // side 6
 	{ -0.5f, -0.5f, 0.5f, -1.0f, 0.0f, 0.0f, },
 	{ -0.5f, 0.5f, -0.5f, -1.0f, 0.0f, 0.0f, },
-	{ -0.5f, 0.5f, 0.5f, -1.0f, 0.0f, 0.0f, },
+	{ -0.5f, 0.5f, 0.5f, -1.0f, 0.0f, 0.0f, },	
 };
 
 static const short PRMIB_CUBE[] =

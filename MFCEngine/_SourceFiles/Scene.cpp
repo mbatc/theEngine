@@ -11,10 +11,9 @@ Scene::Scene()
 	renderer(),
 	nObjects( NULL ),
 	sceneObjects(NULL),
-	mainCamera(NULL),
 	nLights(NULL)
 {
-	mainCamera = new Camera();
+	AddCameraObject();
 	char t[] = { "Scene_0" };
 	name = new char[8];
 
@@ -109,6 +108,66 @@ int Scene::AddGameObject()
 	}
 	return -1;
 }
+
+int Scene::AddCameraObject()
+{
+	if (sceneObjects)
+	{
+		ObjectList* tempList = new ObjectList[nObjects + 1];
+		ZeroMemory(tempList, sizeof(ObjectList)*(nObjects + 1));
+
+		for (int i = 0; i < nObjects; i++)
+		{
+			tempList[i].ID = sceneObjects[i].ID;
+			tempList[i].object = sceneObjects[i].object;
+			tempList[i].name = new char[512];
+			ZeroMemory(tempList[i].name, sizeof(char) * 512);
+
+			GetObjectName(tempList[i].name, 512, i);
+		}
+		tempList[nObjects].ID = nObjects;
+		tempList[nObjects].object = (Gameobject*)new Camera();
+		tempList[nObjects].name = new char[15];
+		char name[15] = { "New Camera" };
+		for (int i = 0; i < 15; i++)
+		{
+			tempList[nObjects].name[i] = name[i];
+		}
+
+		delete sceneObjects;
+		nObjects++;
+
+		sceneObjects = new ObjectList[nObjects];
+		ZeroMemory(sceneObjects, sizeof(ObjectList)*(nObjects));
+		for (int i = 0; i < nObjects; i++)
+		{
+			sceneObjects[i].ID = tempList[i].ID;
+			sceneObjects[i].object = tempList[i].object;
+			sceneObjects[i].name = new char[512];
+			SetObjectName(tempList[i].name, i);
+		}
+		return nObjects - 1;
+	}
+	else
+	{
+		char name[15] = { "New Camera" };
+		sceneObjects = new ObjectList[1];
+		if (!sceneObjects)
+			return -1;
+		sceneObjects[0].ID = 0;
+		sceneObjects[0].object = (Gameobject*)new Camera();
+		sceneObjects[0].name = new char[15];
+		for (int i = 0; i < 15; i++)
+			sceneObjects[0].name[i] = name[i];
+
+		if (!sceneObjects[0].object)
+			return -1;
+		nObjects = 1;
+		return 0;
+	}
+	return -1;
+}
+
 
 int Scene::AddLightObject(D3DGraphics& gfx)
 {

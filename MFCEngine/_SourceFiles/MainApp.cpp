@@ -5,6 +5,7 @@
 #include "Project.h"
 #include "Scene.h"
 #include "GlobalPointers.h"
+#include "KeyboardInput.h"
 #include "resource.h"
 
 IMPLEMENT_DYNCREATE(MainView, CView);
@@ -15,11 +16,13 @@ UINT _cdecl GameUpdateThread(LPVOID pParam)
 	GameUdt* gameThread = (GameUdt*)pParam;
 	if (gameThread == NULL || !gameThread->IsKindOf(RUNTIME_CLASS(GameUdt)) )
 		return 1;
+
 	while (1 != 2)
 	{
 		char msg[512];
 		int nCycles = gameThread->winApp->GetProject()->LockScene();
 
+		gameThread->winApp->LockKBD();
 		gameThread->winApp->Update();
 
 		if (nCycles > 0)
@@ -27,6 +30,9 @@ UINT _cdecl GameUpdateThread(LPVOID pParam)
 			sprintf(msg, "CPU Cycles To Lock Scene: %d", nCycles);
 			Console->Output(msg);
 		}
+
+		((MainWin*)gameThread->winApp->m_pMainWnd)->kServ->Update();
+		gameThread->winApp->UnlockKBD();
 
 		nCycles = gameThread->winApp->LockGFX();
 		gameThread->winApp->Render();
@@ -39,6 +45,7 @@ UINT _cdecl GameUpdateThread(LPVOID pParam)
 			sprintf(msg, "CPU Cycles To Lock D3DGraphics: %d", nCycles);
 			Console->Output(msg);
 		}
+
 	}
 }
 
@@ -69,6 +76,11 @@ inline BOOL MainApp::InitInstance()
 	mainWin->UpdateObjectList();
 
 	GameUdt* object = new GameUdt(this);
+
+	LockKBD();
+	kbd->ServerRef(mainWin->kServ);
+	UnlockKBD();
+
 	AfxBeginThread(GameUpdateThread, object);
 
 	return TRUE;
@@ -144,6 +156,28 @@ int MainApp::LockGFX()
 		nCycles += 1;
 	} while (isLocked == true);
 	isLocked = true;
+	return nCycles;
+}
+
+void MainApp::UnlockKBD()
+{
+	if (kbdLocked)
+		kbdLocked = false;
+}
+
+int MainApp::LockKBD()
+{
+	int nCycles = 0;
+	if (kbdLocked == false)
+	{
+		kbdLocked = true;
+		return 0;
+	}
+	do
+	{
+		nCycles += 1;
+	} while (kbdLocked == true);
+	kbdLocked = true;
 	return nCycles;
 }
 

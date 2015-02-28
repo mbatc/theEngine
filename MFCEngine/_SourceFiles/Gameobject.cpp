@@ -11,8 +11,12 @@ Gameobject::Gameobject()
 	type(NULL)
 {
 	transform = new Transform();
-	type = new char[512];
-	type = { "GAMEOBJECT" };
+	char name[] = { "GAMEOBJECT" };
+	type = new char[11];
+	for (int i = 0; i < 11; i++)
+	{
+		type[i] = name[i];
+	}
 }
 
 Gameobject::~Gameobject()

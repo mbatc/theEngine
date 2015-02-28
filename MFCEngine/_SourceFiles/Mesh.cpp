@@ -66,136 +66,292 @@ void Mesh::LoadPrimitive(const PRIMITIVEMESH meshtype,const CUSTOMVERTEX* PRM,co
 
 void Mesh::LoadFromFile(const char* filename)
 {
-	int normalIndex = 0;
+	//STRUCTS THAT WILL BE USEFUL FOR STORING THE INFORMATION
+	struct vector3 {
+		float x;
+		float y;
+		float z;
+	};
 
-	if (vertexBuffer)
-		delete [] vertexBuffer;
-	vertexBuffer = NULL;
-	CUSTOMVERTEX* TEMPVB = NULL;
+	struct faceVertex {
+		int vertexIndex;
+		int normalIndex;
+		int textureIndex;
+	};
 
-	if (indexBuffer)
-		delete[] indexBuffer;
-	indexBuffer = NULL;
-	short * TEMPIB = NULL;
+	struct faceInfo {
+		UINT nPoints;
+		faceVertex* point;
+	};
+	//*********************************************************
+	//INITIALIZATION OF TEMPORARY BUFFERS
+	short* TempIb = NULL;
+	vector3* TempVb = NULL;
+	vector3* TempNb = NULL;
+	faceInfo* faces = NULL;
+	CUSTOMVERTEX* FMTINDEXBUFFER = NULL;
 
-	short * TEMPNB = NULL;
-	int NBLen = 0;
+	UINT nFaces = 0;
+	UINT nVertices = 0;
+	UINT nNormals = 0;
+	UINT nIndices = 0;
+	//*********************************************************
+	//LOADING THE INFO FROM THE FILE
+	nVerts = 0;
+	nTris = 0;
 
-	int indexBufLen = 0;
-
-	meshType = PM_MESH;
 	FILE* pFile;
-	fopen_s(&pFile, filename, "r");
+	pFile = fopen(filename, "r");
 	do
 	{
+		char buffer[32];
 		if (!feof(pFile))
 		{
-			char buffer[16] = { '\0' };
-			fscanf(pFile, "%s", &buffer);
-			if (!strcmp(buffer,"v"))
+			fscanf(pFile, "%s", buffer);
+			//***********************
+			//LOADING VERTEX INFO//***********************************
+			if (!strcmp(buffer, "v"))
 			{
-				float vx = 0, vy = 0, vz = 0;
-				fscanf(pFile, "%f%f%f",&vx, &vy, &vz);
-				if (vertexBuffer)
-				{
-					if (TEMPVB)
-						delete [] TEMPVB;
-					TEMPVB = new CUSTOMVERTEX[nVerts + 1];
-					for (int i = 0; i < nVerts; i++)
-					{
-						TEMPVB[i] = vertexBuffer[i];
-					}
-					TEMPVB[nVerts].x = vx;
-					TEMPVB[nVerts].y = vy;
-					TEMPVB[nVerts].z = vz;
+				float x = 0, y = 0, z = 0;
+				fscanf(pFile, "%f%f%f", &x, &y, &z);
 
-					delete[] vertexBuffer;
-					vertexBuffer = new CUSTOMVERTEX[nVerts + 1];
-					nVerts++;
-					for (int i = 0; i < nVerts; i++)
-					{
-						vertexBuffer[i] = TEMPVB[i];
-					}
-				}
-				else 
+				vector3* temp = new vector3[nVertices + 1];
+				for (int i = 0; i < nVertices; i++)
 				{
-					vertexBuffer = new CUSTOMVERTEX[nVerts + 1];
-					vertexBuffer[0].x = vx;
-					vertexBuffer[0].y = vy;
-					vertexBuffer[0].z = vz;
+					temp[i] = TempVb[i];
 				}
-			}
+				
+				if (TempVb)
+					delete[] TempVb;
+				TempVb = new vector3[nVertices + 1];
+				
+				temp[nVertices].x = x;
+				temp[nVertices].y = y;
+				temp[nVertices].z = z;
+
+				for (int i = 0; i < nVertices + 1; i++)
+				{
+					TempVb[i] = temp[i];
+				}
+
+				nVertices++;
+			}//LOADING NORMAL INFO//**********************************
 			else if (!strcmp(buffer, "vn"))
 			{
-				if (TEMPVB)
+				float x = 0, y = 0, z = 0;
+				fscanf(pFile, "%f%f%f", &x, &y, &z);
+
+				vector3* temp = new vector3[nNormals + 1];
+				for (int i = 0; i < nNormals; i++)
 				{
-					int x = 0, y = 0, z = 0;
-					fscanf(pFile, "%f%f%f", &x, &y, &z);
-					TEMPVB[normalIndex].NORMAL.x = x;
-					TEMPVB[normalIndex].NORMAL.y = y;
-					TEMPVB[normalIndex].NORMAL.z = z;
+					temp[i] = TempNb[i];
 				}
-				normalIndex++;
-			}
+
+				if (TempNb)
+					delete[] TempNb;
+				TempNb = new vector3[nNormals + 1];
+
+				temp[nNormals].x = x;
+				temp[nNormals].y = y;
+				temp[nNormals].z = z;
+
+				for (int i = 0; i < nNormals + 1; i++)
+				{
+					TempNb[i] = temp[i];
+				}
+
+				nNormals++;
+			}//LOADING FACE INFO//************************************
 			else if (!strcmp(buffer, "f"))
 			{
-				int v1 = 0, v2 = 0, v3 = 0;
-				int vn1 = 0, vn2 = 0, vn3 = 0;
-				int vt1 = 0, vt2 = 0, vt3 = 0;
-				fscanf(pFile, "%d/%d/%d%d/%d/%d%d/%d/%d", &v1, &v2, &v3, &vt1,&vt2,&vt3,&vn1,&vn2,&vn3);
-				if (indexBuffer)
-				{
-					if (TEMPIB)
-						delete[] TEMPIB;
-					TEMPIB = new short[indexBufLen + 3];
-					for (int i = 0; i < indexBufLen; i++)
-					{
-						TEMPIB[i] = indexBuffer[i];
-					}
-					TEMPIB[indexBufLen] = v1;
-					TEMPIB[indexBufLen + 1] = v2;
-					TEMPIB[indexBufLen + 2] = v3;
+				faceInfo* temp = new faceInfo[nFaces+1];
+				temp[nFaces].nPoints = 0;
+				temp[nFaces].point = NULL;
 
-					delete[] indexBuffer;
-					indexBuffer = new short[indexBufLen + 3];
-					indexBufLen += 3;
-
-					for (int i = 0; i < indexBufLen; i++)
-					{
-						indexBuffer[i] = TEMPIB[i];
-					}
-					nTris++;
-				}
-				else
+				for (int i = 0; i < nFaces; i++)
 				{
-					indexBuffer = new short[3];
-					indexBuffer[0] = v1;
-					indexBuffer[1] = v2;
-					indexBuffer[2] = v3;
-					nTris++;
-					indexBufLen = 3;
+					temp[i] = faces[i];
 				}
+
+				if (faces)
+					delete faces;
+				faces = new faceInfo[nFaces + 1];
+
+				do
+				{
+					UINT v = -1, vt = -1, vn = -1;
+					fscanf(pFile, "%d%s", &v, buffer);
+
+					if (buffer[0] == '/' && buffer[1] == '/')
+					{
+						vt = -1;
+						vn = atoi(&buffer[2]);
+					}
+					else
+					{
+						int i_vt = 1, i_vn = 0;
+						for (int i = 1; i < 32; i++, i_vn++)
+						{
+							if (buffer[i] == '/')
+								break;
+						}
+						vt = atoi(&buffer[i_vt]);
+						vn = atoi(&buffer[i_vn]);
+					}
+					faceVertex* tempPoint = new faceVertex[temp[nFaces].nPoints + 1];
+
+					v  -= 1;
+					vn -= 1;
+					vt -= 1;
+
+					for (int i = 0; i < temp[nFaces].nPoints; i++)
+					{
+						tempPoint[i] = temp[nFaces].point[i];
+					}
+
+					if (temp[nFaces].point)
+						delete[] temp[nFaces].point;
+					temp[nFaces].point = new faceVertex[temp[nFaces].nPoints + 1];
+
+					for (int i = 0; i < temp[nFaces].nPoints; i++)
+					{
+						temp[nFaces].point[i] = tempPoint[i];
+					}
+
+					temp[nFaces].point[temp[nFaces].nPoints].vertexIndex = v;
+					temp[nFaces].point[temp[nFaces].nPoints].textureIndex = vt;
+					temp[nFaces].point[temp[nFaces].nPoints].normalIndex = vn;
+
+					temp[nFaces].nPoints++;
+
+					delete[] tempPoint;
+				} while (pFile->_ptr[0] != '\n');
+				nFaces++;
+
+				for (int i = 0; i < nFaces; i++)
+				{
+					faces[i] = temp[i];
+				}
+
+				delete[] temp;
 			}
 		}
 	} while (!feof(pFile));
 
-	if (vertexBuffer)
-		delete[] vertexBuffer;
-	vertexBuffer = new CUSTOMVERTEX[nVerts];
-	for (int i = 0; i < nVerts; i++)
+
+	//*********************************************************
+	//FORMATTING THE INFORMATION
+	/*short* TempIb = NULL;
+	vector3* TempVb = NULL;
+	vector3* TempNb = NULL;
+	faceInfo* faces = NULL;
+	CUSTOMVERTEX* FMTINDEXBUFFER = NULL;
+
+	UINT nFaces = 0;
+	UINT nVertices = 0;
+	UINT nNormals = 0;
+	UINT nIndices = 0;*/
+
+	int VertexBufLen = 0;
+	int BufIndex = 0;
+	short* t_pSortedIb = NULL;
+	CUSTOMVERTEX* t_pSortedVb = new CUSTOMVERTEX[nFaces * 3];
+
+	//Counting the number of vertex indices needed
+	int nFaceVerts = 0;
+	for (int i = 0; i < nFaces; i++)
 	{
-		vertexBuffer[i] = TEMPVB[i];
+		nFaceVerts += faces[i].nPoints;
 	}
+
+	t_pSortedIb = new short[nFaceVerts];
+
+	//Looping through all face definitions and creating the neccesary Vertices
+	for (int i = 0; i < nFaces; i++)
+	{
+		faceInfo* face = &faces[i];
+		
+		for (int p_i = 0; p_i < 3; p_i++)
+		{
+			int v_i = face->point[p_i].vertexIndex;
+			int vn_i = face->point[p_i].normalIndex;
+			int vt_i = face->point[p_i].textureIndex;
+
+			vector3 t_norm = TempNb[vn_i];
+			vector3 t_vert = TempVb[v_i];
+
+			bool vertExists = false;
+
+			if (!vertExists)
+			{
+
+				t_pSortedVb[BufIndex].NORMAL.x = t_norm.x;
+				t_pSortedVb[BufIndex].NORMAL.y = t_norm.y;
+				t_pSortedVb[BufIndex].NORMAL.z = t_norm.z;
+			
+				t_pSortedVb[BufIndex].x = t_vert.x;
+				t_pSortedVb[BufIndex].y = t_vert.y;
+				t_pSortedVb[BufIndex].z = t_vert.z;
+
+				t_pSortedIb[p_i + i * 3] = BufIndex;
+				BufIndex++;
+			}
+		}
+	}
+
+
+	//LOADING SORTED INFORMATION INTO THE BUFFERS USED FOR DRAWING
+	if (vertexBuffer)
+		delete [] vertexBuffer;
+	vertexBuffer = new CUSTOMVERTEX[BufIndex];
 
 	if (indexBuffer)
-		delete[] indexBuffer;
-	indexBuffer = new short[indexBufLen];
+		delete [] indexBuffer;
+	indexBuffer = new short[nFaceVerts];
 
-	for (int i = 0; i < indexBufLen; i++)
+	for (int i = 0; i < BufIndex; i++)
 	{
-		indexBuffer[i] = TEMPIB[i];
+		vertexBuffer[i] = t_pSortedVb[i];
 	}
 
+	for (int i = 0; i < nFaceVerts; i++)
+	{
+		indexBuffer[i] = t_pSortedIb[i];
+	}
+
+	nVerts = BufIndex;
+	nIndices = nFaceVerts;
+
+	nTris = nFaces;
+
+	vb_size = nVerts;
+	ib_size = nIndices;
+
+	pFile = fopen("primitive.txt", "w");
+
+	fprintf(pFile, "static const CUSTOMVERTEX INSERTNAME[] =\n{\n");
+	for (int i = 0; i < nVerts; i++)
+	{
+		fprintf(pFile, "\t{%ff,%ff,%ff,%ff,%ff,%ff,},\n",vertexBuffer[i].x,
+			vertexBuffer[i].y,
+			vertexBuffer[i].z,
+			vertexBuffer[i].NORMAL.x,
+			vertexBuffer[i].NORMAL.y,
+			vertexBuffer[i].NORMAL.z);
+	}
+	fprintf(pFile, "};\n\n");
+	fprintf(pFile, "static const short INSERTNAME[] =\n{");
+	for (int i = 0; i < nFaces; i++)
+	{
+		fprintf(pFile, "\t%d,%d,%d,\n", indexBuffer[i * 3],
+			indexBuffer[i * 3 + 1],
+			indexBuffer[i * 3 + 2]);
+	}
+	fprintf(pFile, "};\n");
+
+	fclose(pFile);
+
+	//CREATING DIRECTX STUFF
 	HRESULT result;
 	VOID* pVoid;
 
@@ -207,15 +363,13 @@ void Mesh::LoadFromFile(const char* filename)
 	memcpy(pVoid, vertexBuffer, nVerts*sizeof(CUSTOMVERTEX));
 	vb->Unlock();
 
-	result = gfx.GetDevice()->CreateIndexBuffer(indexBufLen*sizeof(short), 0, D3DFMT_INDEX16,
+	result = gfx.GetDevice()->CreateIndexBuffer(nIndices*sizeof(short), 0, D3DFMT_INDEX16,
 		D3DPOOL_MANAGED, &ib, 0);
 	assert(!FAILED(result));
 
 	ib->Lock(0, 0, (void**)&pVoid, 0);
-	memcpy(pVoid, indexBuffer, indexBufLen*sizeof(short));
+	memcpy(pVoid, indexBuffer, nIndices*sizeof(short));
 	ib->Unlock();
-
-	nVerts /= 3;
 }
 
 void Mesh::Render(D3DGraphics& gfx)
