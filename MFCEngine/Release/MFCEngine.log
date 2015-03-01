@@ -1,11 +1,29 @@
-﻿Build started 28/02/2015 7:22:31 PM.
+﻿Build started 1/03/2015 4:07:16 PM.
      1>Project "D:\mbatc13\My Documents\GameProjects\MFCEngine\MFCEngine\MFCEngine.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /Zi /nologo /W0 /WX- /sdl /MP /O2 /Oi /Oy- /GL /D _CRT_SECURE_NO_WARNINGS /D _MBCS /D _AFXDLL /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt _SourceFiles\MainWin.cpp _SourceFiles\Mesh.cpp _SourceFiles\Project.cpp
-         MainWin.cpp
-         Mesh.cpp
-         Project.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /Zi /nologo /W0 /WX- /sdl /MP /O2 /Oi /Oy- /GL /D _CRT_SECURE_NO_WARNINGS /D _MBCS /D _AFXDLL /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt _SourceFiles\Camera.cpp _SourceFiles\Component.cpp _SourceFiles\CustomBehaviour.cpp _SourceFiles\D3DGraphics.cpp _SourceFiles\DialogObjList.cpp _SourceFiles\DialogObjProp.cpp _SourceFiles\Gameobject.cpp _SourceFiles\Light.cpp _SourceFiles\MainApp.cpp _SourceFiles\MainWin.cpp _SourceFiles\Mesh.cpp _SourceFiles\MeshRenderer.cpp _SourceFiles\PhysicsController.cpp _SourceFiles\Project.cpp _SourceFiles\Scene.cpp _SourceFiles\SceneRenderer.cpp
+         Camera.cpp
+         Component.cpp
+         CustomBehaviour.cpp
+         D3DGraphics.cpp
          _WIN32_WINNT not defined. Defaulting to _WIN32_WINNT_MAXVER (see WinSDKVer.h)
+         DialogObjList.cpp
+         _WIN32_WINNT not defined. Defaulting to _WIN32_WINNT_MAXVER (see WinSDKVer.h)
+         DialogObjProp.cpp
+         _WIN32_WINNT not defined. Defaulting to _WIN32_WINNT_MAXVER (see WinSDKVer.h)
+         Gameobject.cpp
+         _WIN32_WINNT not defined. Defaulting to _WIN32_WINNT_MAXVER (see WinSDKVer.h)
+         Light.cpp
+         MainApp.cpp
+         _WIN32_WINNT not defined. Defaulting to _WIN32_WINNT_MAXVER (see WinSDKVer.h)
+         MainWin.cpp
+         _WIN32_WINNT not defined. Defaulting to _WIN32_WINNT_MAXVER (see WinSDKVer.h)
+         Mesh.cpp
+         MeshRenderer.cpp
+         PhysicsController.cpp
+         Project.cpp
+         Scene.cpp
+         SceneRenderer.cpp
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\mbatc13\My Documents\GameProjects\MFCEngine\Release\MFCEngine.exe" /NOLOGO /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /manifestinput:"C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\Include\Manifest\dpiaware.manifest" /DEBUG /PDB:"D:\mbatc13\My Documents\GameProjects\MFCEngine\Release\MFCEngine.pdb" /SUBSYSTEM:WINDOWS /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\mbatc13\My Documents\GameProjects\MFCEngine\Release\MFCEngine.lib" /MACHINE:X86 /SAFESEH Release\MFCEngine.res
          Release\Camera.obj
@@ -38,4 +56,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:05.68
+Time Elapsed 00:00:11.30

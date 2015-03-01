@@ -34,9 +34,6 @@
     <Filter Include="Source Files\MFC\Dialogs">
       <UniqueIdentifier>{27c5a153-947e-49ff-95a4-1510ac21a050}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\MFC\Dialogs">
-      <UniqueIdentifier>{e0be266a-2489-4e6d-9e2a-d80e193d2958}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Engine\Gameobject\Custom Scripts">
       <UniqueIdentifier>{3dd42948-6494-4ec3-8b17-bb3abf9d0a72}</UniqueIdentifier>
     </Filter>
@@ -48,6 +45,9 @@
     </Filter>
     <Filter Include="Source Files\Engine\Gameobject\Physics">
       <UniqueIdentifier>{9b6e51b0-b3a4-4e86-bea4-79e20eb98122}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\MFC\Dialogs">
+      <UniqueIdentifier>{e0be266a-2489-4e6d-9e2a-d80e193d2958}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

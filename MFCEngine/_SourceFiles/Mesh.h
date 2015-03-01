@@ -27,6 +27,7 @@ public:
 	void RestoreGFX();
 
 	void InitMaterial();
+	void LoadTextureFromFile(char* filepath);
 	void InitMesh();
 
 	void Update();
@@ -40,6 +41,7 @@ public:
 	int GetNVerts(){ return nVerts; }
 	int GetNTris(){ return nTris; }
 	D3DMATERIAL9* GetMaterial(){ return &mat; }
+	LPDIRECT3DTEXTURE9 GetTexture(){ return tex; }
 
 private:
 	CUSTOMVERTEX* vertexBuffer;
@@ -48,6 +50,7 @@ private:
 	D3DMATERIAL9			mat;
 	LPDIRECT3DVERTEXBUFFER9 vb;
 	LPDIRECT3DINDEXBUFFER9	ib;
+	LPDIRECT3DTEXTURE9		tex;
 
 	PRIMITIVEMESH meshType;
 
@@ -55,6 +58,8 @@ private:
 	int nTris;
 	UINT vb_size;
 	UINT ib_size;
+
+	char* TextureFilePath;
 
 	D3DGraphics& gfx;
 };

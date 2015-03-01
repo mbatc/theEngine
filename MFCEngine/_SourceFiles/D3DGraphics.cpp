@@ -9,6 +9,11 @@ D3DGraphics::D3DGraphics(HWND hwnd, UINT w_width, UINT w_height)
 	width(w_width),
 	height(w_height)
 {
+	defaultMat.Ambient = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
+	defaultMat.Diffuse = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
+	defaultMat.Specular = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
+
+
 	HRESULT result;
 	
 	pDirect3D = Direct3DCreate9(D3D_SDK_VERSION);

@@ -270,12 +270,14 @@ void MainWin::ADDNEWPLANE()
 void MainWin::ADDMESHFROMFILE()
 {
 	//Used so that the scene class is not accessed between threads!!
-	CFileDialog fileDialog(TRUE);
+	CFileDialog fileDialog(TRUE,NULL,NULL,6UL,"Wavefront OBJ (*.obj)|*.obj||");
 	fileDialog.DoModal();
 	OPENFILENAME& ofn = fileDialog.GetOFN();
-	ofn.lpstrDefExt = ".obj";
 	char filepath[512] = { 0 };
 	sprintf_s(filepath, sizeof(filepath), "%s", fileDialog.GetPathName().GetString());
+
+	if (filepath[0] == '\0')
+		return;
 
 	int nameStart = 0;
 	for (nameStart = sizeof(filepath) / sizeof(char);

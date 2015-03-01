@@ -5,7 +5,9 @@
 Mesh::Mesh(Gameobject* object, D3DGraphics& gfx)
 	:
 	Component(object),
-	gfx(gfx)
+	gfx(gfx),
+	tex(NULL),
+	TextureFilePath(NULL)
 {
 	m_type = CT_DATA;
 	m_pCompIdentifier = CTYPE_MESH;
@@ -16,7 +18,24 @@ Mesh::Mesh(Gameobject* object, D3DGraphics& gfx)
 }
 
 Mesh::~Mesh()
-{}
+{
+	if (vertexBuffer)
+		delete vertexBuffer;
+	if (indexBuffer)
+		delete indexBuffer;
+	if (vb)
+		vb->Release();
+	if (ib)
+		ib->Release();
+	if (tex)
+		tex->Release();
+
+	vertexBuffer = NULL;
+	indexBuffer = NULL;
+	vb = NULL;
+	ib = NULL;
+	tex = NULL;
+}
 
 void Mesh::LoadPrimitive(const PRIMITIVEMESH meshtype,const CUSTOMVERTEX* PRM,const short* PRMIB,const UINT PRM_SIZE,const UINT PRMIB_SIZE)
 {
@@ -66,11 +85,51 @@ void Mesh::LoadPrimitive(const PRIMITIVEMESH meshtype,const CUSTOMVERTEX* PRM,co
 
 void Mesh::LoadFromFile(const char* filename)
 {
+
+	//GETTING THE NAME OF THE MATERIAL (MTL) FILE AND STORING IT IN A SEPERATE STRING
+	int nameLen = 0;
+	int matExtensionStart = 0;
+	int dirLen = 0;
+	for (; filename[nameLen] != '\0'; nameLen++);
+	dirLen = nameLen;
+	char* matFilepath = new char[nameLen + 1];
+
+	for (; filename[dirLen] != '\\'; dirLen--);
+	dirLen += 2;
+	char* curDirectory = new char[dirLen];
+
+	for (int i = 0; i < dirLen-1; i++)
+	{
+		curDirectory[i] = filename[i];
+	}
+	curDirectory[dirLen - 1] = '\0';
+
+	for (int i = 0; i < nameLen; i++)
+	{
+		matFilepath[i] = filename[i]; 
+		if (filename[i] == '.')
+		{
+			matExtensionStart = i;
+			break;
+		}
+	}
+
+	matFilepath[matExtensionStart + 1] = 'm';
+	matFilepath[matExtensionStart + 2] = 't';
+	matFilepath[matExtensionStart + 3] = 'l';
+	matFilepath[matExtensionStart + 4] = '\0';
+	//******************************************************************************
+
 	//STRUCTS THAT WILL BE USEFUL FOR STORING THE INFORMATION
 	struct vector3 {
 		float x;
 		float y;
 		float z;
+	};
+
+	struct UV {
+		float U;
+		float V;
 	};
 
 	struct faceVertex {
@@ -88,6 +147,7 @@ void Mesh::LoadFromFile(const char* filename)
 	short* TempIb = NULL;
 	vector3* TempVb = NULL;
 	vector3* TempNb = NULL;
+	UV*		 TempTb = NULL;
 	faceInfo* faces = NULL;
 	CUSTOMVERTEX* FMTINDEXBUFFER = NULL;
 
@@ -95,6 +155,7 @@ void Mesh::LoadFromFile(const char* filename)
 	UINT nVertices = 0;
 	UINT nNormals = 0;
 	UINT nIndices = 0;
+	UINT nTexCoord = 0;
 	//*********************************************************
 	//LOADING THE INFO FROM THE FILE
 	nVerts = 0;
@@ -134,6 +195,7 @@ void Mesh::LoadFromFile(const char* filename)
 					TempVb[i] = temp[i];
 				}
 
+				delete[] temp;
 				nVertices++;
 			}//LOADING NORMAL INFO//**********************************
 			else if (!strcmp(buffer, "vn"))
@@ -160,8 +222,28 @@ void Mesh::LoadFromFile(const char* filename)
 					TempNb[i] = temp[i];
 				}
 
+				delete[] temp;
 				nNormals++;
 			}//LOADING FACE INFO//************************************
+			else if (!strcmp(buffer, "vt"))
+			{
+				UV* temp = new UV[nTexCoord + 1];
+				for (int i = 0; i < nTexCoord; i++){ temp[i] = TempTb[i]; }
+				float tu = -1, tv = -1;
+				fscanf(pFile, "%f%f", &tu, &tv);
+				
+				temp[nTexCoord].U = tu;
+				temp[nTexCoord].V = tv;
+
+				nTexCoord++;
+
+				if (TempTb)
+					delete [] TempTb;
+				TempTb = new UV[nTexCoord];
+
+				for (int i = 0; i < nTexCoord; i++){ TempTb[i] = temp[i]; }
+				delete [] temp;
+			}
 			else if (!strcmp(buffer, "f"))
 			{
 				faceInfo* temp = new faceInfo[nFaces+1];
@@ -238,6 +320,38 @@ void Mesh::LoadFromFile(const char* filename)
 		}
 	} while (!feof(pFile));
 
+	fclose(pFile);
+
+	pFile = fopen(matFilepath, "r");
+	do
+	{
+		char buffer[128] = { 0 };
+		if (!feof(pFile))
+		{
+			fscanf(pFile, "%s", buffer);
+			if (!strcmp(buffer,"map_Kd") )
+			{
+				fscanf(pFile, "%s", buffer);
+				int filepathLen = 0;
+				int texLen = 0;
+				for (; buffer[texLen] != '\0'; texLen++);
+				filepathLen = dirLen + texLen;
+
+				TextureFilePath = new char[filepathLen];
+
+				for (int i = 0; i < dirLen -1; i++)
+				{
+					TextureFilePath[i] = curDirectory[i];
+				}
+
+				for (int i = 0; i < texLen; i++)
+				{
+					TextureFilePath[i + dirLen - 1] = buffer[i];
+				}
+				TextureFilePath[filepathLen - 1] = '\0';
+			}
+		}
+	} while (!feof(pFile));
 
 	//*********************************************************
 	//FORMATTING THE INFORMATION
@@ -277,24 +391,54 @@ void Mesh::LoadFromFile(const char* filename)
 			int vn_i = face->point[p_i].normalIndex;
 			int vt_i = face->point[p_i].textureIndex;
 
-			vector3 t_norm = TempNb[vn_i];
-			vector3 t_vert = TempVb[v_i];
+			vector3* t_norm = NULL;
+			vector3* t_vert = NULL;
+			UV*		 t_uv = NULL;
+			if (TempNb)
+				t_norm = new vector3;
+				*t_norm = TempNb[vn_i];
+			if (TempVb)
+				t_vert = new vector3;
+				*t_vert = TempVb[v_i];
+			if (TempTb)
+			{
+				t_uv = new UV; 
+				*t_uv = TempTb[vt_i];
+			}
 
 			bool vertExists = false;
 
 			if (!vertExists)
 			{
+				if (t_norm)
+				{
+					t_pSortedVb[BufIndex].NORMAL.x = t_norm->x;
+					t_pSortedVb[BufIndex].NORMAL.y = t_norm->y;
+					t_pSortedVb[BufIndex].NORMAL.z = t_norm->z;
+				}
+				
+				if (t_vert)
+				{
+					t_pSortedVb[BufIndex].x = t_vert->x;
+					t_pSortedVb[BufIndex].y = t_vert->y;
+					t_pSortedVb[BufIndex].z = t_vert->z;
+				}
 
-				t_pSortedVb[BufIndex].NORMAL.x = t_norm.x;
-				t_pSortedVb[BufIndex].NORMAL.y = t_norm.y;
-				t_pSortedVb[BufIndex].NORMAL.z = t_norm.z;
-			
-				t_pSortedVb[BufIndex].x = t_vert.x;
-				t_pSortedVb[BufIndex].y = t_vert.y;
-				t_pSortedVb[BufIndex].z = t_vert.z;
+				if (t_uv)
+				{
+					t_pSortedVb[BufIndex].tu = t_uv->U;
+					t_pSortedVb[BufIndex].tv = t_uv->V;
+				}
 
 				t_pSortedIb[p_i + i * 3] = BufIndex;
 				BufIndex++;
+
+				if (t_norm)
+					delete t_norm;
+				if (t_vert)
+					delete t_vert;
+				if (t_uv)
+					delete t_uv;
 			}
 		}
 	}
@@ -332,12 +476,14 @@ void Mesh::LoadFromFile(const char* filename)
 	fprintf(pFile, "static const CUSTOMVERTEX INSERTNAME[] =\n{\n");
 	for (int i = 0; i < nVerts; i++)
 	{
-		fprintf(pFile, "\t{%ff,%ff,%ff,%ff,%ff,%ff,},\n",vertexBuffer[i].x,
+		fprintf(pFile, "\t{%ff,%ff,%ff,%ff,%ff,%ff,\t%ff,%ff,},\n",vertexBuffer[i].x,
 			vertexBuffer[i].y,
 			vertexBuffer[i].z,
 			vertexBuffer[i].NORMAL.x,
 			vertexBuffer[i].NORMAL.y,
-			vertexBuffer[i].NORMAL.z);
+			vertexBuffer[i].NORMAL.z,
+			vertexBuffer[i].tu,
+			vertexBuffer[i].tv);
 	}
 	fprintf(pFile, "};\n\n");
 	fprintf(pFile, "static const short INSERTNAME[] =\n{");
@@ -352,6 +498,9 @@ void Mesh::LoadFromFile(const char* filename)
 	fclose(pFile);
 
 	//CREATING DIRECTX STUFF
+
+	LoadTextureFromFile(TextureFilePath);
+
 	HRESULT result;
 	VOID* pVoid;
 
@@ -385,7 +534,17 @@ void Mesh::InitMaterial()
 {
 	ZeroMemory(&mat, sizeof(mat));
 	mat.Ambient = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
-	mat.Diffuse = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
+	mat.Diffuse = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);/*
+	mat.Specular = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);*/
+}
+
+void Mesh::LoadTextureFromFile(char* filepath)
+{
+	HRESULT result;
+	result = D3DXCreateTextureFromFile(gfx.GetDevice(), filepath, &tex);
+	if (result != D3D_OK)
+		MessageBox(NULL, "Failed To Create Texture \n(function: Mesh::LoadTextureFromFile File: Mesh.cpp)",
+		"Error", MB_OK | MB_ICONEXCLAMATION);
 }
 
 void Mesh::InitMesh()
@@ -445,11 +604,18 @@ void Mesh::FreeGFX()
 		ib->Release();
 		ib = NULL;
 	}
+	if (tex)
+	{
+		tex->Release();
+		tex = NULL;
+	}
 }
 void Mesh::RestoreGFX()
 {
 	HRESULT result;
 	VOID* pVoid;
+
+	LoadTextureFromFile(TextureFilePath);
 
 	result = gfx.GetDevice()->CreateVertexBuffer(vb_size*sizeof(CUSTOMVERTEX), 0, CUSTOMFVF,
 		D3DPOOL_MANAGED, &vb, NULL);

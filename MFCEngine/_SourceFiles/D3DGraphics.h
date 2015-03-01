@@ -8,12 +8,15 @@
 
 #include "Scene.h"
 
-#define CUSTOMFVF (D3DFVF_XYZ | D3DFVF_NORMAL )
+#define CUSTOMFVF (D3DFVF_XYZ | D3DFVF_NORMAL | D3DFVF_TEX1 )
+
+static D3DMATERIAL9 defaultMat;
 
 struct CUSTOMVERTEX
 {
 	FLOAT x, y, z;
 	D3DVECTOR NORMAL;
+	FLOAT tu, tv;
 };
 
 class D3DGraphics

@@ -268,7 +268,7 @@ void Scene::DeleteGameObject(int ID)
 				}
 				else
 				{
-					if (strcmp(sceneObjects[ID].object->GetPointerToType(), "GAMELIGHT"))
+					if (!strcmp(sceneObjects[ID].object->GetPointerToType(), "GAMELIGHT"))
 						isLight = true;
 					else
 						isLight = false;
