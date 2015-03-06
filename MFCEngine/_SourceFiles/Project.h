@@ -44,7 +44,7 @@ public:
 private:
 	//------------------------------------------
 	//DATA MEMBERS
-	bool sceneLocked;
+	volatile bool sceneLocked;
 
 	SceneInfo* sceneDB;
 	Scene* curScene;

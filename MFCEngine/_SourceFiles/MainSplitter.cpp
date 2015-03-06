@@ -20,6 +20,31 @@ BOOL MainSplitter::PreTranslateMessage(MSG* pMsg)
 		theApp->UnlockKBD();
 		return TRUE;
 		break;
+	case WM_LBUTTONDOWN:
+		theApp->LockMSE();
+		((MainWin*)theApp->m_pMainWnd)->mServ->LeftMousePressed();
+		theApp->UnlockMSE();
+		break;
+	case WM_LBUTTONUP:
+		theApp->LockMSE();
+		((MainWin*)theApp->m_pMainWnd)->mServ->LeftMouseReleased();
+		theApp->UnlockMSE();
+		break;
+	case WM_RBUTTONDOWN:
+		theApp->LockMSE();
+		((MainWin*)theApp->m_pMainWnd)->mServ->RightMousePressed();
+		theApp->UnlockMSE();
+		break;
+	case WM_RBUTTONUP:
+		theApp->LockMSE();
+		((MainWin*)theApp->m_pMainWnd)->mServ->RightMouseReleased();
+		theApp->UnlockMSE();
+		break;
+	case WM_MOUSEMOVE:	/*
+		theApp->LockMSE();
+		((MainWin*)theApp->m_pMainWnd)->mServ->OnMouseMove(GET_X_LPARAM(pMsg->lParam), GET_Y_LPARAM(pMsg->lParam));
+		theApp->UnlockMSE();*/
+		break;
 	default:
 		return CWnd::PreTranslateMessage(pMsg);
 	}

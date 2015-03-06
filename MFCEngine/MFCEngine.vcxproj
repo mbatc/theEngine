@@ -11,6 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="resource.h" />
     <ClInclude Include="_SourceFiles\Camera.h" />
     <ClInclude Include="_SourceFiles\Component.h" />
     <ClInclude Include="_SourceFiles\Console.h" />
@@ -27,8 +28,10 @@
     <ClInclude Include="_SourceFiles\MainDoc.h" />
     <ClInclude Include="_SourceFiles\MainView.h" />
     <ClInclude Include="_SourceFiles\MainWin.h" />
+    <ClInclude Include="_SourceFiles\MaterialEditor.h" />
     <ClInclude Include="_SourceFiles\Mesh.h" />
     <ClInclude Include="_SourceFiles\MeshRenderer.h" />
+    <ClInclude Include="_SourceFiles\MouseInput.h" />
     <ClInclude Include="_SourceFiles\PhysicsController.h" />
     <ClInclude Include="_SourceFiles\PlayerControl.h" />
     <ClInclude Include="_SourceFiles\PrimitiveDefinitions.h" />
@@ -54,8 +57,10 @@
     <ClCompile Include="_SourceFiles\MainSplitter.cpp" />
     <ClCompile Include="_SourceFiles\MainView.cpp" />
     <ClCompile Include="_SourceFiles\MainWin.cpp" />
+    <ClCompile Include="_SourceFiles\MaterialEditor.cpp" />
     <ClCompile Include="_SourceFiles\Mesh.cpp" />
     <ClCompile Include="_SourceFiles\MeshRenderer.cpp" />
+    <ClCompile Include="_SourceFiles\MouseInput.cpp" />
     <ClCompile Include="_SourceFiles\PhysicsController.cpp" />
     <ClCompile Include="_SourceFiles\Project.cpp" />
     <ClCompile Include="_SourceFiles\Scene.cpp" />
@@ -111,7 +116,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <MultiProcessorCompilation>false</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -126,7 +131,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <MultiProcessorCompilation>false</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>

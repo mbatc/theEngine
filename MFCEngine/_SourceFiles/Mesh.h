@@ -29,6 +29,7 @@ public:
 	void InitMaterial();
 	void LoadTextureFromFile(char* filepath);
 	void InitMesh();
+	void SetMaterial(D3DMATERIAL9 newMat);
 
 	void Update();
 	void Render(D3DGraphics& gfx);

@@ -313,9 +313,9 @@ void DialogObjProp::OP_COMPCB()
 			if (strcmp(obj->GetComponent(i)->GetIdentifier(), CTYPE_MESH) )
 			{
 				char name[512];
-				obj->GetComponent(i)->GetName(name, 512);
+				obj->GetComponent(i)->GetName(name, 512);/*
 				cb->AddString(name);
-				cb->SetItemData(ListItem, i);
+				cb->SetItemData(ListItem, i);*/
 				ListItem++;
 			}
 		}

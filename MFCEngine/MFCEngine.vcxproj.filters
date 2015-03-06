@@ -132,6 +132,15 @@
     <ClInclude Include="_SourceFiles\PlayerControl.h">
       <Filter>Header Files\Engine\Gameobject\Custom Scripts</Filter>
     </ClInclude>
+    <ClInclude Include="_SourceFiles\MouseInput.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="_SourceFiles\MaterialEditor.h">
+      <Filter>Header Files\MFC\Dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="_SourceFiles\MainWin.cpp">
@@ -202,6 +211,12 @@
     </ClCompile>
     <ClCompile Include="_SourceFiles\MainSplitter.cpp">
       <Filter>Source Files\MFC</Filter>
+    </ClCompile>
+    <ClCompile Include="_SourceFiles\MouseInput.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="_SourceFiles\MaterialEditor.cpp">
+      <Filter>Source Files\MFC\Dialogs</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

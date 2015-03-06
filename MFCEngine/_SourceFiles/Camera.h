@@ -11,5 +11,6 @@ public:
 	void Update();
 	void Render(D3DGraphics& gfx) const;
 private:
-
+	Vector3 LookAt;
+	int LookAtDist;
 };

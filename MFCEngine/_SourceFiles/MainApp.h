@@ -29,6 +29,9 @@ public:
 	int		LockKBD();
 	void	UnlockKBD();
 
+	int		LockMSE();
+	void	UnlockMSE();
+
 protected:
 	//------------------------------------------
 	//DATA MEMBERS
@@ -42,6 +45,7 @@ protected:
 
 	bool isLocked;
 	bool kbdLocked;
+	bool mseLocked;
 };
 
 class GameUdt : public CWinThread

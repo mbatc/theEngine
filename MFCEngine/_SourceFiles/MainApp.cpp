@@ -23,6 +23,7 @@ UINT _cdecl GameUpdateThread(LPVOID pParam)
 		int nCycles = gameThread->winApp->GetProject()->LockScene();
 
 		gameThread->winApp->LockKBD();
+		gameThread->winApp->LockMSE();
 		gameThread->winApp->Update();
 
 		if (nCycles > 0)
@@ -32,7 +33,9 @@ UINT _cdecl GameUpdateThread(LPVOID pParam)
 		}
 
 		((MainWin*)gameThread->winApp->m_pMainWnd)->kServ->Update();
+		((MainWin*)gameThread->winApp->m_pMainWnd)->mServ->Update();
 		gameThread->winApp->UnlockKBD();
+		gameThread->winApp->UnlockMSE();
 
 		nCycles = gameThread->winApp->LockGFX();
 		gameThread->winApp->Render();
@@ -50,6 +53,10 @@ UINT _cdecl GameUpdateThread(LPVOID pParam)
 }
 
 MainApp::MainApp()
+	:
+	isLocked(false),
+	mseLocked(false),
+	kbdLocked(false)
 {
 	InitVariables();
 }
@@ -80,6 +87,10 @@ inline BOOL MainApp::InitInstance()
 	LockKBD();
 	kbd->ServerRef(mainWin->kServ);
 	UnlockKBD();
+
+	LockMSE();
+	mouse->SetServerPointer(mainWin->mServ);
+	UnlockMSE();
 
 	AfxBeginThread(GameUpdateThread, object);
 
@@ -185,6 +196,28 @@ void MainApp::UnlockGFX()
 {
 	if (isLocked)
 		isLocked = false;
+}
+
+int MainApp::LockMSE()
+{
+	int nCycles = 0;
+	if (mseLocked == false)
+	{
+		mseLocked = true;
+		return 0;
+	}
+	do
+	{
+		nCycles += 1;
+	} while (mseLocked == true);
+	mseLocked = true;
+	return nCycles;
+}
+
+void MainApp::UnlockMSE()
+{
+	if (mseLocked)
+		mseLocked = false;
 }
 
 MainApp mainApp;

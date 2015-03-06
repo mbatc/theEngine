@@ -26,16 +26,24 @@ BEGIN_MESSAGE_MAP(MainWin,CFrameWnd)
 	ON_COMMAND(ID_CONTROL_PLAYERCONTROL, AddComp_PlayerControl)
 
 	ON_COMMAND(ID_WINDOW_OBJECTPROPERTIES, WindowObjProperties)
+
+	ON_COMMAND(ID_EDIT_MATERIALEDITOR, EditMaterialEditor )
 END_MESSAGE_MAP()
 
 MainWin::MainWin(MainApp * app)
 	:
 	theApp(app),
-	m_mainSplitter()
+	m_mainSplitter(),
+	materialEditor(NULL)
 {
 	kServ = new KeyboardServer();
+	mServ = new MouseServer();
+
 	m_bInitMainSplitter = FALSE;
-	Create(NULL, "TheEngine");
+	CRect tr(0, 0, GetSystemMetrics(SM_CXSCREEN), GetSystemMetrics(SM_CYSCREEN));
+	Create(NULL, "TheEngine",WS_MAXIMIZE | WS_BORDER | WS_CAPTION | WS_SYSMENU | 
+		WS_THICKFRAME | WS_MAXIMIZEBOX | WS_MINIMIZEBOX,
+		tr);
 	if (!InitDialogPointers())
 		MessageBox("Control Pointers Failed To Initialise!", "Error!");
 
@@ -398,4 +406,56 @@ void MainWin::ADDCOMP_PLAYERCONTROL()
 	Gameobject* obj = theApp->GetProject()->GetScene()->GetSceneObject(curSel);
 	obj->AddComponent((Component*)new PlayerControl(obj));
 	theApp->GetProject()->UnlockScene();
+}
+
+void MainWin::EDITMATERIALEDITOR()
+{
+	int ID = ((CListBox*)pObjList->GetDlgItem(IDC_OBJLIST))->GetCurSel();
+	if (ID == -1)
+	{
+		MessageBox("No Object Selected!","Notice!");
+		return;
+	}
+	Gameobject* obj = theApp->GetProject()->GetScene()->GetSceneObject(ID);
+	int MeshID = -1;
+	for (int i = 0; i < obj->GetNumberOfComponent(); i++)
+	{
+		if (!strcmp(obj->GetComponent(i)->GetIdentifier(), CTYPE_MESH))
+		{
+			MeshID = i;
+			break;
+		}
+	}
+
+	if (MeshID != -1)
+	{
+		materialEditor = new MaterialEditor(this, ID, *((Mesh*)obj->GetComponent(MeshID))->GetMaterial());
+		if (!materialEditor)
+			MessageBoxA("Could Not Initialize Material Editor!", "Error!");
+	}
+	else
+	{
+		MessageBox("No Mesh Exists On Selected Object!", "Notice!");
+	}
+}
+
+void MainWin::OnMaterialEditorOK(D3DMATERIAL9 mat,char* textureName, int ObjID)
+{
+	Gameobject* obj = theApp->GetProject()->GetScene()->GetSceneObject(ObjID);
+	int MeshID = -1;
+	for (int i = 0; i < obj->GetNumberOfComponent(); i++)
+	{
+		if (!strcmp(obj->GetComponent(i)->GetIdentifier(), CTYPE_MESH))
+		{
+			MeshID = i;
+			break;
+		}
+	}
+	if (MeshID != -1)
+	{
+		((Mesh*)obj->GetComponent(MeshID))->SetMaterial(mat);
+		((Mesh*)obj->GetComponent(MeshID))->LoadTextureFromFile(textureName);
+	}
+	else
+		MessageBox("No Mesh On Selected Object!", "Notice!");
 }

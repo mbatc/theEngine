@@ -2,15 +2,17 @@
 
 #include <afxwin.h>
 #include <afxext.h>
+#include "MaterialEditor.h"
 #include "DialogObjProp.h"
 #include "DialogObjList.h"
 #include "MainSplitter.h"
 
 #include "KeyboardInput.h"
+#include "MouseInput.h"
 
-class KeyboardServer;
 class D3DGraphics;
 class MainApp;
+class MaterialEditor;
 
 class MainWin : public CFrameWnd
 {
@@ -29,6 +31,7 @@ public:
 
 	DialogObjProp* GetObjProp(){ return pObjProp; }
 	DialogObjList* GetObjList(){ return pObjList; }
+	void OnMaterialEditorOK(D3DMATERIAL9 mat, char* textureName, int ObjID);
 
 	MainApp* theApp;
 
@@ -37,6 +40,7 @@ public:
 	MainSplitter	m_mainSplitter;
 
 	KeyboardServer*	kServ;
+	MouseServer* mServ;
 
 protected:
 	//Methods
@@ -45,13 +49,13 @@ protected:
 	BOOL InitDockablePanels();
 
 	//Data Members
+	MaterialEditor* materialEditor;
 	CMenu*			pMenu;
 	DialogObjProp*	pObjProp;
 	DialogObjList*	pObjList;
 	CDialogBar*		pConsoleWindow;
 	BOOL			m_bInitMainSplitter;
 
-	const static UINT ID_CONSOLEEDIT = 11;
 	const static UINT ID_CONSOLE = 10;
 
 	D3DGraphics * gfx;
@@ -67,6 +71,7 @@ protected:
 	afx_msg void WindowObjProperties(){ WINDOWOBJPROPERTIES(); }
 	afx_msg void FilesaveasScene(){ FILESAVEASSCENE(); }
 	afx_msg void AddComp_PlayerControl(){ ADDCOMP_PLAYERCONTROL(); }
+	afx_msg void EditMaterialEditor(){ EDITMATERIALEDITOR(); }
 
 private:
 	void MENUEXIT();
@@ -79,6 +84,7 @@ private:
 	void WINDOWOBJPROPERTIES();
 	void FILESAVEASSCENE();
 	void ADDCOMP_PLAYERCONTROL();
+	void EDITMATERIALEDITOR();
 
 	DECLARE_MESSAGE_MAP();
 };

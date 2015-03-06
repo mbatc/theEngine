@@ -37,6 +37,16 @@ Mesh::~Mesh()
 	tex = NULL;
 }
 
+void Mesh::SetMaterial(D3DMATERIAL9 newMat)
+{
+	ZeroMemory(&mat, sizeof(D3DMATERIAL9));
+	mat.Ambient = D3DXCOLOR(newMat.Ambient.r, newMat.Ambient.g, newMat.Ambient.b, newMat.Ambient.a);
+
+	mat.Specular = D3DXCOLOR(newMat.Specular.r, newMat.Specular.g, newMat.Specular.b, newMat.Specular.a);
+
+	mat.Diffuse = D3DXCOLOR(newMat.Diffuse.r, newMat.Diffuse.g, newMat.Diffuse.b, newMat.Diffuse.a);
+}
+
 void Mesh::LoadPrimitive(const PRIMITIVEMESH meshtype,const CUSTOMVERTEX* PRM,const short* PRMIB,const UINT PRM_SIZE,const UINT PRMIB_SIZE)
 {
 	meshType = meshtype;
@@ -156,6 +166,8 @@ void Mesh::LoadFromFile(const char* filename)
 	UINT nNormals = 0;
 	UINT nIndices = 0;
 	UINT nTexCoord = 0;
+
+	bool isVtParse = false;
 	//*********************************************************
 	//LOADING THE INFO FROM THE FILE
 	nVerts = 0;
@@ -231,18 +243,18 @@ void Mesh::LoadFromFile(const char* filename)
 				for (int i = 0; i < nTexCoord; i++){ temp[i] = TempTb[i]; }
 				float tu = -1, tv = -1;
 				fscanf(pFile, "%f%f", &tu, &tv);
-				
+
 				temp[nTexCoord].U = tu;
 				temp[nTexCoord].V = tv;
 
 				nTexCoord++;
 
 				if (TempTb)
-					delete [] TempTb;
+					delete[] TempTb;
 				TempTb = new UV[nTexCoord];
 
 				for (int i = 0; i < nTexCoord; i++){ TempTb[i] = temp[i]; }
-				delete [] temp;
+				delete[] temp;
 			}
 			else if (!strcmp(buffer, "f"))
 			{
@@ -271,10 +283,10 @@ void Mesh::LoadFromFile(const char* filename)
 					}
 					else
 					{
-						int i_vt = 1, i_vn = 0;
+						int i_vt = 1, i_vn = 2;
 						for (int i = 1; i < 32; i++, i_vn++)
 						{
-							if (buffer[i] == '/')
+							if (buffer[i_vn - 1] == '/')
 								break;
 						}
 						vt = atoi(&buffer[i_vt]);
@@ -412,22 +424,22 @@ void Mesh::LoadFromFile(const char* filename)
 			{
 				if (t_norm)
 				{
-					t_pSortedVb[BufIndex].NORMAL.x = t_norm->x;
-					t_pSortedVb[BufIndex].NORMAL.y = t_norm->y;
-					t_pSortedVb[BufIndex].NORMAL.z = t_norm->z;
+					t_pSortedVb[BufIndex].NORMAL.x = -t_norm->x;
+					t_pSortedVb[BufIndex].NORMAL.y = -t_norm->y;
+					t_pSortedVb[BufIndex].NORMAL.z = -t_norm->z;
 				}
 				
 				if (t_vert)
 				{
-					t_pSortedVb[BufIndex].x = t_vert->x;
-					t_pSortedVb[BufIndex].y = t_vert->y;
-					t_pSortedVb[BufIndex].z = t_vert->z;
+					t_pSortedVb[BufIndex].x = -t_vert->x;
+					t_pSortedVb[BufIndex].y = -t_vert->y;
+					t_pSortedVb[BufIndex].z = -t_vert->z;
 				}
 
 				if (t_uv)
 				{
 					t_pSortedVb[BufIndex].tu = t_uv->U;
-					t_pSortedVb[BufIndex].tv = t_uv->V;
+					t_pSortedVb[BufIndex].tv = 1 - t_uv->V;
 				}
 
 				t_pSortedIb[p_i + i * 3] = BufIndex;
@@ -443,6 +455,18 @@ void Mesh::LoadFromFile(const char* filename)
 		}
 	}
 
+
+	for (int i = 0; i < nFaces; i++)
+	{
+		int i_1 = 0, i_2 = 0, i_3 = 0;
+		i_1 = t_pSortedIb[i * 3];
+		i_2 = t_pSortedIb[i * 3 + 1];
+		i_3 = t_pSortedIb[i * 3 + 2];
+
+		t_pSortedIb[i * 3] = i_1;
+		t_pSortedIb[i * 3 + 1] = i_3;
+		t_pSortedIb[i * 3 + 2] = i_2;
+	}
 
 	//LOADING SORTED INFORMATION INTO THE BUFFERS USED FOR DRAWING
 	if (vertexBuffer)
@@ -534,14 +558,32 @@ void Mesh::InitMaterial()
 {
 	ZeroMemory(&mat, sizeof(mat));
 	mat.Ambient = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
-	mat.Diffuse = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);/*
-	mat.Specular = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);*/
+	mat.Diffuse = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
+	mat.Specular = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
 }
 
 void Mesh::LoadTextureFromFile(char* filepath)
 {
+	if (!filepath)
+		return;
 	HRESULT result;
 	result = D3DXCreateTextureFromFile(gfx.GetDevice(), filepath, &tex);
+	
+	int fileLen = 0;
+	for (; filepath[fileLen] != '\0'; fileLen++);
+
+	char* temp = new char[fileLen + 1];
+	for (int i = 0; i < fileLen + 1; i++){ temp[i] = filepath[i]; }
+
+	if (TextureFilePath)
+		delete TextureFilePath;
+	
+	TextureFilePath = new char[fileLen + 1];
+	for (int i = 0; i < fileLen + 1; i++)
+	{
+		TextureFilePath[i] = temp[i];
+	}
+
 	if (result != D3D_OK)
 		MessageBox(NULL, "Failed To Create Texture \n(function: Mesh::LoadTextureFromFile File: Mesh.cpp)",
 		"Error", MB_OK | MB_ICONEXCLAMATION);
@@ -615,7 +657,8 @@ void Mesh::RestoreGFX()
 	HRESULT result;
 	VOID* pVoid;
 
-	LoadTextureFromFile(TextureFilePath);
+	if (TextureFilePath)
+		LoadTextureFromFile(TextureFilePath);
 
 	result = gfx.GetDevice()->CreateVertexBuffer(vb_size*sizeof(CUSTOMVERTEX), 0, CUSTOMFVF,
 		D3DPOOL_MANAGED, &vb, NULL);

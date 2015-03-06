@@ -44,11 +44,14 @@ void MeshRenderer::Render(D3DGraphics& gfx)
 			D3DXMatrixScaling(&matScale, 0.0f, 0.0f, 0.0f);
 		}
 
+		D3DMATERIAL9* mat = mesh->GetMaterial();
 		if (mesh->GetTexture())
 			gfx.GetDevice()->SetTexture(0, mesh->GetTexture());
+		else
+			gfx.GetDevice()->SetTexture(0, NULL);
 
-		if (mesh->GetMaterial())
-			gfx.GetDevice()->SetMaterial(mesh->GetMaterial());
+		if (mat)
+			gfx.GetDevice()->SetMaterial(mat);
 		else
 			gfx.GetDevice()->SetMaterial(&defaultMat);
 
