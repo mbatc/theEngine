@@ -73,7 +73,7 @@ private:
 class MaterialEditor : public CDialog
 {
 public:
-	MaterialEditor(MainWin* parent,int objID, D3DMATERIAL9 mat);
+	MaterialEditor(MainWin* parent,int objID,Mesh* DefMesh, D3DMATERIAL9 mat);
 	~MaterialEditor();
 
 private:
@@ -98,6 +98,15 @@ private:
 			&newMat.Diffuse.b,
 			&newMat.Diffuse.a);
 		mesh->SetMaterial(newMat);
+
+		char texName[512];
+		mat.GetTextureName(texName, 512);
+
+		mesh->RemoveTexture();
+		if (texName[0] != '\0')
+			mesh->LoadTextureFromFile(texName);
+		else
+			D3DXCreateTextureFromFile(gfx->GetDevice(), NULL, (LPDIRECT3DTEXTURE9*)mesh->GetTexture());
 
 		light->Update();
 		obj->Update();

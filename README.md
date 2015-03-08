@@ -3,6 +3,10 @@ A simple DirectX 3D game engine!
 
 This engine is being written primarily in C++ and uses the Microsoft Foundation Classes (MFC) as a base for the GUI in the engine.(This being the reason that the exe's and solution name is 'MFCEngine').
 
+Update 7:
+
+In this udpate, the material editor has been updated, meaning that when you open it, the texture that is currently loaded onto a model will be loaded into the material editor. I have also started work on the compiler. Not much can be said about it really. All that is functional so far is the scanner, which scans through the text and returns each individual character with its own column and line. I will start work on the lexer next, which generates tokens and all that good stuff, and hopefully within the next few weeks i will be able to properly implement custom scripts into the engine.
+
 Update 6:
 
 A material editor has now been added. It you to change the diffuse, specular and ambient colours and also select a texture for the object. When the material editor is opened, it is linked to the object that was selected when it was opened. This means that you can have multiple material editors opened for different objects. An alpha value for the diffuse, specular and ambient colors is within the material editors class but it can not be changed through the editor yet. This will be added through the sliders that are on the dialogue. Another problem is that the texture that is currently displayed on an object is not loaded into the material editor when it is open, so it has to be re-opened through the dialogue.

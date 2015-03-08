@@ -82,7 +82,7 @@ BEGIN_MESSAGE_MAP(MaterialEditor,CDialog)
 	ON_COMMAND(IDC_CANCELBT,OnCancel)
 END_MESSAGE_MAP()
 
-MaterialEditor::MaterialEditor(MainWin* parent, int objID, D3DMATERIAL9 tMat)
+MaterialEditor::MaterialEditor(MainWin* parent, int objID, Mesh* DefMesh, D3DMATERIAL9 tMat)
 	:
 	gfx(NULL),
 	ObjID(objID),
@@ -106,6 +106,8 @@ MaterialEditor::MaterialEditor(MainWin* parent, int objID, D3DMATERIAL9 tMat)
 	light = new Light(*gfx, 0);
 	light->GetTransform()->SetTranslation(0.0f, 2.5f, 5.0f);
 
+	Mesh* mesh = (Mesh*)obj->GetComponent(meshID);
+
 	mat.SetAmbient(tMat.Ambient.r, tMat.Ambient.g, tMat.Ambient.b, tMat.Ambient.a);
 	mat.SetDiffuse(tMat.Diffuse.r, tMat.Diffuse.g, tMat.Diffuse.b, tMat.Diffuse.a);
 	mat.SetSpecular(tMat.Specular.r, tMat.Specular.g, tMat.Specular.b, tMat.Specular.a);
@@ -121,6 +123,8 @@ MaterialEditor::MaterialEditor(MainWin* parent, int objID, D3DMATERIAL9 tMat)
 	CEdit* specR = (CEdit*)GetDlgItem(IDC_SPEC_R);
 	CEdit* specG = (CEdit*)GetDlgItem(IDC_SPEC_G);
 	CEdit* specB = (CEdit*)GetDlgItem(IDC_SPEC_B);
+
+	CEdit* tex = (CEdit*)GetDlgItem(IDC_TEXBROWSE);
 
 	char t_difR[256]  = {0};
 	char t_difG[256]  = {0};
@@ -151,6 +155,13 @@ MaterialEditor::MaterialEditor(MainWin* parent, int objID, D3DMATERIAL9 tMat)
 	specR->SetWindowTextA(t_specR);
 	specG->SetWindowTextA(t_specG);
 	specB->SetWindowTextA(t_specB);
+
+
+	char texFilePath[512];
+	DefMesh->GetTextureFilePath(texFilePath, 512);
+	mat.SetTextureName(texFilePath, 512);
+
+	tex->SetWindowTextA(texFilePath);
 
 	UpdateView();
 }
@@ -265,6 +276,6 @@ void MaterialEditor::ONTEXCHANGE()
 	char text[256];
 	edit->GetWindowTextA(text, 256);
 	mat.SetTextureName(text, 256);
-	((Mesh*)obj->GetComponent(meshID))->LoadTextureFromFile(text);
+
 	UpdateView();
 }

@@ -1,0 +1,14 @@
+//This is a test file
+/*It servers no purpose but to test parsing of characters*/
+
+void doThing(){}
+
+int main()
+{
+	bool parser = true;
+	if( parser )
+	{
+		doThing();
+	}
+	return 0;
+}

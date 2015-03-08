@@ -22,6 +22,7 @@ BEGIN_MESSAGE_MAP(MainWin,CFrameWnd)
 	ON_COMMAND(ID_FILESAVEAS_SCENE, FilesaveasScene)
 	ON_COMMAND(ID_GAMEOBJECTADDNEW_PLANE, AddnewPlane)
 	ON_COMMAND(ID_GAMEOBJECTADDNEW_MESHFROMFILE, AddnewMeshFromFile)
+	ON_COMMAND(ID_GAMEOBJECTADDNEW_CAMERA, AddnewCamera)
 
 	ON_COMMAND(ID_CONTROL_PLAYERCONTROL, AddComp_PlayerControl)
 
@@ -275,6 +276,19 @@ void MainWin::ADDNEWPLANE()
 		MessageBox("Failed To Update Object List!", "Error!");
 }
 
+
+void MainWin::ADDNEWCAMERA()
+{
+	theApp->curProject->LockScene();
+	int ID = theApp->curProject->GetScene()->AddCameraObject();
+	char nb[] = { "New Camera" };
+	theApp->curProject->GetScene()->SetObjectName(nb, ID);
+	theApp->curProject->UnlockScene();
+
+	if (!UpdateObjectList())
+		MessageBox("Failed To Update Object List!", "Error!");
+}
+
 void MainWin::ADDMESHFROMFILE()
 {
 	//Used so that the scene class is not accessed between threads!!
@@ -429,7 +443,7 @@ void MainWin::EDITMATERIALEDITOR()
 
 	if (MeshID != -1)
 	{
-		materialEditor = new MaterialEditor(this, ID, *((Mesh*)obj->GetComponent(MeshID))->GetMaterial());
+		materialEditor = new MaterialEditor(this, ID, (Mesh*)obj->GetComponent(MeshID), *((Mesh*)obj->GetComponent(MeshID))->GetMaterial());
 		if (!materialEditor)
 			MessageBoxA("Could Not Initialize Material Editor!", "Error!");
 	}

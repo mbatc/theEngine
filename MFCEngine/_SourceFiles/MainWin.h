@@ -66,6 +66,7 @@ protected:
 	afx_msg void AddnewPlane(){ ADDNEWPLANE(); }
 	afx_msg void AddnewLight(){ ADDNEWLIGHT(); }
 	afx_msg void AddnewEmpty(){ ADDNEWEMPTY(); }
+	afx_msg void AddnewCamera(){ ADDNEWCAMERA(); }
 	afx_msg void AddnewMeshFromFile(){ ADDMESHFROMFILE(); }
 	afx_msg void DeleteObject(){ DELETEOBJECT(); }
 	afx_msg void WindowObjProperties(){ WINDOWOBJPROPERTIES(); }
@@ -79,6 +80,7 @@ private:
 	void ADDNEWPLANE();
 	void ADDNEWLIGHT();
 	void ADDNEWEMPTY();
+	void ADDNEWCAMERA();
 	void ADDMESHFROMFILE();
 	void DELETEOBJECT();
 	void WINDOWOBJPROPERTIES();

@@ -23,11 +23,14 @@ public:
 		const short* PRMIB,const UINT PRM_SIZE,
 		const UINT PRMIB_SIZE);
 
+	void GetTextureFilePath(char* buffer, const int buflen) const;
+
 	void FreeGFX();
 	void RestoreGFX();
 
 	void InitMaterial();
 	void LoadTextureFromFile(char* filepath);
+	void RemoveTexture();
 	void InitMesh();
 	void SetMaterial(D3DMATERIAL9 newMat);
 

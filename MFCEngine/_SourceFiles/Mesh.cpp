@@ -37,6 +37,13 @@ Mesh::~Mesh()
 	tex = NULL;
 }
 
+void Mesh::RemoveTexture()
+{
+	if (tex)
+		tex->Release();
+	tex = NULL;
+}
+
 void Mesh::SetMaterial(D3DMATERIAL9 newMat)
 {
 	ZeroMemory(&mat, sizeof(D3DMATERIAL9));
@@ -344,23 +351,30 @@ void Mesh::LoadFromFile(const char* filename)
 			if (!strcmp(buffer,"map_Kd") )
 			{
 				fscanf(pFile, "%s", buffer);
-				int filepathLen = 0;
-				int texLen = 0;
-				for (; buffer[texLen] != '\0'; texLen++);
-				filepathLen = dirLen + texLen;
-
-				TextureFilePath = new char[filepathLen];
-
-				for (int i = 0; i < dirLen -1; i++)
+				if (buffer)
 				{
-					TextureFilePath[i] = curDirectory[i];
-				}
+					int filepathLen = 0;
+					int texLen = 0;
+					for (; buffer[texLen] != '\0'; texLen++);
+					filepathLen = dirLen + texLen;
 
-				for (int i = 0; i < texLen; i++)
-				{
-					TextureFilePath[i + dirLen - 1] = buffer[i];
+					TextureFilePath = new char[filepathLen];
+
+					for (int i = 0; i < dirLen - 1; i++)
+					{
+						TextureFilePath[i] = curDirectory[i];
+					}
+
+					for (int i = 0; i < texLen; i++)
+					{
+						TextureFilePath[i + dirLen - 1] = buffer[i];
+					}
+					TextureFilePath[filepathLen - 1] = '\0';
 				}
-				TextureFilePath[filepathLen - 1] = '\0';
+				else
+				{
+					TextureFilePath = { 0 };
+				}
 			}
 		}
 	} while (!feof(pFile));
@@ -523,7 +537,8 @@ void Mesh::LoadFromFile(const char* filename)
 
 	//CREATING DIRECTX STUFF
 
-	LoadTextureFromFile(TextureFilePath);
+	if (TextureFilePath)
+		LoadTextureFromFile(TextureFilePath);
 
 	HRESULT result;
 	VOID* pVoid;
@@ -564,6 +579,7 @@ void Mesh::InitMaterial()
 
 void Mesh::LoadTextureFromFile(char* filepath)
 {
+	RemoveTexture();
 	if (!filepath)
 		return;
 	HRESULT result;
@@ -587,6 +603,22 @@ void Mesh::LoadTextureFromFile(char* filepath)
 	if (result != D3D_OK)
 		MessageBox(NULL, "Failed To Create Texture \n(function: Mesh::LoadTextureFromFile File: Mesh.cpp)",
 		"Error", MB_OK | MB_ICONEXCLAMATION);
+}
+
+void Mesh::GetTextureFilePath(char* buffer, const int buflen) const
+{
+	if (!TextureFilePath)
+	{
+		buffer[0] = '\0';
+		return;
+	}
+
+	for (int i = 0; i < buflen; i++)
+	{
+		buffer[i] = TextureFilePath[i];
+		if (TextureFilePath[i] == '\0')
+			break;
+	}
 }
 
 void Mesh::InitMesh()

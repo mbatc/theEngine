@@ -59,11 +59,16 @@ void Camera::Update()
 	float y = 0;
 
 	float yRot = 0;
+	float xRot = 0;
 	if (kbd->KeyIsDown(VK_UP))
 	{
 		if (kbd->KeyIsDown(VK_SHIFT))
 		{
 			y += 0.1f;
+		}
+		else if ( kbd->KeyIsDown(VK_CONTROL) )
+		{
+			xRot -= 0.5f;
 		}
 		else
 		{
@@ -75,6 +80,10 @@ void Camera::Update()
 		if (kbd->KeyIsDown(VK_SHIFT))
 		{
 			y -= 0.1f;
+		}
+		else if (kbd->KeyIsDown(VK_CONTROL))
+		{
+			xRot += 0.5f;
 		}
 		else
 		{
@@ -113,7 +122,7 @@ void Camera::Update()
 	transform->SetTranslation(transform->GetTranslation().x + x,
 		transform->GetTranslation().y + y,
 		transform->GetTranslation().z + z);
-	transform->SetRotation(transform->GetRotation().x,
+	transform->SetRotation(transform->GetRotation().x + xRot,
 		transform->GetRotation().y + yRot,
 		transform->GetRotation().z);
 
