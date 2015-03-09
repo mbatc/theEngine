@@ -70,11 +70,14 @@
   <ItemGroup>
     <ClInclude Include="Character.h" />
     <ClInclude Include="Compiler.h" />
+    <ClInclude Include="CurrentFile.h" />
+    <ClInclude Include="EngineLibrary.h" />
     <ClInclude Include="GlobalDefinitions.h" />
     <ClInclude Include="Lexer.h" />
     <ClInclude Include="Parser.h" />
     <ClInclude Include="ScanDriver.h" />
     <ClInclude Include="Scanner.h" />
+    <ClInclude Include="Token.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />

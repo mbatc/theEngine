@@ -2,6 +2,8 @@
 
 #include "Scanner.h"
 #include "Character.h"
+#include"Token.h"
+
 #include <iostream>
 
 using namespace std;
@@ -9,14 +11,17 @@ using namespace std;
 class ScanDriver
 {
 public:
-	ScanDriver(){}
+	ScanDriver(char* filename)
+		:
+	filename(filename)
+	{}
 	~ScanDriver(){}
 
 	bool scan()
 	{
-		scanner.OpenFile("text.txt");
-
+		scanner.OpenFile(filename);
 		Character Char = scanner.GetChar();
+
 		while (true)
 		{
 			char* buffer = Char.toString();
@@ -29,5 +34,6 @@ public:
 
 private:
 	Scanner scanner;
+	char* filename;
 
 };

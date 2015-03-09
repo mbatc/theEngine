@@ -3,6 +3,10 @@ A simple DirectX 3D game engine!
 
 This engine is being written primarily in C++ and uses the Microsoft Foundation Classes (MFC) as a base for the GUI in the engine.(This being the reason that the exe's and solution name is 'MFCEngine').
 
+Update 8:
+
+I have not done any work on the actual 'engine' aspect of the engine, but instead i have been working on the compiler. The compiler is comming along nicely. So far the following classes: Character, Scanner, Token, Lexer. The Character and Scanner classes are somewhat complete and when working together output the characters with there positioning in the file( as mentioned in the previous update ). When i add the Token and Lexer classes into the mix it starts to get alot more complicated and i have a feeling it will take some time to get them to a decent level of functionality. They work, but have a couple of issues that have to be ironed out. Because of this increase in complexity when adding the lexer, i am probably not going to write my own parser, but find source code for one online and just port it to my project, especially because C++ is a very complex language and writing a compiler for it is no easy task. The current code for the compiler is also pretty sloppy but i will fix it up once i have a decent amount of functionality in the program.
+
 Update 7:
 
 In this udpate, the material editor has been updated, meaning that when you open it, the texture that is currently loaded onto a model will be loaded into the material editor. I have also started work on the compiler. Not much can be said about it really. All that is functional so far is the scanner, which scans through the text and returns each individual character with its own column and line. I will start work on the lexer next, which generates tokens and all that good stuff, and hopefully within the next few weeks i will be able to properly implement custom scripts into the engine.

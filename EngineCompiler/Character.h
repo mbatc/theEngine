@@ -7,10 +7,18 @@ class Character
 public:
 	Character(char c, int index, int column, int line, char* source):
 		cargo(c),
-		sourceIndex(sourceIndex),
+		sourceIndex(index),
 		sourceColumnIndex(column),
 		sourceLineIndex(line),
 		sourceText(source)
+	{}
+
+	Character():
+		cargo(NULL),
+		sourceIndex(NULL),
+		sourceLineIndex(NULL),
+		sourceColumnIndex(NULL),
+		sourceText(NULL)
 	{}
 
 	char cargo;
@@ -25,7 +33,6 @@ public:
 	//Returns the Line of the current Character
 	int GetLineIndex() const { return sourceLineIndex; }
 
-	//Parse a pointer to this function because it will be dynamically allocated and format the buffer
 	char* toString()
 	{
 		char* tempCargo = new char[3];

@@ -17,6 +17,13 @@ public:
 
 	~Scanner(){}
 
+	void SetIndex(int sourceIndex, int columnIndex, int lineIndex)
+	{
+		m_sourceIndex = sourceIndex;
+		m_lineIndex = lineIndex;
+		m_columnIndex = columnIndex;
+	}
+
 	void OpenFile(char* filename)
 	{ 
 		file = fopen(filename, "r");
@@ -46,12 +53,11 @@ public:
 		fclose(file);
 
 		m_lastIndex = fileLen - 1;
+		m_sourceIndex = 0;
 	}
 
 	Character GetChar()
 	{
-		m_sourceIndex++;
-
 		if (m_sourceIndex > 0)
 		{
 			if (m_sourceText[m_sourceIndex - 1] == '\n')
@@ -62,7 +68,7 @@ public:
 		}
 		m_columnIndex++;
 
-		if (m_columnIndex > m_lastIndex)
+		if (m_sourceIndex > m_lastIndex)
 		{
 			Char = Character(ENDMARK, m_sourceIndex, m_columnIndex, m_lineIndex, m_sourceText);
 		}
@@ -73,6 +79,7 @@ public:
 				m_sourceText);
 		}
 
+		m_sourceIndex++;
 		return Char;
 	}
 
