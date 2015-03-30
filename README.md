@@ -1,39 +1,8 @@
 # theEngine
 A simple DirectX 3D game engine!
 
-This engine is being written primarily in C++ and uses the Microsoft Foundation Classes (MFC) as a base for the GUI in the engine.(This being the reason that the exe's and solution name is 'MFCEngine').
+This engine is being written primarily in C++ and uses the Microsoft Foundation Classes (MFC) as a base for the GUI in the engine (This being the reason that the exe and solution name is 'MFCEngine'). The graphics API is DirectX9 so not the most recent, but it is the most frequentl used in tutorials on the never ending internets.
 
-Update 8:
+theEngine is primarily a educational project for myself. I am hoping that while learning how to write a lot of the neccessary code to make a functional game engine, i will learn a lot more about C++ and also how it(C++) and DirectX interact with the hardware. So far whilst writing the engine, i have learned a lot more about this stuff (as of the 9th update in the wiki) and there is a lot more 'engine' to be written and i am exited about the challenges i will have to tackle in the future. The only annoying thing is that i am trying to fit in time to work on the program inbetween school and work. This doesnt leave much time so updates may stop coming for a while when assignments start popping up, but i will never forget...
 
-I have not done any work on the actual 'engine' aspect of the engine, but instead i have been working on the compiler. The compiler is comming along nicely. So far the following classes: Character, Scanner, Token, Lexer. The Character and Scanner classes are somewhat complete and when working together output the characters with there positioning in the file( as mentioned in the previous update ). When i add the Token and Lexer classes into the mix it starts to get alot more complicated and i have a feeling it will take some time to get them to a decent level of functionality. They work, but have a couple of issues that have to be ironed out. Because of this increase in complexity when adding the lexer, i am probably not going to write my own parser, but find source code for one online and just port it to my project, especially because C++ is a very complex language and writing a compiler for it is no easy task. The current code for the compiler is also pretty sloppy but i will fix it up once i have a decent amount of functionality in the program.
-
-Update 7:
-
-In this udpate, the material editor has been updated, meaning that when you open it, the texture that is currently loaded onto a model will be loaded into the material editor. I have also started work on the compiler. Not much can be said about it really. All that is functional so far is the scanner, which scans through the text and returns each individual character with its own column and line. I will start work on the lexer next, which generates tokens and all that good stuff, and hopefully within the next few weeks i will be able to properly implement custom scripts into the engine.
-
-Update 6:
-
-A material editor has now been added. It you to change the diffuse, specular and ambient colours and also select a texture for the object. When the material editor is opened, it is linked to the object that was selected when it was opened. This means that you can have multiple material editors opened for different objects. An alpha value for the diffuse, specular and ambient colors is within the material editors class but it can not be changed through the editor yet. This will be added through the sliders that are on the dialogue. Another problem is that the texture that is currently displayed on an object is not loaded into the material editor when it is open, so it has to be re-opened through the dialogue.
-
-Update 5:
-
-This is just a small update. The bug mentioned in 'update 4' has been fixed and the cause was a missing '!' i a pesky 'if' statement. Texture support has been added, however to load textures from .mtl files the source image has to be in the same folder as the .mtl file. But the source file can be in folders within the .mtl files folder.
-
-Update 4:
-
-The loading of .obj files has been somewhat complete. It can load them, but the faces have to be triangulated otherwise it will not work. This will be fixed soon. Loading models can also be done through the program itself instead of having to change source code to load models. Keyboard input has been added and there is now a component that you can add to an object that gives simple controls to the object. With all these changes a bug has popped up. When an object is deleted, there is an access violation. I am going to wok on fixing this before moving onto other things.
-
-
-Update 3:
-
-Its been a while but not much has changed. There is still only basic object functionality, however there is now a mesh and mesh renderer architecture in place. Cubes and planes can be loaded in and I am working on loading .Obj files into the engine. There is also a console window which displays text output. This will be used later to display errors during compiling.Some changes have also been made to the properties panel to support changing menus depending on which component is selected.There is also a simple saving and loading system in place which you can save scenes with, however to load a scene you have to change source code.
-
- 
-Update 2:
-
-Basic gameobject functionality has been added, and by basic, i mean basic. There are no graphical elements to the game object yet. Only an empty instance of one which contains a transform object (translation, rotation, scale). Also basic UI functionality has been added. So you can change the values of an objects translation, rotation or scale using the panel to the right, and select the object you are editing using the panel to the left.
-
-
-Update 1:
-
-So far there nothing but a few basic dialog panels to change object properties. However these do not do anything yet as i am in the process of porting all the graphics and main engine functionality(of which there is not much) from another project. The reason for this is that i had previously been using Win32 but decided to go with MFC.
+To see recent update logs (sort of) goto the the wiki!
