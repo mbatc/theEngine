@@ -1,0 +1,13 @@
+fish = 10;
+
+otherfish = 10;
+
+if(fish = otherfish)
+{
+	fish = 5;
+}
+else
+{
+	otherfish = 50m3th1n9_R4and0m;
+}
+
