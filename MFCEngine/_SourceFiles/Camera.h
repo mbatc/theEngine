@@ -10,6 +10,9 @@ public:
 
 	void Update();
 	void Render(D3DGraphics& gfx) const;
+
+	void Move(float speed, Vector3 axis );
+
 private:
 	Vector3 LookAt;
 	int LookAtDist;

@@ -137,44 +137,22 @@ void Mesh::LoadFromFile(const char* filename)
 	matFilepath[matExtensionStart + 4] = '\0';
 	//******************************************************************************
 
-	//STRUCTS THAT WILL BE USEFUL FOR STORING THE INFORMATION
-	struct vector3 {
-		float x;
-		float y;
-		float z;
-	};
-
-	struct UV {
-		float U;
-		float V;
-	};
-
-	struct faceVertex {
-		int vertexIndex;
-		int normalIndex;
-		int textureIndex;
-	};
-
-	struct faceInfo {
-		UINT nPoints;
-		faceVertex* point;
-	};
 	//*********************************************************
 	//INITIALIZATION OF TEMPORARY BUFFERS
-	short* TempIb = NULL;
-	vector3* TempVb = NULL;
-	vector3* TempNb = NULL;
-	UV*		 TempTb = NULL;
-	faceInfo* faces = NULL;
-	CUSTOMVERTEX* FMTINDEXBUFFER = NULL;
+	short*			TempIb			= NULL;
+	vector3*		TempVb			= NULL;
+	vector3*		TempNb			= NULL;
+	UV*				TempTb			= NULL;
+	faceInfo*		faces			= NULL;
+	CUSTOMVERTEX*	FMTINDEXBUFFER	= NULL;
 
-	UINT nFaces = 0;
-	UINT nVertices = 0;
-	UINT nNormals = 0;
-	UINT nIndices = 0;
-	UINT nTexCoord = 0;
+	UINT nFaces		= 0;
+	UINT nVertices	= 0;
+	UINT nNormals	= 0;
+	UINT nIndices	= 0;
+	UINT nTexCoord	= 0;
 
-	bool isVtParse = false;
+	bool isVtParse	= false;
 	//*********************************************************
 	//LOADING THE INFO FROM THE FILE
 	nVerts = 0;
@@ -379,20 +357,9 @@ void Mesh::LoadFromFile(const char* filename)
 		}
 	} while (!feof(pFile));
 
-	//*********************************************************
+	//**************************
 	//FORMATTING THE INFORMATION
-	/*short* TempIb = NULL;
-	vector3* TempVb = NULL;
-	vector3* TempNb = NULL;
-	faceInfo* faces = NULL;
-	CUSTOMVERTEX* FMTINDEXBUFFER = NULL;
-
-	UINT nFaces = 0;
-	UINT nVertices = 0;
-	UINT nNormals = 0;
-	UINT nIndices = 0;*/
-
-	int VertexBufLen = 0;
+	//**************************
 	int BufIndex = 0;
 	short* t_pSortedIb = NULL;
 	CUSTOMVERTEX* t_pSortedVb = new CUSTOMVERTEX[nFaces * 3];
@@ -405,6 +372,8 @@ void Mesh::LoadFromFile(const char* filename)
 	}
 
 	t_pSortedIb = new short[nFaceVerts];
+
+	faces = TriangulateFaces(faces,&nFaces);
 
 	//Looping through all face definitions and creating the neccesary Vertices
 	for (int i = 0; i < nFaces; i++)
@@ -433,6 +402,20 @@ void Mesh::LoadFromFile(const char* filename)
 			}
 
 			bool vertExists = false;
+			for (int i_v = 0; i_v < BufIndex; i_v++)
+			{
+				if (t_pSortedVb[i_v].NORMAL.x == -t_norm->x &&
+					t_pSortedVb[i_v].NORMAL.y == -t_norm->y &&
+					t_pSortedVb[i_v].NORMAL.z == -t_norm->z &&
+					t_pSortedVb[i_v].x == -t_vert->x &&
+					t_pSortedVb[i_v].y == -t_vert->y &&
+					t_pSortedVb[i_v].z == -t_vert->z &&
+					t_pSortedVb[i_v].tu == t_uv->U &&
+					t_pSortedVb[i_v].tv == 1 - t_uv->V)
+				{
+					t_pSortedIb[p_i + i * 3] = i_v;
+				}
+			}
 
 			if (!vertExists)
 			{
@@ -558,6 +541,41 @@ void Mesh::LoadFromFile(const char* filename)
 	ib->Lock(0, 0, (void**)&pVoid, 0);
 	memcpy(pVoid, indexBuffer, nIndices*sizeof(short));
 	ib->Unlock();
+}
+
+Mesh::faceInfo* Mesh::TriangulateFaces(faceInfo* faceIndex,	UINT* nFaces)
+{
+	if (!faceIndex)
+		return NULL;
+
+	int nTriangles = 0;
+	for (int i = 0; i < *nFaces; i++)
+	{
+		nTriangles += faceIndex[i].nPoints - 2;
+	}
+
+	faceInfo* newFaces = new faceInfo[nTriangles];
+
+	for (int i = 0, t_i = 0; i < *nFaces; i++)
+	{
+		if (faceIndex[i].nPoints <= 3)
+		{
+			newFaces[t_i] = faceIndex[i];
+		}
+		else
+		{
+			for (int i_l = 0; i_l < faceIndex[i].nPoints - 2;i_l++, t_i++)
+			{
+				newFaces[t_i].nPoints = 3;
+				newFaces[t_i].point = new faceVertex[3];
+				newFaces[t_i].point[0] = faceIndex[i].point[0];
+				newFaces[t_i].point[1] = faceIndex[i].point[i_l + 1];
+				newFaces[t_i].point[2] = faceIndex[i].point[i_l + 2];
+			}
+		}
+	}
+
+	return newFaces;
 }
 
 void Mesh::Render(D3DGraphics& gfx)

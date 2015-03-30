@@ -13,6 +13,30 @@ enum PRIMITIVEMESH
 
 class Mesh : public Component
 {
+private:
+	//STRUCTS THAT WILL BE USEFUL FOR STORING UNFORMATTED INFORMATION
+	struct vector3 {
+		float x;
+		float y;
+		float z;
+	};
+
+	struct UV {
+		float U;
+		float V;
+	};
+
+	struct faceVertex {
+		int vertexIndex;
+		int normalIndex;
+		int textureIndex;
+	};
+
+	struct faceInfo {
+		UINT nPoints;
+		faceVertex* point;
+	};
+
 public:
 	Mesh(Gameobject* object, D3DGraphics& gfx);
 	~Mesh();
@@ -22,6 +46,8 @@ public:
 	void LoadPrimitive(const PRIMITIVEMESH meshtype,const CUSTOMVERTEX* PRM,
 		const short* PRMIB,const UINT PRM_SIZE,
 		const UINT PRMIB_SIZE);
+
+	faceInfo* TriangulateFaces(faceInfo* faceIndex, UINT* nFaces);
 
 	void GetTextureFilePath(char* buffer, const int buflen) const;
 
@@ -47,7 +73,7 @@ public:
 	D3DMATERIAL9* GetMaterial(){ return &mat; }
 	LPDIRECT3DTEXTURE9 GetTexture(){ return tex; }
 
-private:
+private:	
 	CUSTOMVERTEX* vertexBuffer;
 	short* indexBuffer;
 

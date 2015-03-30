@@ -12,14 +12,22 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="_SourceFiles\Camera.h" />
+    <ClInclude Include="_SourceFiles\Character.h" />
     <ClInclude Include="_SourceFiles\Component.h" />
     <ClInclude Include="_SourceFiles\Console.h" />
+    <ClInclude Include="_SourceFiles\CSkinScrollBar.h" />
     <ClInclude Include="_SourceFiles\CustomBehaviour.h" />
+    <ClInclude Include="_SourceFiles\CSkinScrollWnd.h" />
     <ClInclude Include="_SourceFiles\D3DGraphics.h" />
     <ClInclude Include="_SourceFiles\DialogObjList.h" />
     <ClInclude Include="_SourceFiles\DialogObjProp.h" />
+    <ClInclude Include="_SourceFiles\FileEngine.h" />
+    <ClInclude Include="_SourceFiles\FileTree.h" />
     <ClInclude Include="_SourceFiles\Gameobject.h" />
     <ClInclude Include="_SourceFiles\GlobalPointers.h" />
+    <ClInclude Include="_SourceFiles\TextEditor.h" />
+    <ClInclude Include="_SourceFiles\LanguageDefinitions.h" />
+    <ClInclude Include="_SourceFiles\Lexer.h" />
     <ClInclude Include="_SourceFiles\MainSplitter.h" />
     <ClInclude Include="_SourceFiles\KeyboardInput.h" />
     <ClInclude Include="_SourceFiles\Light.h" />
@@ -31,25 +39,35 @@
     <ClInclude Include="_SourceFiles\Mesh.h" />
     <ClInclude Include="_SourceFiles\MeshRenderer.h" />
     <ClInclude Include="_SourceFiles\MouseInput.h" />
+    <ClInclude Include="_SourceFiles\Parser.h" />
     <ClInclude Include="_SourceFiles\PhysicsController.h" />
     <ClInclude Include="_SourceFiles\PlayerControl.h" />
     <ClInclude Include="_SourceFiles\PrimitiveDefinitions.h" />
     <ClInclude Include="_SourceFiles\Project.h" />
     <ClInclude Include="_SourceFiles\resource.h" />
+    <ClInclude Include="_SourceFiles\Scanner.h" />
     <ClInclude Include="_SourceFiles\Scene.h" />
     <ClInclude Include="_SourceFiles\SceneRenderer.h" />
+    <ClInclude Include="_SourceFiles\ScriptInterpreter.h" />
+    <ClInclude Include="_SourceFiles\Token.h" />
     <ClInclude Include="_SourceFiles\Transform.h" />
     <ClInclude Include="_SourceFiles\Vector.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="_SourceFiles\Camera.cpp" />
+    <ClCompile Include="_SourceFiles\Character.cpp" />
     <ClCompile Include="_SourceFiles\Component.cpp" />
+    <ClCompile Include="_SourceFiles\CSkinScrollBar.cpp" />
+    <ClCompile Include="_SourceFiles\CSkinScrollWnd.cpp" />
     <ClCompile Include="_SourceFiles\CustomBehaviour.cpp" />
     <ClCompile Include="_SourceFiles\D3DGraphics.cpp" />
     <ClCompile Include="_SourceFiles\DialogObjList.cpp" />
+    <ClCompile Include="_SourceFiles\FileEngine.cpp" />
+    <ClCompile Include="_SourceFiles\FileTree.cpp" />
     <ClCompile Include="_SourceFiles\Gameobject.cpp" />
     <ClCompile Include="_SourceFiles\GlobalPointerDef.cpp" />
     <ClCompile Include="_SourceFiles\KeyboardInput.cpp" />
+    <ClCompile Include="_SourceFiles\Lexer.cpp" />
     <ClCompile Include="_SourceFiles\Light.cpp" />
     <ClCompile Include="_SourceFiles\MainApp.cpp" />
     <ClCompile Include="_SourceFiles\MainDoc.cpp" />
@@ -60,11 +78,15 @@
     <ClCompile Include="_SourceFiles\Mesh.cpp" />
     <ClCompile Include="_SourceFiles\MeshRenderer.cpp" />
     <ClCompile Include="_SourceFiles\MouseInput.cpp" />
+    <ClCompile Include="_SourceFiles\Parser.cpp" />
     <ClCompile Include="_SourceFiles\PhysicsController.cpp" />
     <ClCompile Include="_SourceFiles\Project.cpp" />
+    <ClCompile Include="_SourceFiles\Scanner.cpp" />
     <ClCompile Include="_SourceFiles\Scene.cpp" />
     <ClCompile Include="_SourceFiles\SceneRenderer.cpp" />
     <ClCompile Include="_SourceFiles\DialogObjProp.cpp" />
+    <ClCompile Include="_SourceFiles\TextEditor.cpp" />
+    <ClCompile Include="_SourceFiles\Token.cpp" />
     <ClCompile Include="_SourceFiles\Transform.cpp" />
     <ClCompile Include="_SourceFiles\Vector.cpp" />
   </ItemGroup>

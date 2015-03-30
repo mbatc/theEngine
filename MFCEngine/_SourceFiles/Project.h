@@ -1,5 +1,7 @@
 #pragma once
 #include "D3DGraphics.h"
+#include "FileTree.h"
+#include <atomic>
 
 class Scene;
 
@@ -37,14 +39,15 @@ public:
 	bool SaveScene(char* filename);
 	bool SaveProject(char* filename);
 	bool SaveComponentInfo(FILE* pFile, char* ID, int compNum, int objNum);
-
 	//------------------------------------------
 	//INLINE METHODS
 	Scene* GetScene(){ return curScene; }
+
+	FileTree projectFiles;
 private:
 	//------------------------------------------
 	//DATA MEMBERS
-	volatile bool sceneLocked;
+	std::atomic<bool> sceneLocked;
 
 	SceneInfo* sceneDB;
 	Scene* curScene;

@@ -31,7 +31,7 @@ void MeshRenderer::Render(D3DGraphics& gfx)
 				tnfm->GetTranslation().z);
 			D3DXMatrixRotationX(&matRotationX, D3DXToRadian(tnfm->GetRotation().x));
 			D3DXMatrixRotationY(&matRotationY, D3DXToRadian(tnfm->GetRotation().y));
-			D3DXMatrixRotationZ(&matRotationZ, D3DXToRadian(tnfm->GetRotation().z));
+			D3DXMatrixRotationZ(&matRotationZ, D3DXToRadian(tnfm->GetRotation().z + 180));
 
 			D3DXMatrixScaling(&matScale, tnfm->GetScale().x, tnfm->GetScale().y, tnfm->GetScale().z);
 		}

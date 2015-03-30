@@ -6,16 +6,17 @@
 #include "Component.h"
 #include "Transform.h"
 
-class PlayerControl : public CustomBehaviour
+class PlayerControl : public Component
 {
 public:
 	PlayerControl(Gameobject* parent)
 		:
-		CustomBehaviour(parent)
+		Component(parent)
 	{
 		grav = 0.025f;
 		floorHeight = -2.0f;
 	}
+
 	~PlayerControl()
 	{
 

@@ -1,50 +1,85 @@
-﻿Build started 2/03/2015 1:58:48 PM.
+﻿Build started 30/03/2015 8:50:18 PM.
      1>Project "D:\mbatc13\My Documents\GameProjects\MFCEngine\MFCEngine\MFCEngine.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /Zi /nologo /W0 /WX- /sdl /MP /O2 /Oi /Oy- /GL /D _CRT_SECURE_NO_WARNINGS /D _MBCS /D _AFXDLL /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt _SourceFiles\Camera.cpp _SourceFiles\D3DGraphics.cpp _SourceFiles\DialogObjList.cpp _SourceFiles\MainApp.cpp _SourceFiles\MainSplitter.cpp _SourceFiles\MainWin.cpp _SourceFiles\Mesh.cpp _SourceFiles\MeshRenderer.cpp _SourceFiles\MouseInput.cpp _SourceFiles\Project.cpp _SourceFiles\Scene.cpp _SourceFiles\SceneRenderer.cpp _SourceFiles\DialogObjProp.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /Zi /nologo /W0 /WX- /sdl /O2 /Oi /Oy- /GL /D _CRT_SECURE_NO_WARNINGS /D _MBCS /D _AFXDLL /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt _SourceFiles\Camera.cpp _SourceFiles\Character.cpp _SourceFiles\CSkinScrollBar.cpp _SourceFiles\CSkinScrollWnd.cpp _SourceFiles\CustomBehaviour.cpp _SourceFiles\DialogObjList.cpp _SourceFiles\FileEngine.cpp _SourceFiles\FileTree.cpp _SourceFiles\Gameobject.cpp _SourceFiles\GlobalPointerDef.cpp _SourceFiles\Lexer.cpp _SourceFiles\MainApp.cpp _SourceFiles\MainSplitter.cpp _SourceFiles\MainWin.cpp _SourceFiles\MaterialEditor.cpp _SourceFiles\Mesh.cpp _SourceFiles\MeshRenderer.cpp _SourceFiles\Parser.cpp _SourceFiles\Project.cpp _SourceFiles\Scanner.cpp _SourceFiles\Scene.cpp _SourceFiles\SceneRenderer.cpp _SourceFiles\DialogObjProp.cpp _SourceFiles\TextEditor.cpp _SourceFiles\Token.cpp
          Camera.cpp
-         D3DGraphics.cpp
+         _WIN32_WINNT not defined. Defaulting to _WIN32_WINNT_MAXVER (see WinSDKVer.h)
+         Character.cpp
+         CSkinScrollBar.cpp
+         _WIN32_WINNT not defined. Defaulting to _WIN32_WINNT_MAXVER (see WinSDKVer.h)
+         CSkinScrollWnd.cpp
+         _WIN32_WINNT not defined. Defaulting to _WIN32_WINNT_MAXVER (see WinSDKVer.h)
+         CustomBehaviour.cpp
          DialogObjList.cpp
+         _WIN32_WINNT not defined. Defaulting to _WIN32_WINNT_MAXVER (see WinSDKVer.h)
+         FileEngine.cpp
+         _WIN32_WINNT not defined. Defaulting to _WIN32_WINNT_MAXVER (see WinSDKVer.h)
+         FileTree.cpp
+         Gameobject.cpp
+         _WIN32_WINNT not defined. Defaulting to _WIN32_WINNT_MAXVER (see WinSDKVer.h)
+         GlobalPointerDef.cpp
+         _WIN32_WINNT not defined. Defaulting to _WIN32_WINNT_MAXVER (see WinSDKVer.h)
+         Lexer.cpp
          MainApp.cpp
-         _WIN32_WINNT not defined. Defaulting to _WIN32_WINNT_MAXVER (see WinSDKVer.h)
-         _WIN32_WINNT not defined. Defaulting to _WIN32_WINNT_MAXVER (see WinSDKVer.h)
          _WIN32_WINNT not defined. Defaulting to _WIN32_WINNT_MAXVER (see WinSDKVer.h)
          MainSplitter.cpp
          _WIN32_WINNT not defined. Defaulting to _WIN32_WINNT_MAXVER (see WinSDKVer.h)
          MainWin.cpp
-         Mesh.cpp
          _WIN32_WINNT not defined. Defaulting to _WIN32_WINNT_MAXVER (see WinSDKVer.h)
+         MaterialEditor.cpp
+         _WIN32_WINNT not defined. Defaulting to _WIN32_WINNT_MAXVER (see WinSDKVer.h)
+         Mesh.cpp
          MeshRenderer.cpp
-         MouseInput.cpp
+         Parser.cpp
+         _WIN32_WINNT not defined. Defaulting to _WIN32_WINNT_MAXVER (see WinSDKVer.h)
          Project.cpp
+         Scanner.cpp
+         Compiling...
          Scene.cpp
          SceneRenderer.cpp
+         _WIN32_WINNT not defined. Defaulting to _WIN32_WINNT_MAXVER (see WinSDKVer.h)
          DialogObjProp.cpp
          _WIN32_WINNT not defined. Defaulting to _WIN32_WINNT_MAXVER (see WinSDKVer.h)
+         TextEditor.cpp
+         _WIN32_WINNT not defined. Defaulting to _WIN32_WINNT_MAXVER (see WinSDKVer.h)
+         Token.cpp
+       ResourceCompile:
+         C:\Program Files (x86)\Windows Kits\8.1\bin\x86\rc.exe /D _AFXDLL /l"0x0409" /nologo /fo"Release\MFCEngine.res" MFCEngine.rc 
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\mbatc13\My Documents\GameProjects\MFCEngine\Release\MFCEngine.exe" /NOLOGO /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /manifestinput:"C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\Include\Manifest\dpiaware.manifest" /DEBUG /PDB:"D:\mbatc13\My Documents\GameProjects\MFCEngine\Release\MFCEngine.pdb" /SUBSYSTEM:WINDOWS /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\mbatc13\My Documents\GameProjects\MFCEngine\Release\MFCEngine.lib" /MACHINE:X86 /SAFESEH Release\MFCEngine.res
          Release\Camera.obj
+         Release\Character.obj
          Release\Component.obj
+         Release\CSkinScrollBar.obj
+         Release\CSkinScrollWnd.obj
          Release\CustomBehaviour.obj
          Release\D3DGraphics.obj
          Release\DialogObjList.obj
+         Release\FileEngine.obj
+         Release\FileTree.obj
          Release\Gameobject.obj
          Release\GlobalPointerDef.obj
          Release\KeyboardInput.obj
+         Release\Lexer.obj
          Release\Light.obj
          Release\MainApp.obj
          Release\MainDoc.obj
          Release\MainSplitter.obj
          Release\MainView.obj
          Release\MainWin.obj
+         Release\MaterialEditor.obj
          Release\Mesh.obj
          Release\MeshRenderer.obj
          Release\MouseInput.obj
+         Release\Parser.obj
          Release\PhysicsController.obj
          Release\Project.obj
+         Release\Scanner.obj
          Release\Scene.obj
          Release\SceneRenderer.obj
          Release\DialogObjProp.obj
+         Release\TextEditor.obj
+         Release\Token.obj
          Release\Transform.obj
          Release\Vector.obj
          Generating code
@@ -54,4 +89,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:17.61
+Time Elapsed 00:00:39.37

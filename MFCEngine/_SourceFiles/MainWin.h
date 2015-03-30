@@ -6,6 +6,7 @@
 #include "DialogObjProp.h"
 #include "DialogObjList.h"
 #include "MainSplitter.h"
+#include "TextEditor.h"
 
 #include "KeyboardInput.h"
 #include "MouseInput.h"
@@ -55,6 +56,7 @@ protected:
 	DialogObjList*	pObjList;
 	CDialogBar*		pConsoleWindow;
 	BOOL			m_bInitMainSplitter;
+	TextEditor*		scriptEditor;
 
 	const static UINT ID_CONSOLE = 10;
 
@@ -72,7 +74,11 @@ protected:
 	afx_msg void WindowObjProperties(){ WINDOWOBJPROPERTIES(); }
 	afx_msg void FilesaveasScene(){ FILESAVEASSCENE(); }
 	afx_msg void AddComp_PlayerControl(){ ADDCOMP_PLAYERCONTROL(); }
+	afx_msg void AddComp_Script(){ ADDCOMP_SCRIPT(); }
 	afx_msg void EditMaterialEditor(){ EDITMATERIALEDITOR(); }
+
+	afx_msg void OnRunGame() { ONRUNGAME(); }
+	afx_msg void OnStopGame() { ONSTOPGAME(); }
 
 private:
 	void MENUEXIT();
@@ -85,8 +91,12 @@ private:
 	void DELETEOBJECT();
 	void WINDOWOBJPROPERTIES();
 	void FILESAVEASSCENE();
-	void ADDCOMP_PLAYERCONTROL();
+	void ADDCOMP_PLAYERCONTROL(); 
+	void ADDCOMP_SCRIPT();
 	void EDITMATERIALEDITOR();
+
+	void ONRUNGAME();
+	void ONSTOPGAME();
 
 	DECLARE_MESSAGE_MAP();
 };

@@ -1,6 +1,7 @@
 #include "MainApp.h"
 #include "MainView.h"
 #include "MainWin.h"
+#include "Lexer.h"
 #include "GlobalPointers.h"
 #include "PlayerControl.h"
 #include "D3DGraphics.h"
@@ -15,6 +16,9 @@
 BEGIN_MESSAGE_MAP(MainWin,CFrameWnd)
 	ON_COMMAND(ID_FILE_EXIT, MenuExit)
 
+	ON_COMMAND(ID_EDIT_RUN, OnRunGame)
+	ON_COMMAND(ID_EDIT_STOP, OnStopGame)
+
 	ON_COMMAND(ID_GAMEOBJECTADDNEW_CUBE, AddnewCube)
 	ON_COMMAND(ID_GAMEOBJECTADDNEW_LIGHT, AddnewLight)
 	ON_COMMAND(ID_GAMEOBJECTADDNEW_EMPTY, AddnewEmpty)
@@ -25,10 +29,12 @@ BEGIN_MESSAGE_MAP(MainWin,CFrameWnd)
 	ON_COMMAND(ID_GAMEOBJECTADDNEW_CAMERA, AddnewCamera)
 
 	ON_COMMAND(ID_CONTROL_PLAYERCONTROL, AddComp_PlayerControl)
+	ON_COMMAND(ID_ADDCOMPONENT_SCRIPT, AddComp_Script)
 
 	ON_COMMAND(ID_WINDOW_OBJECTPROPERTIES, WindowObjProperties)
 
 	ON_COMMAND(ID_EDIT_MATERIALEDITOR, EditMaterialEditor )
+
 END_MESSAGE_MAP()
 
 MainWin::MainWin(MainApp * app)
@@ -209,17 +215,17 @@ void MainWin::ADDNEWEMPTY()
 	int ID = theApp->curProject->GetScene()->AddGameObject();
 	char nb[] = { "New Empty Gameobject" };
 	theApp->curProject->GetScene()->SetObjectName(nb, ID);
-	theApp->curProject->UnlockScene();
 
 	if (!UpdateObjectList())
 		MessageBox("Failed To Update Object List!", "Error!");
+
+	theApp->curProject->UnlockScene();
 }
 
 void MainWin::ADDNEWLIGHT()
 {
 	theApp->curProject->LockScene();
 	theApp->curProject->GetScene()->AddLightObject(*gfx);
-	theApp->curProject->UnlockScene();
 
 	CListBox * pObjLIST = (CListBox *)pObjList->GetDlgItem(IDC_OBJLIST);
 
@@ -228,6 +234,8 @@ void MainWin::ADDNEWLIGHT()
 
 	int curSelected = pObjLIST->GetCurSel();
 	pObjLIST->SetCurSel(curSelected + 1);
+
+	theApp->curProject->UnlockScene();
 }
 
 void MainWin::ADDNEWCUBE()
@@ -247,10 +255,10 @@ void MainWin::ADDNEWCUBE()
 	((MeshRenderer*)obj->GetComponent(meshRendID))->SetMeshPointer((Mesh*)obj->GetComponent(meshID),meshID);
 	theApp->curProject->GetScene()->SetObjectName("New Cube", ID);
 
-	theApp->curProject->UnlockScene();
-
 	if (!UpdateObjectList())
 		MessageBox("Failed To Update Object List!", "Error!");
+
+	theApp->curProject->UnlockScene();
 }
 
 void MainWin::ADDNEWPLANE()
@@ -270,10 +278,10 @@ void MainWin::ADDNEWPLANE()
 		sizeof(PRM_PLANE) / sizeof(CUSTOMVERTEX), sizeof(PRMIB_PLANE) / sizeof(short));
 	theApp->curProject->GetScene()->SetObjectName("New Plane", ID);
 
-	theApp->curProject->UnlockScene();
-
 	if (!UpdateObjectList())
 		MessageBox("Failed To Update Object List!", "Error!");
+
+	theApp->curProject->UnlockScene();
 }
 
 
@@ -283,10 +291,11 @@ void MainWin::ADDNEWCAMERA()
 	int ID = theApp->curProject->GetScene()->AddCameraObject();
 	char nb[] = { "New Camera" };
 	theApp->curProject->GetScene()->SetObjectName(nb, ID);
-	theApp->curProject->UnlockScene();
 
 	if (!UpdateObjectList())
 		MessageBox("Failed To Update Object List!", "Error!");
+
+	theApp->curProject->UnlockScene();
 }
 
 void MainWin::ADDMESHFROMFILE()
@@ -325,12 +334,10 @@ void MainWin::ADDMESHFROMFILE()
 	}
 	else { MessageBox("Failed To Open File!", "Error!"); }
 
-
-	theApp->curProject->UnlockScene();
-
-
 	if (!UpdateObjectList())
 		MessageBox("Failed To Update Object List!", "Error!");
+
+	theApp->curProject->UnlockScene();
 }
 
 void MainWin::DELETEOBJECT()
@@ -422,6 +429,34 @@ void MainWin::ADDCOMP_PLAYERCONTROL()
 	theApp->GetProject()->UnlockScene();
 }
 
+void MainWin::ADDCOMP_SCRIPT()
+{
+	int curSel = ((CListBox*)pObjList->GetDlgItem(IDC_OBJLIST))->GetCurSel();
+
+	CFileDialog fileDialog(FALSE, ".tes", NULL, 6UL, "The Engine Script (*.tes)|*.tes||");
+	fileDialog.DoModal();
+	OPENFILENAME& ofn = fileDialog.GetOFN();
+
+	int strLen = strlen(fileDialog.GetPathName().GetString()) + 1;
+	char* filepath = new char[strLen];
+	sprintf_s(filepath, sizeof(char)*strLen, "%s", fileDialog.GetPathName().GetString());
+
+	FILE* pfile = fopen(filepath, "w");
+	fprintf(pfile, "\0");
+	fclose(pfile);
+
+	theApp->GetProject()->LockScene();
+	Gameobject* obj = theApp->GetProject()->GetScene()->GetSceneObject(curSel);
+	obj->AddComponent((Component*)new CustomBehaviour(obj, filepath));
+	theApp->GetProject()->UnlockScene();
+
+	if (!scriptEditor)
+		scriptEditor = new TextEditor();
+
+	scriptEditor->ChangeFile(filepath);
+	theApp->GetProject()->projectFiles.AddFileToList(filepath);
+}
+
 void MainWin::EDITMATERIALEDITOR()
 {
 	int ID = ((CListBox*)pObjList->GetDlgItem(IDC_OBJLIST))->GetCurSel();
@@ -472,4 +507,28 @@ void MainWin::OnMaterialEditorOK(D3DMATERIAL9 mat,char* textureName, int ObjID)
 	}
 	else
 		MessageBox("No Mesh On Selected Object!", "Notice!");
+}
+
+void MainWin::ONRUNGAME()
+{
+	for (int i = 0;i < theApp->GetProject()->projectFiles.GetNumberOfFiles(); i++)
+	{
+		Lexer lexer(theApp->GetProject()->projectFiles.CurrentFilename());
+		lexer.ProcessTokens();
+
+		Token* temp = lexer.GetTokenTree();
+		int nTokens = lexer.GetNumberOfTokens();
+
+		for (int i_t = 0; i_t < nTokens; i_t++)
+		{
+			Console->Output(temp[i_t].toString(false));
+		}
+
+		theApp->GetProject()->projectFiles.IncrementFile();
+	}
+}
+
+void MainWin::ONSTOPGAME()
+{
+
 }

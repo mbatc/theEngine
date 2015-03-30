@@ -1,4 +1,5 @@
 #include <afxwin.h>
+#include <atomic>
 
 class Project;
 class D3DGraphics;
@@ -43,9 +44,9 @@ protected:
 	void LoadProject(char* filepath = NULL);
 	void InitVariables();
 
-	bool isLocked;
-	bool kbdLocked;
-	bool mseLocked;
+	std::atomic<bool> isLocked;
+	std::atomic<bool> kbdLocked;
+	std::atomic<bool> mseLocked;
 };
 
 class GameUdt : public CWinThread

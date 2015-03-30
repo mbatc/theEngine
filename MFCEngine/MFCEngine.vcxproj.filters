@@ -43,11 +43,77 @@
     <Filter Include="Header Files\Engine\Physics">
       <UniqueIdentifier>{d44bf935-5d9e-4dd4-9da5-8251aeac43ac}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Engine\Gameobject\Physics">
-      <UniqueIdentifier>{9b6e51b0-b3a4-4e86-bea4-79e20eb98122}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\MFC\Dialogs">
       <UniqueIdentifier>{e0be266a-2489-4e6d-9e2a-d80e193d2958}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Engine\Interpreter">
+      <UniqueIdentifier>{b4d7c4e1-c9e9-49f5-918b-785b85d82690}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Engine\Interpreter\Lexer">
+      <UniqueIdentifier>{4e3c799a-7f1d-48ce-8b1c-b76a1df94374}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Engine\Interpreter\Parser">
+      <UniqueIdentifier>{2be88449-57a2-4ad6-babe-5bf851b1cae3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Engine\Interpreter\Scanner">
+      <UniqueIdentifier>{26eaab79-573f-4c38-afcd-ffd8cf9ea1e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine\Interpreter">
+      <UniqueIdentifier>{7487300a-ba1e-43e0-90d4-c328716cb4ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine\Interpreter\Parser">
+      <UniqueIdentifier>{c56ecc79-a1e4-4104-99ed-35052ffe0081}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine\Interpreter\Scanner">
+      <UniqueIdentifier>{18df1088-d323-43f3-a100-901f9d21c851}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine\Interpreter\Lexer">
+      <UniqueIdentifier>{0e11241e-68c5-47ab-be85-a9404d6ff7cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\ScriptEditor">
+      <UniqueIdentifier>{d0df8a5c-abb4-4f19-b5bb-b411e4e0acf6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ScriptEditor">
+      <UniqueIdentifier>{90d45d80-b54e-4301-8449-db35982a78fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Engine\Interpreter\Driver">
+      <UniqueIdentifier>{cbaace06-aa9a-4186-b904-12d60a2b17fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine\Interpreter\Driver">
+      <UniqueIdentifier>{ab2bc953-cc68-4a6c-b62c-0ff56803eb72}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\MFC\Dialogs\Custom Controls">
+      <UniqueIdentifier>{525abb9c-eece-4506-9161-0d2878af00e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\MFC\Dialogs\Custom Controls">
+      <UniqueIdentifier>{d103e0cb-5e3a-45d1-8216-ddfc408e1ece}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Engine\Gameobject\Components">
+      <UniqueIdentifier>{6253a6ea-b2c1-4ff6-879b-cb5a9c8b4e45}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine\Gameobject\Components">
+      <UniqueIdentifier>{825d3474-18b7-4cf0-9c01-70152d5e6aca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine\Physics">
+      <UniqueIdentifier>{9b6e51b0-b3a4-4e86-bea4-79e20eb98122}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Engine\Project">
+      <UniqueIdentifier>{1155c7b6-a533-4bf9-b718-07e494829108}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Engine\Windows Interfacing">
+      <UniqueIdentifier>{74fde18d-550e-46b3-88ac-37dbbf26556e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine\Project">
+      <UniqueIdentifier>{c62d29b5-72e7-48e1-aa18-a2f976680776}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine\Windows Interfacing">
+      <UniqueIdentifier>{3d35e799-26b5-418a-a49c-6d551182b76c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\MFC\Dialogs\Custom Controls\Scroll Bar">
+      <UniqueIdentifier>{40a13e4c-fde9-43fb-92b9-c9cbac576c45}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\MFC\Dialogs\Custom Controls\Scroll Bar">
+      <UniqueIdentifier>{0892473f-ed2d-428a-8e4e-2f322a358e01}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -66,35 +132,14 @@
     <ClInclude Include="_SourceFiles\MainView.h">
       <Filter>Header Files\MFC</Filter>
     </ClInclude>
-    <ClInclude Include="_SourceFiles\D3DGraphics.h">
-      <Filter>Header Files\Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="_SourceFiles\Project.h">
-      <Filter>Header Files\Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="_SourceFiles\Scene.h">
-      <Filter>Header Files\Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="_SourceFiles\SceneRenderer.h">
-      <Filter>Header Files\Engine</Filter>
-    </ClInclude>
     <ClInclude Include="_SourceFiles\Gameobject.h">
-      <Filter>Header Files\Engine\Gameobject</Filter>
-    </ClInclude>
-    <ClInclude Include="_SourceFiles\Component.h">
       <Filter>Header Files\Engine\Gameobject</Filter>
     </ClInclude>
     <ClInclude Include="_SourceFiles\Transform.h">
       <Filter>Header Files\Engine\Gameobject</Filter>
     </ClInclude>
-    <ClInclude Include="_SourceFiles\Mesh.h">
-      <Filter>Header Files\Engine\Gameobject</Filter>
-    </ClInclude>
     <ClInclude Include="_SourceFiles\DialogObjProp.h">
       <Filter>Header Files\MFC\Dialogs</Filter>
-    </ClInclude>
-    <ClInclude Include="_SourceFiles\MeshRenderer.h">
-      <Filter>Header Files\Engine\Gameobject</Filter>
     </ClInclude>
     <ClInclude Include="_SourceFiles\Camera.h">
       <Filter>Header Files\Engine\Gameobject</Filter>
@@ -111,20 +156,11 @@
     <ClInclude Include="_SourceFiles\CustomBehaviour.h">
       <Filter>Header Files\Engine\Gameobject\Custom Scripts</Filter>
     </ClInclude>
-    <ClInclude Include="_SourceFiles\KeyboardInput.h">
-      <Filter>Header Files\Engine</Filter>
-    </ClInclude>
     <ClInclude Include="_SourceFiles\Vector.h">
-      <Filter>Header Files\Engine\Physics</Filter>
-    </ClInclude>
-    <ClInclude Include="_SourceFiles\PhysicsController.h">
       <Filter>Header Files\Engine\Physics</Filter>
     </ClInclude>
     <ClInclude Include="_SourceFiles\GlobalPointers.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="_SourceFiles\Console.h">
-      <Filter>Header Files\Engine</Filter>
     </ClInclude>
     <ClInclude Include="_SourceFiles\MainSplitter.h">
       <Filter>Header Files\MFC</Filter>
@@ -132,11 +168,77 @@
     <ClInclude Include="_SourceFiles\PlayerControl.h">
       <Filter>Header Files\Engine\Gameobject\Custom Scripts</Filter>
     </ClInclude>
-    <ClInclude Include="_SourceFiles\MouseInput.h">
-      <Filter>Header Files\Engine</Filter>
-    </ClInclude>
     <ClInclude Include="_SourceFiles\MaterialEditor.h">
       <Filter>Header Files\MFC\Dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="_SourceFiles\Token.h">
+      <Filter>Header Files\Engine\Interpreter\Lexer</Filter>
+    </ClInclude>
+    <ClInclude Include="_SourceFiles\Lexer.h">
+      <Filter>Header Files\Engine\Interpreter\Lexer</Filter>
+    </ClInclude>
+    <ClInclude Include="_SourceFiles\Scanner.h">
+      <Filter>Header Files\Engine\Interpreter\Scanner</Filter>
+    </ClInclude>
+    <ClInclude Include="_SourceFiles\Character.h">
+      <Filter>Header Files\Engine\Interpreter\Scanner</Filter>
+    </ClInclude>
+    <ClInclude Include="_SourceFiles\Parser.h">
+      <Filter>Header Files\Engine\Interpreter\Parser</Filter>
+    </ClInclude>
+    <ClInclude Include="_SourceFiles\LanguageDefinitions.h">
+      <Filter>Header Files\Engine\Interpreter</Filter>
+    </ClInclude>
+    <ClInclude Include="_SourceFiles\ScriptInterpreter.h">
+      <Filter>Header Files\Engine\Interpreter</Filter>
+    </ClInclude>
+    <ClInclude Include="_SourceFiles\TextEditor.h">
+      <Filter>Header Files\ScriptEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="_SourceFiles\FileTree.h">
+      <Filter>Header Files\Engine\Interpreter\Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="_SourceFiles\FileEngine.h">
+      <Filter>Header Files\Engine\Interpreter\Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="_SourceFiles\MeshRenderer.h">
+      <Filter>Header Files\Engine\Gameobject\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="_SourceFiles\Mesh.h">
+      <Filter>Header Files\Engine\Gameobject\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="_SourceFiles\Component.h">
+      <Filter>Header Files\Engine\Gameobject\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="_SourceFiles\PhysicsController.h">
+      <Filter>Header Files\Engine\Gameobject\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="_SourceFiles\Project.h">
+      <Filter>Header Files\Engine\Project</Filter>
+    </ClInclude>
+    <ClInclude Include="_SourceFiles\Scene.h">
+      <Filter>Header Files\Engine\Project</Filter>
+    </ClInclude>
+    <ClInclude Include="_SourceFiles\SceneRenderer.h">
+      <Filter>Header Files\Engine\Project</Filter>
+    </ClInclude>
+    <ClInclude Include="_SourceFiles\MouseInput.h">
+      <Filter>Header Files\Engine\Windows Interfacing</Filter>
+    </ClInclude>
+    <ClInclude Include="_SourceFiles\KeyboardInput.h">
+      <Filter>Header Files\Engine\Windows Interfacing</Filter>
+    </ClInclude>
+    <ClInclude Include="_SourceFiles\D3DGraphics.h">
+      <Filter>Header Files\Engine\Windows Interfacing</Filter>
+    </ClInclude>
+    <ClInclude Include="_SourceFiles\Console.h">
+      <Filter>Header Files\Engine\Windows Interfacing</Filter>
+    </ClInclude>
+    <ClInclude Include="_SourceFiles\CSkinScrollWnd.h">
+      <Filter>Header Files\MFC\Dialogs\Custom Controls\Scroll Bar</Filter>
+    </ClInclude>
+    <ClInclude Include="_SourceFiles\CSkinScrollBar.h">
+      <Filter>Header Files\MFC\Dialogs\Custom Controls\Scroll Bar</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -152,22 +254,7 @@
     <ClCompile Include="_SourceFiles\MainView.cpp">
       <Filter>Source Files\MFC</Filter>
     </ClCompile>
-    <ClCompile Include="_SourceFiles\D3DGraphics.cpp">
-      <Filter>Source Files\Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="_SourceFiles\Project.cpp">
-      <Filter>Source Files\Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="_SourceFiles\Scene.cpp">
-      <Filter>Source Files\Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="_SourceFiles\SceneRenderer.cpp">
-      <Filter>Source Files\Engine</Filter>
-    </ClCompile>
     <ClCompile Include="_SourceFiles\Gameobject.cpp">
-      <Filter>Source Files\Engine\Gameobject</Filter>
-    </ClCompile>
-    <ClCompile Include="_SourceFiles\Component.cpp">
       <Filter>Source Files\Engine\Gameobject</Filter>
     </ClCompile>
     <ClCompile Include="_SourceFiles\Transform.cpp">
@@ -178,12 +265,6 @@
     </ClCompile>
     <ClCompile Include="_SourceFiles\DialogObjList.cpp">
       <Filter>Source Files\MFC\Dialogs</Filter>
-    </ClCompile>
-    <ClCompile Include="_SourceFiles\MeshRenderer.cpp">
-      <Filter>Source Files\Engine\Gameobject</Filter>
-    </ClCompile>
-    <ClCompile Include="_SourceFiles\Mesh.cpp">
-      <Filter>Source Files\Engine\Gameobject</Filter>
     </ClCompile>
     <ClCompile Include="_SourceFiles\Camera.cpp">
       <Filter>Source Files\Engine\Gameobject</Filter>
@@ -201,10 +282,7 @@
       <Filter>Source Files\Engine</Filter>
     </ClCompile>
     <ClCompile Include="_SourceFiles\Vector.cpp">
-      <Filter>Source Files\Engine\Gameobject\Physics</Filter>
-    </ClCompile>
-    <ClCompile Include="_SourceFiles\PhysicsController.cpp">
-      <Filter>Source Files\Engine\Gameobject\Physics</Filter>
+      <Filter>Source Files\Engine\Physics</Filter>
     </ClCompile>
     <ClCompile Include="_SourceFiles\MainSplitter.cpp">
       <Filter>Source Files\MFC</Filter>
@@ -214,6 +292,60 @@
     </ClCompile>
     <ClCompile Include="_SourceFiles\MaterialEditor.cpp">
       <Filter>Source Files\MFC\Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="_SourceFiles\Lexer.cpp">
+      <Filter>Source Files\Engine\Interpreter\Lexer</Filter>
+    </ClCompile>
+    <ClCompile Include="_SourceFiles\Token.cpp">
+      <Filter>Source Files\Engine\Interpreter\Lexer</Filter>
+    </ClCompile>
+    <ClCompile Include="_SourceFiles\Scanner.cpp">
+      <Filter>Source Files\Engine\Interpreter\Scanner</Filter>
+    </ClCompile>
+    <ClCompile Include="_SourceFiles\Character.cpp">
+      <Filter>Source Files\Engine\Interpreter\Scanner</Filter>
+    </ClCompile>
+    <ClCompile Include="_SourceFiles\Parser.cpp">
+      <Filter>Source Files\Engine\Interpreter\Parser</Filter>
+    </ClCompile>
+    <ClCompile Include="_SourceFiles\TextEditor.cpp">
+      <Filter>Source Files\ScriptEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="_SourceFiles\FileTree.cpp">
+      <Filter>Source Files\Engine\Interpreter\Driver</Filter>
+    </ClCompile>
+    <ClCompile Include="_SourceFiles\FileEngine.cpp">
+      <Filter>Source Files\Engine\Interpreter\Driver</Filter>
+    </ClCompile>
+    <ClCompile Include="_SourceFiles\Component.cpp">
+      <Filter>Source Files\Engine\Gameobject\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="_SourceFiles\Mesh.cpp">
+      <Filter>Source Files\Engine\Gameobject\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="_SourceFiles\MeshRenderer.cpp">
+      <Filter>Source Files\Engine\Gameobject\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="_SourceFiles\PhysicsController.cpp">
+      <Filter>Source Files\Engine\Gameobject\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="_SourceFiles\Scene.cpp">
+      <Filter>Source Files\Engine\Project</Filter>
+    </ClCompile>
+    <ClCompile Include="_SourceFiles\SceneRenderer.cpp">
+      <Filter>Source Files\Engine\Project</Filter>
+    </ClCompile>
+    <ClCompile Include="_SourceFiles\Project.cpp">
+      <Filter>Source Files\Engine\Project</Filter>
+    </ClCompile>
+    <ClCompile Include="_SourceFiles\D3DGraphics.cpp">
+      <Filter>Source Files\Engine\Windows Interfacing</Filter>
+    </ClCompile>
+    <ClCompile Include="_SourceFiles\CSkinScrollWnd.cpp">
+      <Filter>Source Files\MFC\Dialogs\Custom Controls\Scroll Bar</Filter>
+    </ClCompile>
+    <ClCompile Include="_SourceFiles\CSkinScrollBar.cpp">
+      <Filter>Source Files\MFC\Dialogs\Custom Controls\Scroll Bar</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

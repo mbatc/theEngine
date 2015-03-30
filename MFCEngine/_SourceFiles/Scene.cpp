@@ -359,7 +359,10 @@ void Scene::UpdateScene()
 {
 	for (int i = 0; i < nObjects; i++)
 	{
-		sceneObjects[i].object->Update();
+		if (sceneObjects[i].object)
+		{
+			sceneObjects[i].object->Update();
+		}
 	}
 }
 

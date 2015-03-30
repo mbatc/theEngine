@@ -43,7 +43,7 @@ void Camera::Render(D3DGraphics& gfx) const
 
 	D3DXMATRIX matProjection;
 	D3DXMatrixPerspectiveFovLH(&matProjection, D3DXToRadian(60),
-		aspect, 1.0f, 100.0f);
+		aspect, 0.1f,1000.0f);
 	gfx.GetDevice()->SetTransform(D3DTS_PROJECTION, &matProjection);
 }
 
@@ -60,6 +60,8 @@ void Camera::Update()
 
 	float yRot = 0;
 	float xRot = 0;
+	float moveSpeed = 0;
+
 	if (kbd->KeyIsDown(VK_UP))
 	{
 		if (kbd->KeyIsDown(VK_SHIFT))
@@ -72,7 +74,7 @@ void Camera::Update()
 		}
 		else
 		{
-			z -= 0.1f;
+			moveSpeed += 0.01f;
 		}
 	}
 	if (kbd->KeyIsDown(VK_DOWN))
@@ -87,7 +89,7 @@ void Camera::Update()
 		}
 		else
 		{
-			z += 0.1f;
+			moveSpeed -= 0.01f;
 		}
 	}
 	if (kbd->KeyIsDown(VK_LEFT))
@@ -125,6 +127,11 @@ void Camera::Update()
 	transform->SetRotation(transform->GetRotation().x + xRot,
 		transform->GetRotation().y + yRot,
 		transform->GetRotation().z);
+	Vector3 axis;
+	axis.x = 1.0f;
+	axis.z = 1.0f;
+	axis.y = 0.0f;
+	Move(moveSpeed, axis);
 
 
 	LookAt.x = transform->GetTranslation().x + LookAtDist * sin(transform->GetRotation().y * M_PI / 180);
@@ -133,3 +140,23 @@ void Camera::Update()
 
 	LookAt.z = transform->GetTranslation().z + LookAtDist * cos(transform->GetRotation().y * M_PI / 180);
 }	
+
+void Camera::Move(float Speed, Vector3 axis)
+{
+	float x, y, z;
+	x = LookAt.x;
+	y = LookAt.y;
+	z = LookAt.z;
+
+	x -= transform->GetTranslation().x;
+	y -= transform->GetTranslation().y;
+	z -= transform->GetTranslation().z;
+
+	x *= Speed * axis.x;
+	y *= Speed * axis.y;
+	z *= Speed * axis.z;
+
+	transform->SetTranslation(transform->GetTranslation().x + x,
+		transform->GetTranslation().y + y,
+		transform->GetTranslation().z + z);
+}

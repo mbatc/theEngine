@@ -1,19 +1,24 @@
-﻿Build started 8/03/2015 3:23:32 PM.
+﻿Build started 30/03/2015 8:49:22 PM.
      1>Project "D:\mbatc13\My Documents\GameProjects\MFCEngine\MFCEngine\MFCEngine.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W0 /WX- /sdl /Od /Oy- /D _CRT_SECURE_NO_WARNINGS /D _MBCS /D _AFXDLL /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt _SourceFiles\MaterialEditor.cpp
-         MaterialEditor.cpp
-         _WIN32_WINNT not defined. Defaulting to _WIN32_WINNT_MAXVER (see WinSDKVer.h)
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W0 /WX- /sdl /Od /Oy- /D _CRT_SECURE_NO_WARNINGS /D _MBCS /D _AFXDLL /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt _SourceFiles\Scene.cpp
+         Scene.cpp
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\mbatc13\My Documents\GameProjects\MFCEngine\Debug\MFCEngine.exe" /INCREMENTAL /NOLOGO /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /manifestinput:"C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\Include\Manifest\dpiaware.manifest" /DEBUG /PDB:"D:\mbatc13\My Documents\GameProjects\MFCEngine\Debug\MFCEngine.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\mbatc13\My Documents\GameProjects\MFCEngine\Debug\MFCEngine.lib" /MACHINE:X86 Debug\MFCEngine.res
          Debug\Camera.obj
+         Debug\Character.obj
          Debug\Component.obj
+         Debug\CSkinScrollBar.obj
+         Debug\CSkinScrollWnd.obj
          Debug\CustomBehaviour.obj
          Debug\D3DGraphics.obj
          Debug\DialogObjList.obj
+         Debug\FileEngine.obj
+         Debug\FileTree.obj
          Debug\Gameobject.obj
          Debug\GlobalPointerDef.obj
          Debug\KeyboardInput.obj
+         Debug\Lexer.obj
          Debug\Light.obj
          Debug\MainApp.obj
          Debug\MainDoc.obj
@@ -24,11 +29,15 @@
          Debug\Mesh.obj
          Debug\MeshRenderer.obj
          Debug\MouseInput.obj
+         Debug\Parser.obj
          Debug\PhysicsController.obj
          Debug\Project.obj
+         Debug\Scanner.obj
          Debug\Scene.obj
          Debug\SceneRenderer.obj
          Debug\DialogObjProp.obj
+         Debug\TextEditor.obj
+         Debug\Token.obj
          Debug\Transform.obj
          Debug\Vector.obj
          MFCEngine.vcxproj -> D:\mbatc13\My Documents\GameProjects\MFCEngine\Debug\MFCEngine.exe
@@ -36,4 +45,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:02.35
+Time Elapsed 00:00:01.67
